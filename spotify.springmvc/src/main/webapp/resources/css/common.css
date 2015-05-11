@@ -1,0 +1,143 @@
+@CHARSET "UTF-8";
+.top {
+    background-color: #ffffff;
+    /*height: 50px;*/
+    padding-left: 15px;
+    position: relative;   /* position: fixed;*/
+    top: 0;
+    /*width: 100%;*/
+    z-index: -10;
+}
+.header-img {
+     display: block;
+    height: 52px;
+    width: 65px;
+    /*border-radius: 50%;
+    display: block;
+    height: 81px;
+    margin: 0 auto 10px;
+    width: 100px;*/
+}
+.displayInline-block{
+display: inline-block;
+}
+.headerTitleCnt{
+display: inline-block;
+vertical-align: 77%;
+}
+.headerTitle {
+	font-size: 24px;
+	
+}
+.divLoading{
+display: none;
+position : fixed; 
+display :'none;
+border:1px solid #fff;
+box-shadow: 0px 2px 7px #292929;
+-moz-box-shadow: 0px 2px 7px #292929;
+-webkit-box-shadow : 0px 2px 7px #292929;
+border-radius : 10px;
+-moz-border-radius: '10px;
+-webkit-border-radius : 10px;
+background : white; 
+z-index : 501;
+text-align : center;
+FONT-FAMILY : Tahoma;
+/*height: 25%;*/
+left: 38%;
+text-align: center;
+top: 33%;
+/*width: 28%;*/
+padding:2%;
+   
+border-radius: 32px 32px 32px 32px;
+-moz-border-radius: 32px 32px 32px 32px;
+-webkit-border-radius: 32px 32px 32px 32px;
+border: 0px solid #000000;
+}
+.font1 {
+	font-size: 11pt;
+	font-weight: bold;
+}
+.loadBackground{
+
+position: absolute;
+
+width: 100%;
+
+height: 100%;
+
+z-index: 500;
+
+background: black;
+
+background: -moz-linear-gradient(top, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.2) 1%, rgba(0,0,0,0.2) 100%); /* FF3.6+ */
+
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.2)), color-stop(1%,rgba(0,0,0,0.2)), color-stop(100%,rgba(0,0,0,0.2))); /* Chrome,Safari4+ */
+
+background: -webkit-linear-gradient(top, rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.2) 1%,rgba(0,0,0,0.2) 100%); /* Chrome10+,Safari5.1+ */
+
+background: -o-linear-gradient(top, rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.2) 1%,rgba(0,0,0,0.2) 100%); /* Opera 11.10+ */
+
+background: -ms-linear-gradient(top, rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.2) 1%,rgba(0,0,0,0.2) 100%); /* IE10+ */
+
+background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.2) 1%,rgba(0,0,0,0.2) 100%); /* W3C */
+
+filter: alpha(opacity=40);
+
+/*filter: progidXImageTransform.Microsoft.gradient( startColorstr='#33000000', endColorstr='#33000000',GradientType=0 );*/ /* IE6-9 */
+
+top: 0; 
+
+}
+.trTimeLine{
+    background: linear-gradient(to bottom, rgba(245, 252, 255, 1) 0%, rgba(221, 245, 255, 1) 47%, 
+    rgba(193, 237, 255, 1) 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+
+
+
+#contenedor_solapa_amarilla {
+    height: 70px;
+    width: 100%;
+}
+.stretch {
+    height: auto;
+    width: 100%;
+}
+
+#yellow_header_left {
+    background-image: url("../images/izquierda_amarillo.png");
+    background-repeat: no-repeat;
+    height: 102px;
+    position: relative;
+}
+#yellow_header_med {
+    background-image: url("../images/medio_amarillo.png");
+    background-repeat: repeat;
+    display: block;
+    height: 53px;
+    /*margin-left: 3.3%;*/
+    position: static;
+    width: 100%;
+}
+
+#yellow_header_right {
+   background-image: url("../images/derecha_amarillo.png");
+    background-repeat: no-repeat;
+    height: 56px;
+    margin-left: 99.3%;
+    margin-top: -1px;
+    position: relative;
+}
+.error2 {
+  background-color: #f2dede;
+    border: 1px solid #ebccd1;
+    border-radius: 4px;
+    color: #a94442;
+    display: inline-block;
+    margin-bottom: 20px;
+    position: relative;
+}
