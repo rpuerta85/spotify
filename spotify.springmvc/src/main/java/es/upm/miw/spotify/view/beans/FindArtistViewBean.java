@@ -4,11 +4,15 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import es.upm.miw.spotify.controllers.ws.ControllerWsFactory;
 import es.upm.miw.spotify.models.forms.FindArtistForm;
 import es.upm.miw.spotify.models.forms.validators.FindArtistFormValidator;
+import es.upm.miw.spotify.models.pojos.Artists;
 import es.upm.miw.spotify.models.properties.beans.FindArtistViewPropertiesManager;
 import es.upm.miw.spotify.models.properties.beans.ShowArtistsViewPropertiesManager;
+import es.upm.miw.spotify.models.utils.ObjectMapperJacksonSingleton;
 import es.upm.miw.spotify.views.web.ee.CommonViewParamsEE;
 import es.upm.miw.spotify.views.web.ee.FindArtistViewParamsEE;
 import es.upm.miw.spotify.views.web.ee.ShowArtistsViewParamsEE;
@@ -54,7 +58,14 @@ public class FindArtistViewBean extends GenericView{
 	public void process(){
 		logger.info("begin process method");
 		if(findArtistFormValidator.validate()){
-			String jsonArtist = ControllerWsFactory.getInstance(sessionBean).getFindArtistController().findArtistJSON(findArtistForm.getArtist());
+			Artists artist = ControllerWsFactory.getInstance(sessionBean).getFindArtistController().findArtistJSON(findArtistForm.getArtist());
+			String jsonArtist=null;
+			try {
+				jsonArtist = ObjectMapperJacksonSingleton.getInstance().getObjectMapper().writeValueAsString(artist);
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+				logger.error("error in parsing json:"+e);
+			}
 			logger.info("JSON artist:"+jsonArtist);
 			addSuccessMsg(jsonArtist);
 			this.success = true;

@@ -1,31 +1,39 @@
 package es.upm.miw.spotify.rest.client.config;
 
-import org.apache.http.HttpHost;
+import java.text.SimpleDateFormat;
+
+import javax.annotation.PostConstruct;
+
 import org.apache.http.client.HttpClient;
-import org.apache.http.conn.routing.HttpRoute;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.env.Environment;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
-import es.upm.miw.spotify.model.config.SpringModelConfiguration;
-
-
+@ComponentScan(basePackages = { "es.upm.miw.spotify.*" })
 @Configuration
-@Import(SpringModelConfiguration.class)
-@ComponentScan("es.upm.miw.spotify")
-@PropertySource("classpath:restClientConfig.properties")
+@PropertySource(value="classpath:restClientConfig.properties", ignoreResourceNotFound=false)
 public class RestConfig {
-
+	
+	@Autowired
+	private Environment env;
+	
+	@Value("${max.total.connections.default}")
+	private String maxTotalConnectionsDefault;
+	@Value("${max.connections.per.route.default}")
+	private Integer maxConnectionsPerRouteDefault;
+	
 	@Bean
 	public ClientHttpRequestFactory httpRequestFactory() {
 		return new HttpComponentsClientHttpRequestFactory(httpClient());
@@ -42,7 +50,15 @@ public class RestConfig {
 		PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
 		CloseableHttpClient httpClient = HttpClients.custom()
 				.setConnectionManager(connectionManager).build();
+		connectionManager.setMaxTotal(Integer.valueOf(maxTotalConnectionsDefault));
+		connectionManager.setDefaultMaxPerRoute(Integer.valueOf(maxConnectionsPerRouteDefault));
 		return httpClient;
+	}
+	@PostConstruct
+	public void init(){
+		System.out.println("INI");
+		System.out.println("INI1"+env); 
+		System.out.println("INI2"+maxTotalConnectionsDefault); 
 	}
 
 	@Bean
@@ -50,4 +66,6 @@ public class RestConfig {
 		return new PropertySourcesPlaceholderConfigurer();
 	}
 
+	
+	
 }

@@ -2,15 +2,15 @@
 <configuration>
 	<appenders>
 		<Console name="Console" target="SYSTEM_OUT">
-			<PatternLayout pattern="[%-5level] %d{dd-MMM HH:mm:ss} (%t) %c{3} >>> %msg%n" />
+			<PatternLayout pattern="[%-5level] %d{dd-MMM HH:mm:ss} (%t) %c{3} %l >>> %msg%n" />
 		</Console>
 		<File name="File" fileName="target/surefire-reports/logs.txt">
-			<PatternLayout pattern="[%-5level] %d{dd-MMM HH:mm:ss} (%t) %c{3} >>> %msg%n" />
+			<PatternLayout pattern="[%-5level] %d{dd-MMM HH:mm:ss} (%t) %c{3} %l >>> %msg%n" />
 		</File>
 	</appenders>
 	<loggers>
 		<logger name="es.upm.miw.spotify" level="info" />
-		<root level="error">
+		<root level="info">
 			<appender-ref ref="Console" />
 			<appender-ref ref="File" />
 		</root>

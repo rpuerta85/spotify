@@ -1,7 +1,9 @@
 package es.upm.miw.spotify.controllers;
 
+import es.upm.miw.spotify.models.pojos.Artists;
+
 public interface FindArtistController {
 
-	String findArtistJSON(String artist);
+	Artists findArtistJSON(String artist);
 
 }

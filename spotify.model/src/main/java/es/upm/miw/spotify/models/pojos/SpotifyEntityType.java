@@ -1,5 +1,7 @@
 package es.upm.miw.spotify.models.pojos;
 
+import org.codehaus.jackson.annotate.JsonValue;
+
 public enum SpotifyEntityType {
 
   ALBUM("album"),
@@ -13,7 +15,7 @@ public enum SpotifyEntityType {
   SpotifyEntityType(String type) {
    this.type = type;
   }
-
+  @JsonValue
   public String getType() {
     return this.type;
   }
