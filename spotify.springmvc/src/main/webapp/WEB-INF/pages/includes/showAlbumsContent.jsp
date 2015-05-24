@@ -3,8 +3,8 @@
 <%@ taglib prefix = "spring" uri = "http://www.springframework.org/tags" %>
 <script>
 var app = angular.module('albumsCntApp',[]);
-app.controller('albumsCntCtrl', artistContentController);
-function artistContentController($scope, $http,$location){
+app.controller('albumsCntCtrl', albumContentController);
+function albumContentController($scope, $http,$location){
 	var vm=this;
 	   vm.albums = ${findFavoriteFormBean.mapMsgs['jsonArtists']}; 
 	   vm.context = "${pageContext.request.contextPath}";
