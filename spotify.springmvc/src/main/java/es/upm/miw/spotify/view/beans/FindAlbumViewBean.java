@@ -4,27 +4,24 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
 
+import es.upm.miw.spotify.form.beans.FindAlbumFormBean;
 import es.upm.miw.spotify.form.beans.FindArtistFormBean;
 import es.upm.miw.spotify.form.beans.FindFavoriteFormBean;
 
 
-public class FindArtistViewBean extends GenericView {
-	private static final Logger logger = LogManager.getLogger(FindArtistViewBean.class);
-	private static final String NAME = "findArtistViewBean";
-	private SessionBean sessionBean;
-	private FindArtistFormBean findArtistFormBean;
+public class FindAlbumViewBean extends GenericView {
+	private static final Logger logger = LogManager.getLogger(FindAlbumViewBean.class);
+	private static final String NAME = "findAlbumViewBean";
+	private FindAlbumFormBean findAlbumFormBean;
 	private boolean success = false;
 
-	public FindArtistViewBean() {
+	public FindAlbumViewBean() {
 		super();
 	}
 
-	public FindArtistViewBean(SessionBean sessionBean,
-			FindArtistFormBean findArtistFormBean) {
+	public FindAlbumViewBean(FindAlbumFormBean findAlbumFormBean) {
 		super();
-		this.sessionBean = sessionBean;
-		this.findArtistFormBean = findArtistFormBean;
-
+		this.findAlbumFormBean = findAlbumFormBean;
 	}
 
 	public ModelAndView update() {
@@ -33,16 +30,16 @@ public class FindArtistViewBean extends GenericView {
 		model.addObject(NAME, this);
 		//actualizamos el resto de componente por lo que esta formado la vista, en este caso
 		//actualizamos tambien el componente de formulario findArtistFormBean
-		findArtistFormBean.update();
-		model.addObject(FindFavoriteFormBean.getName(), findArtistFormBean);
+		findAlbumFormBean.update();
+		model.addObject(FindFavoriteFormBean.getName(), findAlbumFormBean);
 		return model;
 	}
 
 	public void process(){
-		logger.info("begin FindArtistViewBean process method");
-		findArtistFormBean.process();
-		this.success = this.findArtistFormBean.isSuccess();
-		logger.info("end FindArtistViewBean process method");
+		logger.info("begin FindAlbumViewBean process method");
+		findAlbumFormBean.process();
+		this.success = this.findAlbumFormBean.isSuccess();
+		logger.info("end FindAlbumViewBean process method");
 	}
 
 	@Override
@@ -60,5 +57,4 @@ public class FindArtistViewBean extends GenericView {
 	public static String getName() {
 		return NAME;
 	}
-
 }

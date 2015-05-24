@@ -21,14 +21,15 @@ public class FindArtistControllerWs extends ControllerWs implements
 
 
 	@Override
-	public Artists findArtistJSON(String artist) {
+	public Artists findArtist(String artist) {
 		log.info("begin findArtistJSON");
 		log.info("artist received:"+artist);
 		RestTemplate restTemplate = ControllerWs.buildRestClient();
 		String json = "{}";
 		Artists artists = null;
 		try {
-		System.out.println(replaceParamUriForValue(ControllerWs.URI+RestArtistUris.FIND_ARTIST_REST_URI, RestArtistUris.PARAM, artist));
+		log.info("URI:" + ControllerWs.URI+RestArtistUris.FIND_ARTIST_REST_URI.replaceAll(RestArtistUris.PARAM,artist ));
+		//System.out.println(replaceParamUriForValue(ControllerWs.URI+RestArtistUris.FIND_ARTIST_REST_URI, RestArtistUris.PARAM, artist));
 		artists = restTemplate.getForObject( ControllerWs.URI+RestArtistUris.FIND_ARTIST_REST_URI.replaceAll(RestArtistUris.PARAM,artist ),Artists.class );
 		log.info("rest response:" + json);
 		} catch (Exception e) {

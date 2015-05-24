@@ -24,11 +24,10 @@ public class HomeViewBean extends GenericView{
 
 	@Override
 	protected void setMsgs() {
-		mapMsgs.put("key1","hola");
 		mapMsgs.put(HomeViewParamsEE.BUTTON_FIND_ARTIST_URL.getV(),ViewUrlConstants.FIND_ARTIST_PATH);
-		
-		// TODO Auto-generated method stub
-		
+		mapMsgs.put(HomeViewParamsEE.BUTTON_FIND_ALBUM_URL.getV(),ViewUrlConstants.FIND_ALBUM_PATH);
+		mapMsgs.put(HomeViewParamsEE.BUTTON_FIND_TRACK_URL.getV(),ViewUrlConstants.FIND_TRACK_PATH);		
+
 	}
 
 

@@ -34,14 +34,14 @@
           <p>También podrá realizar búsquedas a traves de los nombre de los álbumes que más
               le gusten, ver la información del mismo y guardar sus álbumes favoritos.
           </p>
-          <p><a role="button" href="/album/buscar" class="btn btn-primary">Buscar Álbumes »</a></p>
+          <p><a role="button" href="${pageContext.request.contextPath}/${homeViewBean.mapMsgs['buttonFindAlbumUrl']}"  class="btn btn-primary">Buscar Álbumes »</a></p>
         </div>
         <div class="col-md-4">
           <h2><span aria-hidden="true" class="glyphicon glyphicon-music"></span> Temas</h2>
           <p>De igual forma, podrá buscar toda la información relativa a sus temas favoritos,
               así como escucharlos desde aquí mismo.
           </p>
-          <p><a role="button" href="/tema/buscar" class="btn btn-primary">Buscar Temas »</a></p>
+          <p><a role="button" href="${pageContext.request.contextPath}/${homeViewBean.mapMsgs['buttonFindTrackUrl']}" class="btn btn-primary">Buscar Temas »</a></p>
         </div>
       </div>
 

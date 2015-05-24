@@ -19,7 +19,6 @@
       <aop:scoped-proxy/>
    </bean> 
 
- 	
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
@@ -30,6 +29,17 @@
 		</property>
 	</bean>
 	
+	<!-- Bean para leer mensajes de internacionalizacion desde los JSPs -->
+	 <bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			 <list>
+                 <value>i18n\views\messages</value>
+                 <value>i18n\forms\messages</value>
+            </list>
+		</property>
+		<property name="defaultEncoding" value="ISO-8859-1"/> 
+	</bean> 
 	<!-- Activates various annotations to be detected in bean classes -->
     <context:annotation-config />
     <context:component-scan base-package="es" />
@@ -43,6 +53,4 @@
 	<!-- Import property files -->
 	<context:property-placeholder  location="classpath:/es/home.properties" order="1" ignore-unresolvable="true"/>
 	<context:property-placeholder  location="classpath:/es/findArtist.properties" order="2" ignore-unresolvable="true"/>
-	<context:property-placeholder  location="classpath:/es/showArtists.properties" order="3" ignore-unresolvable="true"/>
-
 </beans>
