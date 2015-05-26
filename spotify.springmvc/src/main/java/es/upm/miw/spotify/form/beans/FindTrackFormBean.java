@@ -6,10 +6,11 @@ import org.apache.logging.log4j.Logger;
 import es.upm.miw.spotify.controllers.ws.ControllerWsFactory;
 import es.upm.miw.spotify.form.web.ee.FindFavoriteFormParamsEE;
 import es.upm.miw.spotify.models.forms.FindFavoriteForm;
-import es.upm.miw.spotify.models.pojos.Artists;
+import es.upm.miw.spotify.models.pojos.TracksPager;
 import es.upm.miw.spotify.models.utils.ObjectMapperJacksonSingleton;
 import es.upm.miw.spotify.view.beans.SessionBean;
 import es.upm.miw.spotify.views.web.ee.CommonViewParamsEE;
+
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 
@@ -49,16 +50,16 @@ public class FindTrackFormBean extends FindFavoriteFormBean {
 	public void process(){
 		logger.info("begin FindTrackFormBean process method");
 		if(findFavoriteFormValidator.validate()){
-			Artists artist = ControllerWsFactory.getInstance(sessionBean).getFindArtistController().findArtist(findFavoriteForm.getName());
-			String jsonArtist=null;
+			TracksPager track = ControllerWsFactory.getInstance(sessionBean).getFindTrackController().findTrack(findFavoriteForm.getName());
+			String jsonTrack=null;
 			try {
-				jsonArtist = ObjectMapperJacksonSingleton.getInstance().getObjectMapper().writeValueAsString(artist);
+				jsonTrack = ObjectMapperJacksonSingleton.getInstance().getObjectMapper().writeValueAsString(track);
 			} catch (JsonProcessingException e) {
 				e.printStackTrace();
 				logger.error("error in parsing json:"+e);
 			}
-			logger.info("JSON Track:"+jsonArtist);
-			addSuccessMsg(jsonArtist);
+			logger.info("JSON Track:"+jsonTrack);
+			addSuccessMsg(jsonTrack);
 			this.success = true;
 		}else {
 			this.success = false;

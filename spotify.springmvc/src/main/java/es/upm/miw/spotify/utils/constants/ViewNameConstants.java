@@ -8,5 +8,6 @@ public interface ViewNameConstants {
 	String FIND_TRACK_VIEWNAME = "findTrackView";
 	String SHOW_ARTISTS_VIEWNAME = "showArtists";
 	String SHOW_ALBUMS_VIEWNAME = "showAlbums";
+	String SHOW_TRACKS_VIEWNAME = "showTracks";
 
 }

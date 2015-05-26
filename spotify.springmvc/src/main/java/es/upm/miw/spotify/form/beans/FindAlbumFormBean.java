@@ -2,13 +2,16 @@ package es.upm.miw.spotify.form.beans;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import es.upm.miw.spotify.controllers.ws.ControllerWsFactory;
 import es.upm.miw.spotify.form.web.ee.FindFavoriteFormParamsEE;
 import es.upm.miw.spotify.models.forms.FindFavoriteForm;
 import es.upm.miw.spotify.models.pojos.Albums;
+import es.upm.miw.spotify.models.pojos.AlbumsPager;
 import es.upm.miw.spotify.models.utils.ObjectMapperJacksonSingleton;
 import es.upm.miw.spotify.view.beans.SessionBean;
 import es.upm.miw.spotify.views.web.ee.CommonViewParamsEE;
+
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 
@@ -48,7 +51,7 @@ public class FindAlbumFormBean extends FindFavoriteFormBean {
 	public void process(){
 		logger.info("begin FindAlbumFormBean process method");
 		if(findFavoriteFormValidator.validate()){
-			Albums albums = ControllerWsFactory.getInstance(sessionBean).getFindAlbumController().findAlbum(findFavoriteForm.getName());
+			AlbumsPager albums = ControllerWsFactory.getInstance(sessionBean).getFindAlbumController().findAlbum(findFavoriteForm.getName());
 			String json=null;
 			try {
 				json = ObjectMapperJacksonSingleton.getInstance().getObjectMapper().writeValueAsString(albums);

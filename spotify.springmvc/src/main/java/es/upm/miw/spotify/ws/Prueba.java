@@ -20,7 +20,7 @@ public class Prueba {
 		System.out.println(ppp);
 		 System.out.println("aaa");
 		 Artists page = new Gson().fromJson(ppp, Artists.class);
-		 System.out.println(page.getArtists().getItems().size());
+		// System.out.println(page.getArtists().getItems().size());
 		
 	}
 

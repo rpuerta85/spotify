@@ -1,15 +1,6 @@
 package es.upm.miw.spotify.models.pojos;
+import java.util.List;
 
 public class Artists {
-	
-	private Page<Artist> artists;
-
-	public Page<Artist> getArtists() {
-		return artists;
-	}
-
-	public void setArtists(Page<Artist> artists) {
-		this.artists = artists;
-	}
-	
+    public List<Artist> artists;
 }

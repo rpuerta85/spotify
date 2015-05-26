@@ -30,6 +30,7 @@ function albumContentController($scope, $http,$location){
 	                          	<a href="<c:url value="" />"> 
 	                          		<button type="button" class="btn btn-primary">
 	                            			<img  width="64" height="64" title="" alt=""  ng-src="{{album.images[0].url}}">
+	                          			    <span  title="AlbumType" class="badge">{{album.album_type}}</span>
 	                          		</button>
                         		</a>
                       		</td>

@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
 import com.google.gson.Gson;
+
 import es.upm.miw.spotify.models.pojos.Albums;
+import es.upm.miw.spotify.models.pojos.AlbumsPager;
 import es.upm.miw.spotify.rest.core.uris.UrisSpotifyApi;
 import es.upm.miw.spotify.rest.core.uris.UrisWebApp;
 
@@ -29,16 +32,17 @@ public class FindAlbumControllerRest {
 	 // Por tanto, este objeto aqui ya se encuentra instanciado, nohace falta hace NEW
 	
     @RequestMapping(UrisWebApp.FIND_ALBUM_BY_NAME)
-    public Albums findAlbumByName(@RequestParam(value="albumName", defaultValue="") String albumName)  {
+    public AlbumsPager findAlbumByName(@RequestParam(value="albumName", defaultValue="") String albumName)  {
     	LOG.info("begin findAlbumByName");
     	LOG.info("album received:"+albumName);
-    	Albums albums = null;
+    	AlbumsPager albums = null;
     	try {
     		LOG.info("URI:"+spotifyRestUri+UrisSpotifyApi.FIND_ALBUM_BY_NAME.
 				replaceAll(UrisSpotifyApi.PARAM, URLEncoder.encode(albumName, "UTF-8")));
     		String json = restTemplate.getForObject(spotifyRestUri+UrisSpotifyApi.FIND_ALBUM_BY_NAME.
 				replaceAll(UrisSpotifyApi.PARAM, URLEncoder.encode(albumName, "UTF-8")),String.class);
-    		albums =new Gson().fromJson(json, Albums.class);
+    		LOG.info("response json:"+json);
+    		albums =new Gson().fromJson(json, AlbumsPager.class);
     		} catch (Exception e) {
     			LOG.error("error response", e);
     		}

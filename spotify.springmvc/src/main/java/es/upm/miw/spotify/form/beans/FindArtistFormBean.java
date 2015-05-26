@@ -7,6 +7,7 @@ import es.upm.miw.spotify.controllers.ws.ControllerWsFactory;
 import es.upm.miw.spotify.form.web.ee.FindFavoriteFormParamsEE;
 import es.upm.miw.spotify.models.forms.FindFavoriteForm;
 import es.upm.miw.spotify.models.pojos.Artists;
+import es.upm.miw.spotify.models.pojos.ArtistsPager;
 import es.upm.miw.spotify.models.utils.ObjectMapperJacksonSingleton;
 import es.upm.miw.spotify.view.beans.SessionBean;
 import es.upm.miw.spotify.views.web.ee.CommonViewParamsEE;
@@ -51,7 +52,7 @@ public class FindArtistFormBean extends FindFavoriteFormBean {
 	public void process(){
 		logger.info("begin FindArtistFormBean process method");
 		if(findFavoriteFormValidator.validate()){
-			Artists artist = ControllerWsFactory.getInstance(sessionBean).getFindArtistController().findArtist(findFavoriteForm.getName());
+			ArtistsPager artist = ControllerWsFactory.getInstance(sessionBean).getFindArtistController().findArtist(findFavoriteForm.getName());
 			this.favorite = artist;
 			String jsonArtist=null;
 			try {

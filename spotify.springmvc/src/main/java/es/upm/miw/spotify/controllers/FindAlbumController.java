@@ -1,7 +1,7 @@
 package es.upm.miw.spotify.controllers;
 
-import es.upm.miw.spotify.models.pojos.Albums;
+import es.upm.miw.spotify.models.pojos.AlbumsPager;
 
 public interface FindAlbumController {
-	Albums findAlbum(String album);
+	AlbumsPager findAlbum(String album);
 }

@@ -75,6 +75,9 @@ public abstract class FindFavoriteFormBean extends GenericView {
 	public void setFavorite(Object favorite) {
 		this.favorite = favorite;
 	}
+	public MessageSource getMessageSource() {
+		return messageSource;
+	}
 
 	
 

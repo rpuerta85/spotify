@@ -6,6 +6,7 @@ import org.springframework.web.client.RestTemplate;
 
 import es.upm.miw.spotify.controllers.FindArtistController;
 import es.upm.miw.spotify.models.pojos.Artists;
+import es.upm.miw.spotify.models.pojos.ArtistsPager;
 import es.upm.miw.spotify.view.beans.SessionBean;
 import es.upm.miw.spotify.ws.RestArtistUris;
 
@@ -21,16 +22,16 @@ public class FindArtistControllerWs extends ControllerWs implements
 
 
 	@Override
-	public Artists findArtist(String artist) {
+	public ArtistsPager findArtist(String artist) {
 		log.info("begin findArtistJSON");
 		log.info("artist received:"+artist);
 		RestTemplate restTemplate = ControllerWs.buildRestClient();
 		String json = "{}";
-		Artists artists = null;
+		ArtistsPager artists = null;
 		try {
 		log.info("URI:" + ControllerWs.URI+RestArtistUris.FIND_ARTIST_REST_URI.replaceAll(RestArtistUris.PARAM,artist ));
 		//System.out.println(replaceParamUriForValue(ControllerWs.URI+RestArtistUris.FIND_ARTIST_REST_URI, RestArtistUris.PARAM, artist));
-		artists = restTemplate.getForObject( ControllerWs.URI+RestArtistUris.FIND_ARTIST_REST_URI.replaceAll(RestArtistUris.PARAM,artist ),Artists.class );
+		artists = restTemplate.getForObject( ControllerWs.URI+RestArtistUris.FIND_ARTIST_REST_URI.replaceAll(RestArtistUris.PARAM,artist ),ArtistsPager.class );
 		log.info("rest response:" + json);
 		} catch (Exception e) {
 			log.error("error response", e);

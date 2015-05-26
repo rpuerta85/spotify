@@ -1,34 +1,10 @@
 package es.upm.miw.spotify.models.pojos;
 
-import java.util.Date;
-
+/**
+ * <a href="https://developer.spotify.com/web-api/object-model/#playlist-track-object">Playlist track object model</a>
+ */
 public class PlaylistTrack {
-
-  private Date addedAt;
-  private User addedBy;
-  private Track track;
-
-  public Date getAddedAt() {
-    return addedAt;
-  }
-
-  public void setAddedAt(Date addedAt) {
-    this.addedAt = addedAt;
-  }
-
-  public User getAddedBy() {
-    return addedBy;
-  }
-
-  public void setAddedBy(User addedBy) {
-    this.addedBy = addedBy;
-  }
-
-  public Track getTrack() {
-    return track;
-  }
-
-  public void setTrack(Track track) {
-    this.track = track;
-  }
+    public String added_at;
+    public UserSimple added_by;
+    public Track track;
 }
