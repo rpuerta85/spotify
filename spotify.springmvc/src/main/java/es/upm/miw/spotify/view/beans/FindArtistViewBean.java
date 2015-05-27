@@ -6,6 +6,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import es.upm.miw.spotify.form.beans.FindArtistFormBean;
 import es.upm.miw.spotify.form.beans.FindFavoriteFormBean;
+import es.upm.miw.spotify.utils.constants.ViewUrlConstants;
+import es.upm.miw.spotify.views.web.ee.ShowArtistDetailsParamsEE;
 
 
 public class FindArtistViewBean extends GenericView {
@@ -46,7 +48,9 @@ public class FindArtistViewBean extends GenericView {
 	}
 
 	@Override
-	protected void setMsgs() {}
+	protected void setMsgs() {		
+		mapMsgs.put(ShowArtistDetailsParamsEE.SHOW_ARTIST_DETAILS_URL.getV(),ViewUrlConstants.SHOW_ARTIST_DETAILS_PATH);
+}
 	
 	//* GETTETS AND SETTERS */
 	public boolean isSuccess() {

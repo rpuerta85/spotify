@@ -7,5 +7,6 @@ public interface ViewUrlConstants {
 	String FIND_ARTIST_PATH = "artist/find";
 	String FIND_ALBUM_PATH = "album/find";
 	String FIND_TRACK_PATH = "track/find";
+	String SHOW_ARTIST_DETAILS_PATH="artist/details";
 	
 }
