@@ -15,7 +15,7 @@ import es.spotify.models.entities.User;
 
 public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao {
  
-	 private static final String FIND_BY_FAVORITE_TYPE = "SELECT u FROM User u JOIN u.favorites f where f.favoritetype = :favoritetype and f.id = :userId";
+	 private static final String FIND_BY_FAVORITE_TYPE = "SELECT u FROM User u JOIN u.favorites f where f.favoritetype = :favoritetype and u.id = :userId";
 
 	public UserDaoJpa() {
         super(User.class);
