@@ -26,13 +26,14 @@ public class Principal {
          EntityManager em = Persistence.createEntityManagerFactory("BBDD", properties).createEntityManager();
          
          
-       Role r= new Role("jsjsjjs","Super");
+       Role r= new Role("jsjsjjs","ADMIN");
    
        DaoJpaFactory.getFactory().getUserRoleDao().create(r);
        User u= new User("jksjs", LocalDateTime.now(), "jjj@jsj.es", true,"pasword1");
+    
        DaoJpaFactory.getFactory().getUserDao().create(u);
        System.out.println( DaoJpaFactory.getFactory().getUserDao().read(2));
-       FavoriteType ft= new FavoriteType("klñslks", "ALBUM");
+       FavoriteType ft= new FavoriteType("klï¿½slks", "ALBUM");
        DaoJpaFactory.getFactory().getFavoriteTypeDao().create(ft);
        Favorite f = new Favorite("skllksjslskjssjsjjs", ft, "iduUUI");
        DaoJpaFactory.getFactory().getFavoriteDao().create(f);
@@ -48,6 +49,7 @@ public class Principal {
        System.out.println(DaoJpaFactory.getFactory().getUserDao().getFavoriteByFavoriteType(ft, 2));
        List<Favorite> lista =  DaoJpaFactory.getFactory().getUserDao().getFavoriteByFavoriteType(ft, 2);
        System.out.println(lista);
+       System.out.println(DaoJpaFactory.getFactory().getUserDao().isAdminUser(u99.getId()));
        
 	}
 

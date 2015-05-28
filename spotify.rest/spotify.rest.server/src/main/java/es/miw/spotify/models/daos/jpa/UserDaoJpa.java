@@ -16,6 +16,7 @@ import es.spotify.models.entities.User;
 public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao {
  
 	 private static final String FIND_BY_FAVORITE_TYPE = "SELECT u FROM User u JOIN u.favorites f where f.favoritetype = :favoritetype and u.id = :userId";
+	 private static final String FIND__USER_IS_ADMIN_BY_ID = "SELECT u FROM User u JOIN r.roles r where r.role.role = :role and u.id = :userId";
 
 	public UserDaoJpa() {
         super(User.class);
@@ -34,8 +35,14 @@ public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao 
 
 	@Override
 	public boolean isAdminUser(int idUser) {
-		// TODO Auto-generated method stub
-		return false;
+		EntityManager entityManager = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
+        Query query = entityManager.createQuery(FIND__USER_IS_ADMIN_BY_ID);
+        query.setParameter("role", "ADMIN");
+        query.setParameter("userId", idUser);
+        List<User> listaResultado =(List<User>) query.getResultList();
+        entityManager.close();
+       
+		return listaResultado.size()>=1;
 	}
 
 }
