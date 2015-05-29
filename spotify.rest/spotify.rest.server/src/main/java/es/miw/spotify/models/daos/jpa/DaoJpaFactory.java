@@ -14,7 +14,7 @@ import es.miw.spotify.models.daos.DaoFactory;
 import es.miw.spotify.models.daos.FavoriteDao;
 import es.miw.spotify.models.daos.FavoriteTypeDao;
 import es.miw.spotify.models.daos.UserDao;
-import es.miw.spotify.models.daos.UserRoleDao;
+import es.miw.spotify.models.daos.RoleDao;
 
 public class DaoJpaFactory extends DaoFactory {
     private static final String PERSISTENCE_UNIT = "BBDD";
@@ -53,8 +53,8 @@ public class DaoJpaFactory extends DaoFactory {
 	}
 
 	@Override
-	public UserRoleDao getUserRoleDao() {
-	   return new UserRoleDaoJpa();
+	public RoleDao getUserRoleDao() {
+	   return new RoleDaoJpa();
 	}
 
 	@Override
