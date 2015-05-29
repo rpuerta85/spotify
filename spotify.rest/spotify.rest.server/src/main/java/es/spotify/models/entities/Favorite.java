@@ -4,7 +4,9 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-import es.miw.spotify.models.models.entities.GenerateUUIDUnique;
+import es.miw.spotify.models.entities.utils.GenerateUUIDUnique;
+
+
 
 
 
