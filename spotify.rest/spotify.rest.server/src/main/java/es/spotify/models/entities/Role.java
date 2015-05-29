@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import es.miw.spotify.models.models.entities.GenerateUUIDUnique;
+
 
 @Entity
 @Table(name="role")
@@ -23,10 +25,10 @@ public class Role implements Serializable {
 	}
 
 	
-	public Role(String idUUID, String role) {
+	public Role(String role) {
 		super();
-		this.idUUID = idUUID;
 		this.role = role;
+		this.idUUID =   GenerateUUIDUnique.generateUniqueId();
 	}
 
 
