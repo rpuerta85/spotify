@@ -2,21 +2,29 @@ package es.miw.spotify.models.daos.jpa;
 
 import java.util.List;
 
+
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+
+
+
+
 
 
 
 import es.miw.spotify.models.daos.UserDao;
 import es.spotify.models.entities.Favorite;
 import es.spotify.models.entities.FavoriteType;
+import es.spotify.models.entities.Role;
 import es.spotify.models.entities.User;
 
 
 public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao {
  
 	 private static final String FIND_BY_FAVORITE_TYPE = "SELECT u FROM User u JOIN u.favorites f where f.favoritetype = :favoritetype and u.id = :userId";
-	 private static final String FIND__USER_IS_ADMIN_BY_ID = "SELECT u FROM User u JOIN r.roles r where r.role.role = :role and u.id = :userId";
+	 private static final String FIND__USER_IS_ADMIN_BY_ID = "SELECT u FROM User u JOIN r.roles r where r.role = :role and u.id = :userId";
+	private static final String ADMIN_ROLE = "ADMIN";
 
 	public UserDaoJpa() {
         super(User.class);
@@ -37,7 +45,8 @@ public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao 
 	public boolean isAdminUser(int idUser) {
 		EntityManager entityManager = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
         Query query = entityManager.createQuery(FIND__USER_IS_ADMIN_BY_ID);
-        query.setParameter("role", "ADMIN");
+        Role role = DaoJpaFactory.getFactory().getUserRoleDao().findRoleByName(ADMIN_ROLE);
+        query.setParameter("role", role);
         query.setParameter("userId", idUser);
         List<User> listaResultado =(List<User>) query.getResultList();
         entityManager.close();
