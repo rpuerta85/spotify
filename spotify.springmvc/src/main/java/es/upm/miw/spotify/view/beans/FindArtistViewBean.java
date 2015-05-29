@@ -49,7 +49,7 @@ public class FindArtistViewBean extends GenericView {
 
 	@Override
 	protected void setMsgs() {		
-		mapMsgs.put(ShowArtistDetailsParamsEE.SHOW_ARTIST_DETAILS_URL.getV(),ViewUrlConstants.SHOW_ARTIST_DETAILS_PATH);
+		mapMsgs.put(ShowArtistDetailsParamsEE.SHOW_ARTIST_DETAILS_URL.getV(),ViewUrlConstants.SHOW_ARTIST_DETAILS_GETPATH);
 }
 	
 	//* GETTETS AND SETTERS */

@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.web.client.RestTemplate;
 
 import es.upm.miw.spotify.controllers.FindArtistController;
+import es.upm.miw.spotify.models.pojos.Artist;
 import es.upm.miw.spotify.models.pojos.Artists;
 import es.upm.miw.spotify.models.pojos.ArtistsPager;
 import es.upm.miw.spotify.view.beans.SessionBean;
@@ -38,6 +39,25 @@ public class FindArtistControllerWs extends ControllerWs implements
 		}
 		log.debug("end findArtistJSON");
 		return artists;
+	}
+
+
+	@Override
+	public Artist findArtistBySpotifyId(String spotifyId) {
+		log.info("begin findArtistBySpotifyId");
+		log.info("artistid received:"+spotifyId);
+		RestTemplate restTemplate = ControllerWs.buildRestClient();
+		String json = "{}";
+		Artist artist = null;
+		try {
+		log.info("URI:" + ControllerWs.URI+RestArtistUris.FIND_ARTIST_BY_SPOTIFYID_REST_URI.replaceAll(RestArtistUris.PARAM,spotifyId ));
+		artist = restTemplate.getForObject( ControllerWs.URI+RestArtistUris.FIND_ARTIST_BY_SPOTIFYID_REST_URI.replaceAll(RestArtistUris.PARAM,spotifyId ),Artist.class );
+		log.info("rest response:" + json);
+		} catch (Exception e) {
+			log.error("error response", e);
+		}
+		log.debug("end findArtistBySpotifyId");
+		return artist;
 	}
 
 	

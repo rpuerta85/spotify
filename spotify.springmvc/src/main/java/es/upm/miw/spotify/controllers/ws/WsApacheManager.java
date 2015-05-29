@@ -6,6 +6,8 @@ import java.net.URISyntaxException;
 import java.util.Iterator;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.auth.AuthScope;
@@ -29,9 +31,16 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+import es.upm.miw.spotify.models.properties.beans.HomeViewPropertiesManager;
 import es.upm.miw.spotify.models.utils.ObjectMapperJacksonSingleton;
 
-
+@Service("servicio")
 public class WsApacheManager {
 	private static final Logger logger = LogManager.getLogger(WsApacheManager.class);
 
@@ -39,10 +48,19 @@ public class WsApacheManager {
 	protected HttpClient client;
 	protected HttpResponse responseApache;
 	protected HttpEntityEnclosingRequestBase httpMethod;
-
+	
+	@Value("${homeView.jumbotron.button.more.name}")
+	private String urii;
+	@Autowired
+	private HomeViewPropertiesManager ppp;
 	// private HttpRequestBase httpMethodForGetRequest;
-
-	/*public WsApacheManager(String userName, String password) {
+	@PostConstruct
+	public void init(){
+	System.out.println("INITTTTTT"+ppp);	
+	System.out.println("INITTTTTT"+urii);
+	}
+	
+	public WsApacheManager(String userName, String password) {
 		final CredentialsProvider cp = new BasicCredentialsProvider();
 		final UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(
 				userName, password);
@@ -51,10 +69,12 @@ public class WsApacheManager {
 		cp.setCredentials(scope, credentials);
 		client = HttpClientBuilder.create().setDefaultCredentialsProvider(cp)
 				.build();
-	}*/
+	}
 
 	public WsApacheManager() {
 		client = HttpClientBuilder.create().build();
+		System.out.println(">>>>>>>>>>>>>>>>>>>>"+urii);
+		System.out.println(">>>>>>>>>>>>>>>>>>>>"+ppp);
 	}
 
 	public String getJsonResponse() throws Exception {
@@ -167,6 +187,22 @@ public class WsApacheManager {
 
 	public HttpEntityEnclosingRequestBase getHttpMethod() {
 		return httpMethod;
+	}
+
+	public String getUrii() {
+		return urii;
+	}
+
+	public void setUrii(String urii) {
+		this.urii = urii;
+	}
+
+	public HomeViewPropertiesManager getPpp() {
+		return ppp;
+	}
+
+	public void setPpp(HomeViewPropertiesManager ppp) {
+		this.ppp = ppp;
 	}
 
 }

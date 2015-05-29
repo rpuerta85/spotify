@@ -1,7 +1,6 @@
 package es.upm.miw.spotify.rest.server;
 
 import java.net.URLEncoder;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-
+import org.springframework.web.bind.annotation.PathVariable;
 import com.google.gson.Gson;
-
-import es.upm.miw.spotify.models.pojos.Artists;
+import es.upm.miw.spotify.models.pojos.Artist;
 import es.upm.miw.spotify.models.pojos.ArtistsPager;
 import es.upm.miw.spotify.rest.core.uris.UrisSpotifyApi;
 import es.upm.miw.spotify.rest.core.uris.UrisWebApp;
@@ -48,4 +46,23 @@ public class FindArtistControllerRest {
     	LOG.info("end findArtistByName");
     	return artists;
     }
+    @RequestMapping(UrisWebApp.FIND_ARTIST_BY_SPOTIFYID)
+    public Artist findArtistBySpotifyId(@PathVariable("id") String spotifyId)  {
+    	LOG.info("begin findArtistBySpotifyId");
+    	LOG.info("spotifyId received:"+spotifyId);
+    	Artist artist = null;
+    	try {
+    		LOG.info("URI:"+spotifyRestUri+UrisSpotifyApi.FIND_ARTIST_BY_ID.
+				replaceAll(UrisSpotifyApi.PARAM, URLEncoder.encode(spotifyId, "UTF-8")));
+    		String json = restTemplate.getForObject(spotifyRestUri+UrisSpotifyApi.FIND_ARTIST_BY_ID.
+				replaceAll(UrisSpotifyApi.PARAM, URLEncoder.encode(spotifyId, "UTF-8")),String.class);
+    		artist =new Gson().fromJson(json, Artist.class);
+    		} catch (Exception e) {
+    			LOG.error("error response", e);
+    		}
+    	LOG.info("end findArtistBySpotifyId");
+    	return artist;
+    }
+    
+    
 }

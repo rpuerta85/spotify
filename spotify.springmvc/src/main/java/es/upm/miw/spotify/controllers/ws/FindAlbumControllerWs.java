@@ -3,9 +3,7 @@ package es.upm.miw.spotify.controllers.ws;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.client.RestTemplate;
-
 import es.upm.miw.spotify.controllers.FindAlbumController;
-import es.upm.miw.spotify.models.pojos.Albums;
 import es.upm.miw.spotify.models.pojos.AlbumsPager;
 import es.upm.miw.spotify.view.beans.SessionBean;
 import es.upm.miw.spotify.ws.RestArtistUris;

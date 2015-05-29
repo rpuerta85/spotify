@@ -7,6 +7,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,9 +38,9 @@ public class ShowArtistsDetailsController {
 	
 	@RequestMapping(value = { ViewUrlConstants.ROOT_PATH+ViewUrlConstants.SHOW_ARTIST_DETAILS_PATH}, 
 			method = RequestMethod.GET)
-	public ModelAndView showArtistDetailsAction() {
+	public ModelAndView showArtistDetailsAction(@PathVariable("id") String spotifyId) {
 		logger.info("showArtistDetailsAction GET");
-		ShowArtistDetailsViewBean showArtistDetailsViewBean = new ShowArtistDetailsViewBean(session);
+		ShowArtistDetailsViewBean showArtistDetailsViewBean = new ShowArtistDetailsViewBean(session,spotifyId);
 		ModelAndView model = showArtistDetailsViewBean.update();
 		model.setViewName(ViewNameConstants.SHOW_ARTIST_DETAILS_VIEWNAME);
 		logger.info("End showArtistDetailsAction GET");

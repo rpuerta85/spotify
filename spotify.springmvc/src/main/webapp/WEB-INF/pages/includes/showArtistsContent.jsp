@@ -27,7 +27,7 @@ function artistContentController($scope, $http,$location){
               		<table class="table table-striped table-condensed" >
             			<tr  ng-repeat="artist in vm.artists.artists.items">
                       		<td>
-	                          	<a href="${pageContext.request.contextPath}/${findArtistViewBean.mapMsgs['showArtistDetailsUrl']}"> 
+	                          	<a ng-href="${pageContext.request.contextPath}/${findArtistViewBean.mapMsgs['showArtistDetailsUrl']}/{{artist.id}}"> 
 	                          		<button type="button" class="btn btn-primary">
 	                            			
 	                            			<img  width="64" height="64" title="" alt=""  ng-src="{{artist.images[0].url}}">
