@@ -62,6 +62,21 @@
             <artifactId>eclipselink</artifactId>
             <version>2.5.0</version>
         </dependency>
+        
+       <!-- uuid dependency -->
+   <!--   <dependency>
+		    <groupId>com.fasterxml.uuid</groupId>
+		    <artifactId>java-uuid-generator</artifactId>
+		    <version>3.0.0</version>
+       </dependency>-->
+   <dependency> 
+    <groupId>org.safehaus.jug</groupId> 
+    <artifactId>jug</artifactId> 
+    <version>2.0.0</version> 
+     <!-- the classifer is important!! --> 
+    <classifier>lgpl</classifier> 
+</dependency> 
+        
 
 	</dependencies>
 	

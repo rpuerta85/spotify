@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import es.miw.spotify.models.entities.utils.GenerateUUIDUnique;
+
+
+
 
 
 @Entity
@@ -26,12 +30,12 @@ public class Favorite implements Serializable {
 	}
     
 	
-	public Favorite(String idFavorite, FavoriteType favoritetype, String idUUID) {
+	public Favorite(String idFavorite, FavoriteType favoritetype) {
 		super();
 		this.idFavorite = idFavorite;
 		this.favoritetype = favoritetype;
-		this.idUUID = idUUID;
-	}
+		this.idUUID =   GenerateUUIDUnique.generateUniqueId();
+  	}
 
    public int getId() {
 		return this.id;
@@ -118,5 +122,5 @@ public class Favorite implements Serializable {
 	}
 	
 	
-   
+ 
 }

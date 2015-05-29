@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import es.miw.spotify.models.entities.utils.GenerateUUIDUnique;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,10 +43,10 @@ public class User implements Serializable {
 	}
 
 	
-	public User(String idUUID, LocalDateTime createTime, String email,
+	public User(LocalDateTime createTime, String email,
 			boolean enabled, String password) {
 		this();
-		this.idUUID = idUUID;
+		this.idUUID =   GenerateUUIDUnique.generateUniqueId();;
 		this.createTime = createTime;
 		this.email = email;
 		this.enabled = enabled;
