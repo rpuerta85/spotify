@@ -1,11 +1,9 @@
 package es.upm.miw.spotify.views.web.ee;
 
-import es.upm.miw.spotify.utils.constants.ViewUrlConstants;
-
-
 public enum ShowArtistDetailsParamsEE {
 	
-	JSON_ARTISTS("jsonArtists"),SHOW_ARTIST_DETAILS_URL ("showArtistDetailsUrl") ;
+	JSON_ARTISTS("jsonArtists"),SHOW_ARTIST_DETAILS_URL ("showArtistDetailsUrl"),JSON_ALBUMES("jsonAlbumes");
+	
 	private String v;
 
 	private ShowArtistDetailsParamsEE(String v) {

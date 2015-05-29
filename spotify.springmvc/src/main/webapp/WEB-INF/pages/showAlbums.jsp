@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="template/layout.jsp" %>
 <div  class="container"  >
-		<%@ include file="includes/showAlbumsContent.jsp" %> 
+		<%@ include file="includes/album/showAlbumsContent.jsp" %> 
 <%@ include file="template/footer.jsp" %> 
 </div>
 </body>

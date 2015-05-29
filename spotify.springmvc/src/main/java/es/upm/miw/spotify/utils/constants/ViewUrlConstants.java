@@ -10,4 +10,7 @@ public interface ViewUrlConstants {
 	String FIND_TRACK_PATH = "track/find";
 	String SHOW_ARTIST_DETAILS_PATH="artist/details"+IDPARAM;
 	String SHOW_ARTIST_DETAILS_GETPATH = "artist/details";
+	String SHOW_DETAILS_DETAILS_PATH="album/details"+IDPARAM;
+	String SHOW_ALBUM_DETAILS_GETPATH = "album/details";
+
 }

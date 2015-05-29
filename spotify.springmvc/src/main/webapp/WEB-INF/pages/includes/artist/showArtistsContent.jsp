@@ -8,7 +8,11 @@ function artistContentController($scope, $http,$location){
 	var vm=this;
 	   vm.artists = ${findFavoriteFormBean.mapMsgs['jsonArtists']}; 
 	   vm.context = "${pageContext.request.contextPath}";
-	
+	   vm.limit = 5;
+	   vm.moreResult = function(){
+		   vm.limit +=5;
+		   return vm.limit;
+	   }
 	} 
 
 </script>    
@@ -27,7 +31,7 @@ function artistContentController($scope, $http,$location){
               		<table class="table table-striped table-condensed" >
             			<tr  ng-repeat="artist in vm.artists.artists.items">
                       		<td>
-	                          	<a ng-href="${pageContext.request.contextPath}/${findArtistViewBean.mapMsgs['showArtistDetailsUrl']}/{{artist.id}}"> 
+	                          	<a ng-href="${pageContext.request.contextPath}/${findArtistViewBean.mapMsgs['showArtistDetailsUrl']}/{{artist.id}}?limit={{vm.limit}}"> 
 	                          		<button type="button" class="btn btn-primary">
 	                            			
 	                            			<img  width="64" height="64" title="" alt=""  ng-src="{{artist.images[0].url}}">

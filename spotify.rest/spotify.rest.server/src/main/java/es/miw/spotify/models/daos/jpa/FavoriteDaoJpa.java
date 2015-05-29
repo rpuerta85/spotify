@@ -8,4 +8,5 @@ public class FavoriteDaoJpa extends GenericDaoJpa<Favorite, Integer> implements 
 	public FavoriteDaoJpa() {
 		super(Favorite.class);
 	}
+	
 }

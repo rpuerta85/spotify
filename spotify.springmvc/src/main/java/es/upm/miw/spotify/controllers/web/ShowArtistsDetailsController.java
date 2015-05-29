@@ -11,14 +11,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import es.upm.miw.spotify.form.beans.FindArtistFormBean;
-import es.upm.miw.spotify.models.forms.FindFavoriteForm;
 import es.upm.miw.spotify.utils.constants.ViewNameConstants;
 import es.upm.miw.spotify.utils.constants.ViewUrlConstants;
-import es.upm.miw.spotify.view.beans.FindArtistViewBean;
 import es.upm.miw.spotify.view.beans.SessionBean;
 import es.upm.miw.spotify.view.beans.ShowArtistDetailsViewBean;
+import es.upm.miw.spotify.view.components.beans.ShowAlbumesOfArtistListViewComponentBean;
 
 @Controller
 public class ShowArtistsDetailsController {
@@ -38,9 +35,15 @@ public class ShowArtistsDetailsController {
 	
 	@RequestMapping(value = { ViewUrlConstants.ROOT_PATH+ViewUrlConstants.SHOW_ARTIST_DETAILS_PATH}, 
 			method = RequestMethod.GET)
-	public ModelAndView showArtistDetailsAction(@PathVariable("id") String spotifyId) {
+	public ModelAndView showArtistDetailsAction(@PathVariable("id") String spotifyId,
+			@RequestParam(value="limit", defaultValue="5") String limit) {
 		logger.info("showArtistDetailsAction GET");
-		ShowArtistDetailsViewBean showArtistDetailsViewBean = new ShowArtistDetailsViewBean(session,spotifyId);
+		logger.info("spotifyId received"+spotifyId);
+		logger.info("limit received"+limit);
+		ShowAlbumesOfArtistListViewComponentBean showAlbumesOfArtistListViewComponentBean = 
+				new ShowAlbumesOfArtistListViewComponentBean(session, spotifyId,limit);
+		ShowArtistDetailsViewBean showArtistDetailsViewBean = new ShowArtistDetailsViewBean(session,spotifyId,
+				showAlbumesOfArtistListViewComponentBean);
 		ModelAndView model = showArtistDetailsViewBean.update();
 		model.setViewName(ViewNameConstants.SHOW_ARTIST_DETAILS_VIEWNAME);
 		logger.info("End showArtistDetailsAction GET");

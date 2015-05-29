@@ -1,6 +1,7 @@
 package es.upm.miw.spotify.rest.server;
 
 import java.net.URLEncoder;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.bind.annotation.PathVariable;
+
 import com.google.gson.Gson;
+
 import es.upm.miw.spotify.models.pojos.Artist;
 import es.upm.miw.spotify.models.pojos.ArtistsPager;
 import es.upm.miw.spotify.rest.core.uris.UrisSpotifyApi;

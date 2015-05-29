@@ -6,9 +6,14 @@
  
 <script>
 var jsonObject = ${showArtistDetailsViewBean.mapMsgs['jsonArtists']};
+var jsonObjectArtistAlbumes = ${showAlbumesOfArtistListViewComponentBean.mapMsgs['jsonAlbumes']};
+var urlMoreResult = "${showArtistDetailsViewBean.mapMsgs['showArtistDetailsUrl']}";
+
 var app = angular.module('showArtistDetailsCntApp',[]);
 	app.controller('showArtistDetailsContentController', ['$scope','$http','$location','$window',showArtistDetailsContentController]);
-</script>
+	app.controller('showAlbumesListController', ['$scope','$http','$location','$window',showAlbumesListController]);
+
+	</script>
 <div class="panel panel-default" 
 ng-app='showArtistDetailsCntApp' ng-controller="showArtistDetailsContentController as vm" 
 data-ng-init="vm.init('${pageContext.request.contextPath}','${_csrf.token}','${indexView.mapMsgs['userId']}')">
@@ -19,7 +24,7 @@ data-ng-init="vm.init('${pageContext.request.contextPath}','${_csrf.token}','${i
 				class="glyphicon glyphicon-user"></span> <spring:message
 					code="showArtistDetails.panel.header.title" /></small>
 			<mark>
-				a rellenar
+				{{ vm.jsonObject.name }}
 				<!-- ${findFavoriteFormBean.mapMsgs['formFindFavoriteNameMsgError']} -->
 			</mark>
 			<!-- <a href="">
@@ -34,78 +39,31 @@ data-ng-init="vm.init('${pageContext.request.contextPath}','${_csrf.token}','${i
 		</h1>
 	</div>
 
-	<div class="panel-body">
+    <div class="panel-body">
 
-		<div class="row">
-			<div class="col-md-4">
-				<p class="text-left">
-					<img alt="Imagen Pink Floyd" class="img-responsive"
-						src="https://i.scdn.co/image/b954149fed21dcbafe1cee4c30454eb934c384ee"><br>
-					<a title="Escuchar en Spotify" target="_blank"
-						href="https://open.spotify.com/artist/0k17h0D3J5VfsdmQ1iZtE9">
-						<!-- <img alt="Spotify" class="img-responsive"
-						src="/images/1c538cc_logoSpotify_1.png"> -->
-					</a>
-				</p>
-			</div>
-		<!--  <div class="col-md-8">
-				<div class="panel panel-default">
-					<div class="table-responsive">
-						<table class="table table-striped table-condensed">
-							<tbody>
-								<tr>
-									<td><a href="/album/mostrar/0fXAlQ9wTG2glNJvZEkBZc"> <img
-											width="64" height="64" title="The Endless River"
-											alt="Imagen The Endless River"
-											src="https://i.scdn.co/image/2846edccb21549e6e76422557ffdce538c63229e">
-									</a></td>
-									<td>The Endless River</td>
-								</tr>
-								<tr>
-									<td><a href="/album/mostrar/3tF21h9x3rP8G8C3S7hv3S"> <img
-											width="64" height="64"
-											title="Darkside, Tom Stoppard incorporating The Dark Side of The Moon by Pink Floyd"
-											alt="Imagen Darkside, Tom Stoppard incorporating The Dark Side of The Moon by Pink Floyd"
-											src="https://i.scdn.co/image/9a5ce7d2b418db65097c08c4a6a61def8758c9d1">
-									</a></td>
-									<td>Darkside, Tom Stoppard incorporating The Dark Side of
-										The Moon by Pink Floyd</td>
-								</tr>
-								<tr>
-									<td><a href="/album/mostrar/3NQJAg6DHRY2x2GsRT3WwQ"> <img
-											width="64" height="64" title="Pulse" alt="Imagen Pulse"
-											src="https://i.scdn.co/image/e713eea64698fd5ce9cb111b7e2b535fa5db33f2">
-									</a></td>
-									<td>Pulse</td>
-								</tr>
-								<tr>
-									<td><a href="/album/mostrar/1J0NAouKjVtJKHDHzZcaT5"> <img
-											width="64" height="64"
-											title="The Division Bell [2011 - Remaster] (2011 Remastered Version)"
-											alt="Imagen The Division Bell [2011 - Remaster] (2011 Remastered Version)"
-											src="https://i.scdn.co/image/cd201cdf59c5a075a31e23c3f1752da2ecafc608">
-									</a></td>
-									<td>The Division Bell [2011 - Remaster] (2011 Remastered
-										Version)</td>
-								</tr>
-								<tr>
-									<td><a href="/album/mostrar/5pGiFKbY49I0srddXPIBck"> <img
-											width="64" height="64" title="Delicate Sound Of Thunder"
-											alt="Imagen Delicate Sound Of Thunder"
-											src="https://i.scdn.co/image/2fe2624c2663371b8c8da9b6f312314311e55657">
-									</a></td>
-									<td>Delicate Sound Of Thunder</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div> 
-
-				<a role="button" class="btn btn-info"
-					href="/artista/mostrar/0k17h0D3J5VfsdmQ1iZtE9/50"> Más
-					resultados » </a>
-			</div> -->
-		</div>
-
-	</div>
+          <div class="row">
+            <div class="col-md-4">
+              <p class="text-left">
+                <img ng-src="{{ vm.jsonObject.images[0].url }}" class="img-responsive" alt="Imagen {{ vm.jsonObject.name }}"><br>
+                <a ng-href='{{ vm.jsonObject.external_urls.spotify }}' target='_blank' 
+                   title='Escuchar en Spotify'>
+                   <img src="${pageContext.request.contextPath}/resources/images/logoSpotify.png" class="img-responsive" alt="Spotify"><br>
+                </a>
+              </p>
+            </div>
+            <div class="col-md-8">
+					<%@ include file="showAlbumesList.jsp" %>
+             <a ng-href="${pageContext.request.contextPath}/${showArtistDetailsViewBean.mapMsgs['showAlbumDetailsUrl']}/{{vm.jsonObject.id}}"
+                   class="btn btn-info" role="button">
+                  Más resultados &raquo;
+   			 </a> 
+   			 <!--  <a ng-click="vm.moreResult()"
+                   class="btn btn-info" role="button">
+                  Más resultados2 &raquo;
+   			 </a>  -->
+            </div>
+          </div>
+        
+        
+      </div>
 </div>

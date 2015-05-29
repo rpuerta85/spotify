@@ -2,11 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ include file="template/layout.jsp" %>
 <div  class="container"  >
-		<%@ include file="includes/album/findAlbumViewContent.jsp" %> 
+		<%@ include file="includes/album/showAlbumDetailsContent.jsp" %> 
 <%@ include file="template/footer.jsp" %> 
 </div>
 </body>
 </html>
+
 
 
 

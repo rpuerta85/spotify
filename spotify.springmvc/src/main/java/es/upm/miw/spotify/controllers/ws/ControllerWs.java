@@ -2,16 +2,8 @@ package es.upm.miw.spotify.controllers.ws;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-
-import javax.annotation.PostConstruct;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.omg.CORBA.Environment;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import es.upm.miw.spotify.view.beans.SessionBean;

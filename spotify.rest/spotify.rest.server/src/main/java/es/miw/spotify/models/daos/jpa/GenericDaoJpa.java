@@ -1,5 +1,6 @@
 package es.miw.spotify.models.daos.jpa;
 
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -9,12 +10,11 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import org.apache.logging.log4j.LogManager;
-
 import es.miw.spotify.models.daos.GenericDao;
 
 public class GenericDaoJpa<T, ID> implements GenericDao<T, ID> {
     private Class<T> persistentClass;
-
+  
     public GenericDaoJpa(Class<T> persistentClass) {
         this.persistentClass = persistentClass;
     }

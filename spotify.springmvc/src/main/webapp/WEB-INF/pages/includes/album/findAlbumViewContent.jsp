@@ -6,11 +6,11 @@
       <div class="panel-heading">
         <h1>
           <span aria-hidden="true" class="glyphicon glyphicon-user"></span> 
-          <spring:message code="findArtistView.panel.header.title" /><small><spring:message code="findArtistView.panel.header.subtitle" /></small>
+          <spring:message code="findAlbumView.panel.header.title" /><small><spring:message code="findAlbumView.panel.header.subtitle" /></small>
         </h1>
-        <p class="lead"><spring:message code="findArtistView.panel.header.description" /></p>
+        <p class="lead"><spring:message code="findAlbumView.panel.header.description" /></p>
       </div>
       <div class="panel-body">
-		 <%@ include file="../forms/findFavoriteForm.jsp" %> 
+		 <%@ include file="../../forms/findFavoriteForm.jsp" %> 
       </div>
   </div>

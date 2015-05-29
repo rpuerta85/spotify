@@ -27,7 +27,7 @@ function albumContentController($scope, $http,$location){
               		<table class="table table-striped table-condensed" >
             			<tr  ng-repeat="album in vm.albums.albums.items">
                       		<td>
-	                          	<a href="<c:url value="" />"> 
+	                          	<a ng-href="${pageContext.request.contextPath}/${findAlbumViewBean.mapMsgs['showAlbumDetailsUrl']}/{{album.id}}"> 
 	                          		<button type="button" class="btn btn-primary">
 	                            			<img  width="64" height="64" title="" alt=""  ng-src="{{album.images[0].url}}">
 	                          			    <span  title="AlbumType" class="badge">{{album.album_type}}</span>

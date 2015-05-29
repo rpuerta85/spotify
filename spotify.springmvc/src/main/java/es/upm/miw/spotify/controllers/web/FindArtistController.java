@@ -10,14 +10,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import es.upm.miw.spotify.form.beans.FindArtistFormBean;
 import es.upm.miw.spotify.models.forms.FindFavoriteForm;
 import es.upm.miw.spotify.utils.constants.ViewNameConstants;
 import es.upm.miw.spotify.utils.constants.ViewUrlConstants;
 import es.upm.miw.spotify.view.beans.FindArtistViewBean;
 import es.upm.miw.spotify.view.beans.SessionBean;
-import es.upm.miw.spotify.view.beans.ShowArtistDetailsViewBean;
 
 @Controller
 public class FindArtistController {

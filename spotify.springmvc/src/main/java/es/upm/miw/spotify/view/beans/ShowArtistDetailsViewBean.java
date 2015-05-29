@@ -13,6 +13,7 @@ import es.upm.miw.spotify.models.pojos.AlbumsPager;
 import es.upm.miw.spotify.models.pojos.Artist;
 import es.upm.miw.spotify.models.utils.ObjectMapperJacksonSingleton;
 import es.upm.miw.spotify.utils.constants.ViewUrlConstants;
+import es.upm.miw.spotify.view.components.beans.ShowAlbumesOfArtistListViewComponentBean;
 import es.upm.miw.spotify.views.web.ee.CommonViewParamsEE;
 import es.upm.miw.spotify.views.web.ee.HomeViewParamsEE;
 import es.upm.miw.spotify.views.web.ee.ShowArtistDetailsParamsEE;
@@ -24,20 +25,25 @@ public class ShowArtistDetailsViewBean extends GenericView {
 	private SessionBean sessionBean;
 	private String spotifyId;
 	private boolean success = false;
-
+	private ShowAlbumesOfArtistListViewComponentBean showAlbumesOfArtistListViewComponentBean;
 	public ShowArtistDetailsViewBean() {
 		super();
 	}
 
-	public ShowArtistDetailsViewBean(SessionBean sessionBean,String spotifyId) {
+	public ShowArtistDetailsViewBean(SessionBean sessionBean,String spotifyId,
+			ShowAlbumesOfArtistListViewComponentBean showAlbumesOfArtistListViewComponentBean) {
 		super();
 		this.sessionBean = sessionBean;
 		this.spotifyId = spotifyId;
+		this.showAlbumesOfArtistListViewComponentBean = showAlbumesOfArtistListViewComponentBean;
 	}
 
 	public ModelAndView update() {
 		ModelAndView model = new ModelAndView();
 		this.setMsgs();
+		showAlbumesOfArtistListViewComponentBean.update();
+		model.addObject(ShowAlbumesOfArtistListViewComponentBean.getName(), 
+				showAlbumesOfArtistListViewComponentBean);
 		model.addObject(NAME, this);
 		return model;
 	}
@@ -56,7 +62,7 @@ public class ShowArtistDetailsViewBean extends GenericView {
 		logger.info("end showArtistDetails getJSONArtist method");
 		return json;
 	}
-
+   
 	public void process(){
 		/*logger.info("begin showArtistDetails process method");
 		Artist albums = ControllerWsFactory.getInstance(sessionBean).getFindAlbumController().findAlbum(findFavoriteForm.getName());
@@ -77,6 +83,8 @@ public class ShowArtistDetailsViewBean extends GenericView {
 	protected void setMsgs() {
 		//ViewUrlConstants.FIND_ARTIST_PATH
 		mapMsgs.put(ShowArtistDetailsParamsEE.JSON_ARTISTS.getV(),getJSONArtist());
+		mapMsgs.put(ShowArtistDetailsParamsEE.SHOW_ARTIST_DETAILS_URL.getV(),ViewUrlConstants.SHOW_ARTIST_DETAILS_GETPATH);
+
 	}
 	
 	//* GETTETS AND SETTERS */
