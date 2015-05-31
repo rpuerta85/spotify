@@ -22,6 +22,7 @@ app.factory('audio',function ($document) {
 
 	  }
 	});
+	
 app.factory('video', function($document) {
     var videoElement = $document[0].createElement('video');
     //alert(videoElement);
