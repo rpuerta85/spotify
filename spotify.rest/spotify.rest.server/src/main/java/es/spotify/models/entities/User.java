@@ -20,6 +20,8 @@ public class User implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private String idUUID;
+	
+	private String userName;
 
 	@Column(name="create_time")
 	private LocalDateTime createTime;
@@ -43,10 +45,11 @@ public class User implements Serializable {
 	}
 
 	
-	public User(LocalDateTime createTime, String email,
+	public User(String userName, LocalDateTime createTime, String email,
 			boolean enabled, String password) {
 		this();
-		this.idUUID =   GenerateUUIDUnique.generateUniqueId();;
+		this.idUUID =   GenerateUUIDUnique.generateUniqueId();
+		this.userName = userName;
 		this.createTime = createTime;
 		this.email = email;
 		this.enabled = enabled;
@@ -122,6 +125,27 @@ public class User implements Serializable {
 	}
 
 
+	
+
+
+	public String getUserName() {
+		return userName;
+	}
+
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", idUUID=" + idUUID + ", userName="
+				+ userName + ", createTime=" + createTime + ", email=" + email
+				+ ", enabled=" + enabled + ", password=" + password + "]";
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -130,14 +154,12 @@ public class User implements Serializable {
 				+ ((createTime == null) ? 0 : createTime.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + (enabled ? 1231 : 1237);
-		result = prime * result
-				+ ((favorites == null) ? 0 : favorites.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((idUUID == null) ? 0 : idUUID.hashCode());
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
 		result = prime * result
-				+ ((userRoles == null) ? 0 : userRoles.hashCode());
+				+ ((userName == null) ? 0 : userName.hashCode());
 		return result;
 	}
 
@@ -163,11 +185,6 @@ public class User implements Serializable {
 			return false;
 		if (enabled != other.enabled)
 			return false;
-		if (favorites == null) {
-			if (other.favorites != null)
-				return false;
-		} else if (!favorites.equals(other.favorites))
-			return false;
 		if (id != other.id)
 			return false;
 		if (idUUID == null) {
@@ -180,23 +197,16 @@ public class User implements Serializable {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
-		if (userRoles == null) {
-			if (other.userRoles != null)
+		if (userName == null) {
+			if (other.userName != null)
 				return false;
-		} else if (!userRoles.equals(other.userRoles))
+		} else if (!userName.equals(other.userName))
 			return false;
 		return true;
 	}
 
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", idUUID=" + idUUID + ", createTime="
-				+ createTime + ", email=" + email + ", enabled=" + enabled
-				+ ", password=" + password + ", favorites=" + favorites
-				+ ", userRoles=" + userRoles + "]";
-	}
-
+	
 	  
 
 }

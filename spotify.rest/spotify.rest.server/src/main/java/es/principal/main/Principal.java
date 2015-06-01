@@ -29,7 +29,7 @@ public class Principal {
        Role r= new Role("ADMIN");
    
        DaoJpaFactory.getFactory().getUserRoleDao().create(r);
-       User u= new User(LocalDateTime.now(), "jjj@jsj.es", true,"pasword1");
+       User u= new User("u1",LocalDateTime.now(), "jjj@jsj.es", true,"*u1*");
     
        DaoJpaFactory.getFactory().getUserDao().create(u);
        System.out.println( DaoJpaFactory.getFactory().getUserDao().read(2));
