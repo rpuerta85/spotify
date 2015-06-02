@@ -11,4 +11,5 @@ public interface UrisWebApp {
 	String FIND_TRACKS_OF_ALBUM_REST_URI = "/find/album/{id}/tracks";
 	String ADD_FAVORITE_ARTIST="/add/favorite/artist";
 	String FIND_FAVORITE_ALBUMS = "/find/favorites/albums";
+	String FIND_FAVORITE_ARTISTS = "/find/favorites/artists";
 }

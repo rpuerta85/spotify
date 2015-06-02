@@ -44,8 +44,12 @@ public class Principal {
        u99.getFavorites().add(f1);
        u99.getUserRoles().add(r);
        DaoJpaFactory.getFactory().getUserDao().update(u99);
-      
-       
+       FavoriteType ft2= new FavoriteType("ARTIST");
+       DaoJpaFactory.getFactory().getFavoriteTypeDao().create(ft2);
+       Favorite f3 = new Favorite("0UWZUmn7sybxMCqrw9tGa7",ft2);//
+       DaoJpaFactory.getFactory().getFavoriteDao().create(f3);
+       u99.getFavorites().add(f3);
+       DaoJpaFactory.getFactory().getUserDao().update(u99);
        u99=DaoJpaFactory.getFactory().getUserDao().read(2);
        System.out.println(u99);
        System.out.println(DaoJpaFactory.getFactory().getUserDao().getFavoriteByFavoriteType(ft, 2));
