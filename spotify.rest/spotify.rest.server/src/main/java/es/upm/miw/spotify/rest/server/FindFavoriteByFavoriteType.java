@@ -47,10 +47,10 @@ public class FindFavoriteByFavoriteType {
 	 // Por tanto, este objeto aqui ya se encuentra instanciado, nohace falta hace NEW
 	
     @RequestMapping(UrisWebApp.FIND_FAVORITE_ALBUMS)
-    public AlbumsPager findFavoritesAlbums(@RequestParam(value="userId") Integer userId, @RequestParam(value="idFavoriteType")Integer idFavoriteType)  {
+    public AlbumsPager findFavoritesAlbums(@RequestParam(value="userId") String userId, @RequestParam(value="idFavoriteType")String idFavoriteType)  {
     	  
-    	FavoriteType favoriteType = DaoFactory.getFactory().getFavoriteTypeDao().read(idFavoriteType);
-    	User user =  DaoFactory.getFactory().getUserDao().read(userId);
+    	FavoriteType favoriteType = DaoFactory.getFactory().getFavoriteTypeDao().readUUID(idFavoriteType);
+    	User user =  DaoFactory.getFactory().getUserDao().readUUID(userId);
     	List<Favorite> albumesFavorites=	DaoFactory.getFactory().getUserDao().getFavoriteByFavoriteType(favoriteType, user.getId());
     	LOG.info("begin findFavoritesAlbums");
     	LOG.info("album received:");

@@ -13,5 +13,7 @@ public interface GenericDao<T, ID> {
     public void deleteById(ID id);
 
     public List<T> findAll();
+    
+  	public T readUUID(String idUUID);
 
 }
