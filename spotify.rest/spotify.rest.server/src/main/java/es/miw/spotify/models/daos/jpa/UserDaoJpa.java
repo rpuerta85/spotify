@@ -30,7 +30,8 @@ public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao 
 	        Query query = entityManager.createQuery(FIND_BY_FAVORITE_TYPE);
 	        query.setParameter("favoritetype", favoriteType);
 	        query.setParameter("userId", userId);
-	        List<Favorite> listaResultado =(List<Favorite>) query.getResultList();
+	        List<User> user =(List<User>) query.getResultList();
+	        List<Favorite> listaResultado =user.get(0).getFavorites();
 	        entityManager.close();
 	        return listaResultado;
 	}

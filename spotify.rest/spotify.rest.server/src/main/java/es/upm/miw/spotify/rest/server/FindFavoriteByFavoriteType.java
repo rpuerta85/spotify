@@ -1,6 +1,7 @@
 package es.upm.miw.spotify.rest.server;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -28,6 +29,7 @@ import es.upm.miw.spotify.models.pojos.Album;
 import es.upm.miw.spotify.models.pojos.AlbumSimple;
 import es.upm.miw.spotify.models.pojos.AlbumsPager;
 import es.upm.miw.spotify.models.pojos.Page;
+import es.upm.miw.spotify.models.pojos.Pager;
 import es.upm.miw.spotify.rest.core.uris.UrisSpotifyApi;
 import es.upm.miw.spotify.rest.core.uris.UrisWebApp;
 
@@ -45,13 +47,16 @@ public class FindFavoriteByFavoriteType {
 	 // Por tanto, este objeto aqui ya se encuentra instanciado, nohace falta hace NEW
 	
     @RequestMapping(UrisWebApp.FIND_FAVORITE_ALBUMS)
-    public AlbumsPager findFavoritesAlbums(@RequestParam(value="user") User user, @RequestParam(value="idFavoriteType")Integer idFavoriteType)  {
+    public AlbumsPager findFavoritesAlbums(@RequestParam(value="userId") Integer userId, @RequestParam(value="idFavoriteType")Integer idFavoriteType)  {
     	  
     	FavoriteType favoriteType = DaoFactory.getFactory().getFavoriteTypeDao().read(idFavoriteType);
-    	List<Favorite> albumesFavorites = DaoFactory.getFactory().getUserDao().getFavoriteByFavoriteType(favoriteType, user.getId());
+    	User user =  DaoFactory.getFactory().getUserDao().read(userId);
+    	List<Favorite> albumesFavorites=	DaoFactory.getFactory().getUserDao().getFavoriteByFavoriteType(favoriteType, user.getId());
     	LOG.info("begin findFavoritesAlbums");
     	LOG.info("album received:");
-    	AlbumsPager albums = null;
+    	AlbumsPager albums = new AlbumsPager();
+    	albums.albums=new Pager<AlbumSimple>();
+    	albums.albums.items= new ArrayList<AlbumSimple>();
     	for (Favorite favorite : albumesFavorites) {
 		try {
     		LOG.info("URI:"+spotifyRestUri+UrisSpotifyApi.FIND_ALBUM_BY_ID.
@@ -59,11 +64,13 @@ public class FindFavoriteByFavoriteType {
     		String json = restTemplate.getForObject(spotifyRestUri+UrisSpotifyApi.FIND_ALBUM_BY_ID.
 				replaceAll(UrisSpotifyApi.PARAM, URLEncoder.encode(favorite.getIdFavorite(), "UTF-8")),String.class);
     		LOG.info("response json:"+json);
-    		albums =new Gson().fromJson(json, AlbumsPager.class);
+    		AlbumSimple albumSimple = new Gson().fromJson(json, AlbumSimple.class);
+    		albums.albums.items.add(albumSimple);
     		} catch (Exception e) {
     			LOG.error("error response", e);
     		}
     	}
+//    	albums =new Gson().fromJson(json, AlbumsPager.class);
     	LOG.info("end findFavoritesAlbums");
     	return albums;
     }

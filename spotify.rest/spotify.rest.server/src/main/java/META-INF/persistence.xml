@@ -8,7 +8,7 @@
         <class>es.spotify.models.entities.Role</class>
         <class>es.spotify.models.entities.User</class>
         <properties>
-            <property name="eclipselink.ddl-generation" value="drop-and-create-tables" /> <!--drop-and-create-tables   none-->
+            <property name="eclipselink.ddl-generation" value="none" /> <!--drop-and-create-tables   none-->
             <property name="eclipselink.logging.level" value="INFO" /> <!-- OFF,WARNING,INFO,FINE,ALL -->
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/test" />
             <property name="javax.persistence.jdbc.user" value="rootSpotify" />
