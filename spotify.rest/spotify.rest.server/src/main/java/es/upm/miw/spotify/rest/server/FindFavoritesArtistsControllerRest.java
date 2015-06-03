@@ -37,17 +37,15 @@ import es.upm.miw.spotify.rest.core.uris.UrisSpotifyApi;
 import es.upm.miw.spotify.rest.core.uris.UrisWebApp;
 
 @RestController
-public class FindFavoritesArtists {
+public class FindFavoritesArtistsControllerRest {
 	 private final static Log LOG = LogFactory
-				.getLog(FindFavoritesArtists.class);
+				.getLog(FindFavoritesArtistsControllerRest.class);
 	 
 	 @Value("${rest.spotify.uri}")
 	 private String spotifyRestUri;
 
 	 @Autowired
-	 private RestTemplate  restTemplate;//cliente REST, el cual se instancia en cuanto
-	 //se crea el contexto de la aplicacio,. Se crea concretamente en spotify.rest.client.RestConfig
-	 // Por tanto, este objeto aqui ya se encuentra instanciado, nohace falta hace NEW
+	 private RestTemplate  restTemplate;
 	
     @RequestMapping(UrisWebApp.FIND_FAVORITE_ARTISTS)
     public ArtistsPager findFavoritesAlbums(@RequestParam(value="userId") String userId, @RequestParam(value="idFavoriteType")String idFavoriteType)  {

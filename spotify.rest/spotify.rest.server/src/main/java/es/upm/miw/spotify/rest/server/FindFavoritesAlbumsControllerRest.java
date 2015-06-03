@@ -34,9 +34,9 @@ import es.upm.miw.spotify.rest.core.uris.UrisSpotifyApi;
 import es.upm.miw.spotify.rest.core.uris.UrisWebApp;
 
 @RestController
-public class FindFavoritesAlbums {
+public class FindFavoritesAlbumsControllerRest {
 	 private final static Log LOG = LogFactory
-				.getLog(FindFavoritesAlbums.class);
+				.getLog(FindFavoritesAlbumsControllerRest.class);
 	 
 	 @Value("${rest.spotify.uri}")
 	 private String spotifyRestUri;

@@ -1,9 +1,11 @@
 package es.miw.spotify.models.daos.jpa;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+
 
 
 
@@ -17,7 +19,7 @@ import es.spotify.models.entities.User;
 public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao {
  
 	private static final String ADMIN = "ADMIN";
-	private static final String FIND_BY_FAVORITE_TYPE = "SELECT u FROM User u JOIN u.favorites f where f.favoritetype = :favoritetype and u.id = :userId";
+	private static final String FIND_BY_FAVORITE_TYPE = "SELECT u.favorites FROM User u JOIN u.favorites f JOIN f.favoritetype ft where ft.id = :favoritetypeId and u.id = :userId";
 	private static final String FIND__USER_IS_ADMIN_BY_ID = "SELECT u FROM User u JOIN u.userRoles r where r.role = :role and u.id = :userId";
 
 	public UserDaoJpa() {
@@ -28,12 +30,18 @@ public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao 
 	public List<Favorite> getFavoriteByFavoriteType(FavoriteType favoriteType,
 			int userId) { EntityManager entityManager = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
 	        Query query = entityManager.createQuery(FIND_BY_FAVORITE_TYPE);
-	        query.setParameter("favoritetype", favoriteType);
+	        query.setParameter("favoritetypeId", favoriteType.getId());
 	        query.setParameter("userId", userId);
-	        List<User> user =(List<User>) query.getResultList();
-	        List<Favorite> listaResultado =user.get(0).getFavorites();
+//	        List<User> user =(List<User>) query.getResultList();
+//	        List<Favorite> listaResultado =user.get(0).getFavorites();
+	        List<Favorite> listaResultado = query.getResultList();
+	        ArrayList<Favorite> resultado= new ArrayList<Favorite>();
+	        for (Favorite favorite : listaResultado) {
+				if(favorite.getFavoritetype().equals(favoriteType))
+					resultado.add(favorite);
+			}
 	        entityManager.close();
-	        return listaResultado;
+	        return resultado;
 	}
 
 	@Override
