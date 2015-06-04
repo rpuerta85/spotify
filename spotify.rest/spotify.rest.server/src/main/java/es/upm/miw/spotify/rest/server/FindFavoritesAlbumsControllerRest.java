@@ -42,9 +42,7 @@ public class FindFavoritesAlbumsControllerRest {
 	 private String spotifyRestUri;
 
 	 @Autowired
-	 private RestTemplate  restTemplate;//cliente REST, el cual se instancia en cuanto
-	 //se crea el contexto de la aplicacio,. Se crea concretamente en spotify.rest.client.RestConfig
-	 // Por tanto, este objeto aqui ya se encuentra instanciado, nohace falta hace NEW
+	 private RestTemplate  restTemplate;
 	
     @RequestMapping(UrisWebApp.FIND_FAVORITE_ALBUMS)
     public AlbumsPager findFavoritesAlbums(@RequestParam(value="userId") String userId, @RequestParam(value="idFavoriteType")String idFavoriteType)  {
@@ -70,52 +68,8 @@ public class FindFavoritesAlbumsControllerRest {
     			LOG.error("error response", e);
     		}
     	}
-//    	albums =new Gson().fromJson(json, AlbumsPager.class);
     	LOG.info("end findFavoritesAlbums");
     	return albums;
     }
-    
-//    @RequestMapping(UrisWebApp.FIND_ALBUMES_OF_ARTISTID_REST_URI)
-//    public  Page<AlbumSimple> findAlbumesByArtistId(@PathVariable("id") String artistId,
-//    		@RequestParam(value="limit", defaultValue="5") String limit)  {
-//    	LOG.info("begin findAlbumesByArtistId");
-//    	LOG.info("artistId received:"+artistId);
-//    	LOG.info("limit received:"+limit);
-//    	ParameterizedTypeReference<Page<AlbumSimple>> responseType = new ParameterizedTypeReference<Page<AlbumSimple>>() {
-//		  };
-//		  Page<AlbumSimple> resulList = null;
-//		  try {
-//		  LOG.info("URI:"+(spotifyRestUri+UrisSpotifyApi.FIND_ALBUMES_OF_ARTIST_BY_ID.
-//					replaceAll(UrisSpotifyApi.PARAM, URLEncoder.encode(artistId, "UTF-8")).replaceAll(UrisSpotifyApi.LIMIT_PARAM, limit) ));
-//		  ResponseEntity<Page<AlbumSimple>> result = restTemplate.exchange((spotifyRestUri+UrisSpotifyApi.FIND_ALBUMES_OF_ARTIST_BY_ID.
-//					replaceAll(UrisSpotifyApi.PARAM, URLEncoder.encode(artistId, "UTF-8")).replaceAll(UrisSpotifyApi.LIMIT_PARAM, limit) ), HttpMethod.GET, null, responseType);
-//		 resulList = result.getBody();
-//		 String json = new Gson().toJson(resulList);
-//		 LOG.info("response json:"+json);
-//		  } catch (Exception e) {
-//  			LOG.error("error response", e);
-//  		}
-//		 
-//		 LOG.info("end findAlbumesByArtistId");
-//    	return resulList;
-//    }
-//    @RequestMapping(UrisWebApp.FIND_ALBUM_BY_SPOTIFYID)
-//    public Album findAlbumBySpotifyId(@PathVariable("id") String spotifyId)  {
-//    	LOG.info("begin findAlbumBySpotifyId");
-//    	LOG.info("spotifyId received:"+spotifyId);
-//    	Album album = null;
-//    	try {
-//    		LOG.info("URI:"+spotifyRestUri+UrisSpotifyApi.FIND_ALBUM_BY_ID.
-//				replaceAll(UrisSpotifyApi.PARAM, URLEncoder.encode(spotifyId, "UTF-8")));
-//    		String json = restTemplate.getForObject(spotifyRestUri+UrisSpotifyApi.FIND_ALBUM_BY_ID.
-//				replaceAll(UrisSpotifyApi.PARAM, URLEncoder.encode(spotifyId, "UTF-8")),String.class);
-//    		album =new Gson().fromJson(json, Album.class);
-//    		} catch (Exception e) {
-//    			LOG.error("error response", e);
-//    		}
-//    	LOG.info("end findAlbumBySpotifyId");
-//    	return album;
-//    }
-//    
     
 }
