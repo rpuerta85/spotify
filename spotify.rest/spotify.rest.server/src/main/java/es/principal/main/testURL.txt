@@ -1,8 +1,14 @@
-http://localhost:9080/api/find/favorites/albums?userId=7C243AB2EAAC479FB8A1778254C44AF2&idFavoriteType=21EAB46A7A45459C808A80364F5D1988
+http://localhost:9080/api/find/favorites/albums?userUUID=6722052B96424CB5A143BB05FD627C67&favoriteTypeUUID=64229A2A136842F9A9E47BBF30C6BBCC
 
 
 
-http://localhost:9080/api/find/favorites/artists?userId=7C243AB2EAAC479FB8A1778254C44AF2&idFavoriteType=345C08A5AB634B509752B637EDE6ECDF
+http://localhost:9080/api/find/favorites/artists?userUUID=6722052B96424CB5A143BB05FD627C67&favoriteTypeUUID=F41C1808A95146CBB8BF4771AABC6C40
 
 
-http://localhost:9080/api/find/favorites/tracks?userId=7C243AB2EAAC479FB8A1778254C44AF2&idFavoriteType=30DDDB83E87B4882895305E6319A381C
+http://localhost:9080/api/find/favorites/tracks?userUUID=6722052B96424CB5A143BB05FD627C67&favoriteTypeUUID=66A70CBC1A8E4BC28E7724BED6C4CFF6
+
+
+QUITAR UNO Q ES FAVORITO
+
+http://localhost:9080/api/add/favorite?favoriteId=0eGsygTp906u18L0Oimnem&favoriteTypeUUID=66A70CBC1A8E4BC28E7724BED6C4CFF6&userUUID=6722052B96424CB5A143BB05FD627C67
+@RequestParam(value="favoriteId") String favoriteId, @RequestParam(value="favoriteTypeUUID") String favoriteTypeUUID,  @RequestParam(value="userUUID") String userUUID

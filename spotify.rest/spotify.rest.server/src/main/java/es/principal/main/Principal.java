@@ -38,7 +38,7 @@ public class Principal {
        Favorite f = new Favorite("5meb7aKE722LA66ssBhvfM",ft);//1M8Klr6g1qPzykza6wN1BA
        DaoJpaFactory.getFactory().getFavoriteDao().create(f);
        Favorite f1 = new Favorite("1M8Klr6g1qPzykza6wN1BA",ft);//
-       DaoJpaFactory.getFactory().getFavoriteDao().create(f1);
+      // DaoJpaFactory.getFactory().getFavoriteDao().create(f1);
        User u99 =DaoJpaFactory.getFactory().getUserDao().read(2);
        u99.getFavorites().add(f);
        u99.getFavorites().add(f1);
@@ -50,7 +50,7 @@ public class Principal {
        FavoriteType ft3 =new FavoriteType("TRACK");
        DaoJpaFactory.getFactory().getFavoriteTypeDao().create(ft3);
 	   Favorite f4 = new Favorite("0eGsygTp906u18L0Oimnem",ft3);//
-       DaoJpaFactory.getFactory().getFavoriteDao().create(f3);
+       //DaoJpaFactory.getFactory().getFavoriteDao().create(f3);
        u99.getFavorites().add(f3);
      
        u99.getFavorites().add(f4);
@@ -63,8 +63,19 @@ public class Principal {
        System.out.println(DaoJpaFactory.getFactory().getUserDao().getFavoriteByFavoriteType(ft3, 2));
        f4=DaoJpaFactory.getFactory().getFavoriteDao().read(8);
        System.out.println("Es admin:"+DaoJpaFactory.getFactory().getUserDao().isAdminUser(u99.getId()));
-       System.out.println("Esfavorito:"+DaoJpaFactory.getFactory().getUserDao().isFavoriteFromUser(f4, u99.getId()));
-       System.out.println("Es favorito (debe dar false:" +DaoJpaFactory.getFactory().getUserDao().isFavoriteFromUser(new Favorite(), u99.getId())) ;
+       System.out.println("Esfavorito:"+DaoJpaFactory.getFactory().getUserDao().isFavoriteFromUser("0eGsygTp906u18L0Oimnem", u99.getId()));
+       System.out.println("Es favorito (debe dar false:" +DaoJpaFactory.getFactory().getUserDao().isFavoriteFromUser("lkshfklshfk", u99.getId()));
+       
+       User u2 = new User("u2", LocalDateTime.now(), "123@rr.es", true, "*u2*");
+       DaoJpaFactory.getFactory().getUserDao().create(u2);
+       Favorite f20 = new Favorite("0UWZUmn7sybxMCqrw9tGa7",ft2);
+       u2.getFavorites().add(f20);
+       DaoJpaFactory.getFactory().getUserDao().update(u2);
+       
+       
+       
+       
+       
 	}
 
 }

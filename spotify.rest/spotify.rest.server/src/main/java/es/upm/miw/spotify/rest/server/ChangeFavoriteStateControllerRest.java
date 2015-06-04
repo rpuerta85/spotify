@@ -1,8 +1,6 @@
 package es.upm.miw.spotify.rest.server;
 
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -20,8 +18,6 @@ import org.springframework.web.client.RestTemplate;
 import com.google.gson.Gson;
 
 import es.miw.spotify.models.daos.DaoFactory;
-import es.miw.spotify.models.daos.UserDao;
-import es.miw.spotify.models.daos.jpa.UserDaoJpa;
 import es.spotify.models.entities.Favorite;
 import es.spotify.models.entities.FavoriteType;
 import es.spotify.models.entities.User;
@@ -29,14 +25,13 @@ import es.upm.miw.spotify.models.pojos.Album;
 import es.upm.miw.spotify.models.pojos.AlbumSimple;
 import es.upm.miw.spotify.models.pojos.AlbumsPager;
 import es.upm.miw.spotify.models.pojos.Page;
-import es.upm.miw.spotify.models.pojos.Pager;
 import es.upm.miw.spotify.rest.core.uris.UrisSpotifyApi;
 import es.upm.miw.spotify.rest.core.uris.UrisWebApp;
 
 @RestController
-public class FindFavoritesAlbumsControllerRest {
+public class ChangeFavoriteStateControllerRest {
 	 private final static Log LOG = LogFactory
-				.getLog(FindFavoritesAlbumsControllerRest.class);
+				.getLog(ChangeFavoriteStateControllerRest.class);
 	 
 	 @Value("${rest.spotify.uri}")
 	 private String spotifyRestUri;
@@ -44,32 +39,26 @@ public class FindFavoritesAlbumsControllerRest {
 	 @Autowired
 	 private RestTemplate  restTemplate;
 	
-    @RequestMapping(UrisWebApp.FIND_FAVORITE_ALBUMS)
-    public AlbumsPager findFavoritesAlbums(@RequestParam(value="userUUID") String userUUID, @RequestParam(value="favoriteTypeUUID")String favoriteTypeUUID)  {
-    	  
+    @RequestMapping(UrisWebApp.ADD_FAVORITE_TO_USER)
+    public void changeFavoriteStateToUser(@RequestParam(value="favoriteId") String favoriteId, @RequestParam(value="favoriteTypeUUID") String favoriteTypeUUID,  @RequestParam(value="userUUID") String userUUID)  {
+    	LOG.info("begin change changeFavoriteState");
+    	LOG.info("favoriteUUID received:"+favoriteId + "userrUUID received " + userUUID +"FavoritetpeUUID "+favoriteTypeUUID);
     	FavoriteType favoriteType = DaoFactory.getFactory().getFavoriteTypeDao().readUUID(favoriteTypeUUID);
     	User user =  DaoFactory.getFactory().getUserDao().readUUID(userUUID);
-    	List<Favorite> albumesFavorites=	DaoFactory.getFactory().getUserDao().getFavoriteByFavoriteType(favoriteType, user.getId());
-    	LOG.info("begin findFavoritesAlbums");
-    	LOG.info("album received:");
-    	AlbumsPager albums = new AlbumsPager();
-    	albums.albums=new Pager<AlbumSimple>();
-    	albums.albums.items= new ArrayList<AlbumSimple>();
-    	for (Favorite favorite : albumesFavorites) {
-		try {
-    		LOG.info("URI:"+spotifyRestUri+UrisSpotifyApi.FIND_ALBUM_BY_ID.
-				replaceAll(UrisSpotifyApi.PARAM, URLEncoder.encode(favorite.getIdFavorite(), "UTF-8")));
-    		String json = restTemplate.getForObject(spotifyRestUri+UrisSpotifyApi.FIND_ALBUM_BY_ID.
-				replaceAll(UrisSpotifyApi.PARAM, URLEncoder.encode(favorite.getIdFavorite(), "UTF-8")),String.class);
-    		LOG.info("response json:"+json);
-    		AlbumSimple albumSimple = new Gson().fromJson(json, AlbumSimple.class);
-    		albums.albums.items.add(albumSimple);
-    		} catch (Exception e) {
-    			LOG.error("error response", e);
-    		}
+    	boolean isFavoriteFromUser =DaoFactory.getFactory().getUserDao().isFavoriteFromUser(favoriteId, user.getId());
+    	Favorite favorite = null;
+    	if(isFavoriteFromUser){
+    		 favorite =DaoFactory.getFactory().getUserDao().getFavoriteFromUser(favoriteId, user.getId());
+    		 user.getFavorites().remove(favorite);
     	}
-    	LOG.info("end findFavoritesAlbums");
-    	return albums;
+    	else{
+    		favorite = new Favorite(favoriteId, favoriteType);
+    		user.getFavorites().add(favorite);
+    	}
+    	DaoFactory.getFactory().getUserDao().update(user);
+    	
+       	LOG.info("end changeFavoriteState");
+
     }
     
 }
