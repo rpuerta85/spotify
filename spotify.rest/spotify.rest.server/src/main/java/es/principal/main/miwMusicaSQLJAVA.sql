@@ -28,14 +28,15 @@ CREATE TABLE IF NOT EXISTS `favorite` (
   CONSTRAINT `FK_FAVORITE_idFavoritoType` FOREIGN KEY (`idFavoritoType`) REFERENCES `favoritetype` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla test.favorite: ~4 rows (aproximadamente)
-DELETE FROM `favorite`;
+-- Volcando datos para la tabla test.favorite: ~9 rows (aproximadamente)
 /*!40000 ALTER TABLE `favorite` DISABLE KEYS */;
-INSERT INTO `favorite` (`ID`, `IDFAVORITE`, `IDUUID`, `idFavoritoType`) VALUES
-	(4, '5meb7aKE722LA66ssBhvfM', 'BEC8C3FA0AC84CD799FBF2D2AF2B0E51', 3),
-	(5, '1M8Klr6g1qPzykza6wN1BA', 'D21FB434670340B1A7799FE31F150ACE', 3),
-	(7, '0UWZUmn7sybxMCqrw9tGa7', 'ACB1F2024EF546B680A36E2E021DA818', 6),
-	(8, '0eGsygTp906u18L0Oimnem', 'EBCF6EF0F8A9443C8DAF6415DCA13EC6', 9);
+REPLACE INTO `favorite` (`ID`, `IDFAVORITE`, `IDUUID`, `idFavoritoType`) VALUES
+	(4, '5meb7aKE722LA66ssBhvfM', '6964605CDF9148E5A7EB71F5708404D6', 3),
+	(5, '1M8Klr6g1qPzykza6wN1BA', '7E9494F12B4D4BDE8C04CB9E1EEA36C3', 3),
+	(8, '1M8Klr6g1qPzykza6wN1BA', '7E9494F12B4D4BDE8C04CB9E1EEA36C3', 3),
+	(9, '0UWZUmn7sybxMCqrw9tGa7', 'CCFF6663AFD24F4C97878BE684250843', 6),
+	(10, '0eGsygTp906u18L0Oimnem', '4F9D00CCA4CA4C8F92ECDC9B52D0CF10', 7),
+	(12, '0UWZUmn7sybxMCqrw9tGa7', '24CE79483F1E4A30872BEFFEFEB09561', 6);
 /*!40000 ALTER TABLE `favorite` ENABLE KEYS */;
 
 
@@ -49,12 +50,11 @@ CREATE TABLE IF NOT EXISTS `favoritetype` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Volcando datos para la tabla test.favoritetype: ~3 rows (aproximadamente)
-DELETE FROM `favoritetype`;
 /*!40000 ALTER TABLE `favoritetype` DISABLE KEYS */;
-INSERT INTO `favoritetype` (`ID`, `DESCRIPTION`, `IDUUID`) VALUES
-	(3, 'ALBUM', '21EAB46A7A45459C808A80364F5D1988'),
-	(6, 'ARTIST', '345C08A5AB634B509752B637EDE6ECDF'),
-	(9, 'TRACK', '30DDDB83E87B4882895305E6319A381C');
+REPLACE INTO `favoritetype` (`ID`, `DESCRIPTION`, `IDUUID`) VALUES
+	(3, 'ALBUM', '64229A2A136842F9A9E47BBF30C6BBCC'),
+	(6, 'ARTIST', 'F41C1808A95146CBB8BF4771AABC6C40'),
+	(7, 'TRACK', '66A70CBC1A8E4BC28E7724BED6C4CFF6');
 /*!40000 ALTER TABLE `favoritetype` ENABLE KEYS */;
 
 
@@ -68,10 +68,9 @@ CREATE TABLE IF NOT EXISTS `role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Volcando datos para la tabla test.role: ~1 rows (aproximadamente)
-DELETE FROM `role`;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` (`id`, `IDUUID`, `ROLE`) VALUES
-	(1, 'A0731C9A181F433B8010AF34700175B3', 'ADMIN');
+REPLACE INTO `role` (`id`, `IDUUID`, `ROLE`) VALUES
+	(1, '2CBD13D460254FCDBF65A09CB2B8D6CA', 'ADMIN');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 
 
@@ -84,9 +83,8 @@ CREATE TABLE IF NOT EXISTS `sequence` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Volcando datos para la tabla test.sequence: ~1 rows (aproximadamente)
-DELETE FROM `sequence`;
 /*!40000 ALTER TABLE `sequence` DISABLE KEYS */;
-INSERT INTO `sequence` (`SEQ_NAME`, `SEQ_COUNT`) VALUES
+REPLACE INTO `sequence` (`SEQ_NAME`, `SEQ_COUNT`) VALUES
 	('SEQ_GEN', 50);
 /*!40000 ALTER TABLE `sequence` ENABLE KEYS */;
 
@@ -104,11 +102,11 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla test.users: ~1 rows (aproximadamente)
-DELETE FROM `users`;
+-- Volcando datos para la tabla test.users: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` (`ID`, `create_time`, `EMAIL`, `ENABLED`, `IDUUID`, `PASSWORD`, `USERNAME`) VALUES
-	(2, _binary 0xACED00057372000D6A6176612E74696D652E536572955D84BA1B2248B20C00007870770E05000007DF0603121F061B003B4078, 'jjj@jsj.es', 1, '7C243AB2EAAC479FB8A1778254C44AF2', '*u1*', 'u1');
+REPLACE INTO `users` (`ID`, `create_time`, `EMAIL`, `ENABLED`, `IDUUID`, `PASSWORD`, `USERNAME`) VALUES
+	(2, _binary 0xACED00057372000D6A6176612E74696D652E536572955D84BA1B2248B20C00007870770E05000007DF060414290E137D9FC078, 'jjj@jsj.es', 1, '6722052B96424CB5A143BB05FD627C67', '*u1*', 'u1'),
+	(11, _binary 0xACED00057372000D6A6176612E74696D652E536572955D84BA1B2248B20C00007870770E05000007DF060414290E31E39B4078, '123@rr.es', 1, '052779EF22384BAABA6003B17B7FB176', '*u2*', 'u2');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 
@@ -123,14 +121,14 @@ CREATE TABLE IF NOT EXISTS `users_favorite` (
   CONSTRAINT `FK_users_FAVORITE_favorites_ID` FOREIGN KEY (`favorites_ID`) REFERENCES `favorite` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla test.users_favorite: ~4 rows (aproximadamente)
-DELETE FROM `users_favorite`;
+-- Volcando datos para la tabla test.users_favorite: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `users_favorite` DISABLE KEYS */;
-INSERT INTO `users_favorite` (`User_ID`, `favorites_ID`) VALUES
+REPLACE INTO `users_favorite` (`User_ID`, `favorites_ID`) VALUES
 	(2, 4),
-	(2, 5),
-	(2, 7),
-	(2, 8);
+	(2, 8),
+	(2, 9),
+	(2, 10),
+	(11, 12);
 /*!40000 ALTER TABLE `users_favorite` ENABLE KEYS */;
 
 
@@ -146,9 +144,8 @@ CREATE TABLE IF NOT EXISTS `users_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Volcando datos para la tabla test.users_role: ~1 rows (aproximadamente)
-DELETE FROM `users_role`;
 /*!40000 ALTER TABLE `users_role` DISABLE KEYS */;
-INSERT INTO `users_role` (`User_ID`, `userRoles_id`) VALUES
+REPLACE INTO `users_role` (`User_ID`, `userRoles_id`) VALUES
 	(2, 1);
 /*!40000 ALTER TABLE `users_role` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

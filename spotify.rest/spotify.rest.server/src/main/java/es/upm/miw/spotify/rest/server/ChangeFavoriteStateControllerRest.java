@@ -55,6 +55,7 @@ public class ChangeFavoriteStateControllerRest {
     	else{
     		favorite = new Favorite(favoriteId, favoriteType);
     		user.getFavorites().add(favorite);
+    	    DaoFactory.getFactory().getUserDao().update(user);
     	}
     	
        	LOG.info("end changeFavoriteState");
