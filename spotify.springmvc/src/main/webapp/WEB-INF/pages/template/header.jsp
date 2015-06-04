@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
    
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix = "spring" uri = "http://www.springframework.org/tags" %>
+
 <style>
 .error {
 	padding: 15px;
@@ -45,9 +47,9 @@
         </div>
         <div class="navbar-collapse collapse navbar-responsive-collapse" id="navbar">
           <ul class="nav navbar-nav">
-            <li><a href="/artista/buscar"><span aria-hidden="true" class="glyphicon glyphicon-user"></span>&nbsp; Intérpretes</a></li>
-            <li><a href="/album/buscar"><span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span>&nbsp; Álbumes</a></li>
-            <li><a href="/tema/buscar"><span aria-hidden="true" class="glyphicon glyphicon-music"></span>&nbsp; Temas</a></li>
+            <li><a href="${pageContext.request.contextPath}/<spring:message code="header.menu.url.artist.find.path" />"><span aria-hidden="true" class="glyphicon glyphicon-user"></span>&nbsp; <spring:message code="header.menu.artist.title" /></a></li>
+            <li><a href="${pageContext.request.contextPath}/<spring:message code="header.menu.url.album.find.path" />"><span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span>&nbsp; <spring:message code="header.menu.track.title" /></a></li>
+            <li><a href="${pageContext.request.contextPath}/<spring:message code="header.menu.url.track.find.path" />"><span aria-hidden="true" class="glyphicon glyphicon-music"></span>&nbsp; <spring:message code="header.menu.album.title" /></a></li>
                             </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="pull-right">

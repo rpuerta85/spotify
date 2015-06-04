@@ -5,12 +5,10 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
 
 import es.upm.miw.spotify.form.beans.FindAlbumFormBean;
-import es.upm.miw.spotify.form.beans.FindArtistFormBean;
 import es.upm.miw.spotify.form.beans.FindFavoriteFormBean;
 import es.upm.miw.spotify.utils.constants.ViewUrlConstants;
 import es.upm.miw.spotify.views.web.ee.ShowAlbumDetailsParamsEE;
-import es.upm.miw.spotify.views.web.ee.ShowArtistDetailsParamsEE;
-
+import es.upm.miw.spotify.views.web.ee.ShowTrackDetailsParamsEE;
 
 public class FindAlbumViewBean extends GenericView {
 	private static final Logger logger = LogManager.getLogger(FindAlbumViewBean.class);
@@ -48,6 +46,7 @@ public class FindAlbumViewBean extends GenericView {
 	@Override
 	protected void setMsgs() {
 		mapMsgs.put(ShowAlbumDetailsParamsEE.SHOW_ALBUM_DETAILS_URL.getV(),ViewUrlConstants.SHOW_ALBUM_DETAILS_GETPATH);
+		mapMsgs.put(ShowTrackDetailsParamsEE.FAVORITE_NAME.getV(),(findAlbumFormBean.getFindFavoriteForm()!=null)?findAlbumFormBean.getFindFavoriteForm().getName():"");
 
 	}
 	

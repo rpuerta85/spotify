@@ -21,7 +21,9 @@ function artistContentController($scope, $http,$location){
       <div class="panel-heading">
         <h1>
             <span aria-hidden="true" class="glyphicon glyphicon-user"></span> 
-             <spring:message code="showArtistsView.panel.header.title" /> <small><spring:message code="showArtistsView.panel.header.subtitle" /></small>
+             <spring:message code="showArtistsView.panel.header.title" /> 
+             <small><spring:message code="showArtistsView.panel.header.subtitle" />
+             <kbd>"${findArtistViewBean.mapMsgs['favoriteName']}"</kbd></small>
         </h1>
         <p class="lead"><spring:message code="showArtistsView.panel.header.description" /> </p>
       </div>

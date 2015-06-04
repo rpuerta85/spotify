@@ -2,14 +2,18 @@ package es.upm.miw.spotify.view.components.beans;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
+
 import es.upm.miw.spotify.controllers.ws.ControllerWsFactory;
 import es.upm.miw.spotify.models.pojos.Page;
 import es.upm.miw.spotify.models.pojos.TrackSimple;
 import es.upm.miw.spotify.models.utils.ObjectMapperJacksonSingleton;
+import es.upm.miw.spotify.utils.constants.ViewUrlConstants;
 import es.upm.miw.spotify.view.beans.GenericView;
 import es.upm.miw.spotify.view.beans.SessionBean;
 import es.upm.miw.spotify.views.web.ee.ShowAlbumDetailsParamsEE;
+import es.upm.miw.spotify.views.web.ee.ShowTrackDetailsParamsEE;
 
 public class ShowTracksOfAlbumesListViewComponentBean extends GenericView {
 	private static final Logger logger = LogManager.getLogger(ShowTracksOfAlbumesListViewComponentBean.class);
@@ -53,6 +57,8 @@ public class ShowTracksOfAlbumesListViewComponentBean extends GenericView {
 	@Override
 	protected void setMsgs() {
 		mapMsgs.put(ShowAlbumDetailsParamsEE.JSON_TRACKS.getV(),getJSON());
+		mapMsgs.put(ShowTrackDetailsParamsEE.SHOW_TRACK_DETAILS_URL.getV(),ViewUrlConstants.SHOW_TRACK_DETAILS_GETPATH);
+
 	}
 	
 	//* GETTETS AND SETTERS */

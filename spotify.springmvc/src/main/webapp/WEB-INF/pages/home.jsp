@@ -6,10 +6,6 @@
 		<%@ include file="includes/homeContent.jsp" %> 
 <%@ include file="template/footer.jsp" %> 
 </div>
-
-	<h1>Title2 : ${title}</h1>
-	<h1>Message : ${message}</h1>
-
 	<sec:authorize access="hasRole('ROLE_USER')">
 		<!-- For login user -->
 		

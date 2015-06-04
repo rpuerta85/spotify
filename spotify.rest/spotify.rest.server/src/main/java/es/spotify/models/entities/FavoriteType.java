@@ -13,7 +13,7 @@ public class FavoriteType implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Integer id;
 	private String idUUID;
 
 	
@@ -30,13 +30,6 @@ public class FavoriteType implements Serializable {
 		this.idUUID =   GenerateUUIDUnique.generateUniqueId();
 	}
 
-	public int getId() {
-		return this.id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getDescription() {
 		return this.description;
@@ -55,6 +48,16 @@ public class FavoriteType implements Serializable {
 	}
 
 
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
 	@Override
 	public String toString() {
 		return "FavoriteType [id=" + id + ", idUUID=" + idUUID
@@ -68,7 +71,7 @@ public class FavoriteType implements Serializable {
 		int result = 1;
 		result = prime * result
 				+ ((description == null) ? 0 : description.hashCode());
-		result = prime * result + id;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((idUUID == null) ? 0 : idUUID.hashCode());
 		return result;
 	}
@@ -88,7 +91,10 @@ public class FavoriteType implements Serializable {
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (idUUID == null) {
 			if (other.idUUID != null)
@@ -98,5 +104,7 @@ public class FavoriteType implements Serializable {
 		return true;
 	}
 
+
+	
    
 }

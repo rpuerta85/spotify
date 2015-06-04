@@ -18,7 +18,9 @@ import org.springframework.web.client.RestTemplate;
 import com.google.gson.Gson;
 
 import es.upm.miw.spotify.models.pojos.AlbumSimple;
+import es.upm.miw.spotify.models.pojos.Artist;
 import es.upm.miw.spotify.models.pojos.Page;
+import es.upm.miw.spotify.models.pojos.Track;
 import es.upm.miw.spotify.models.pojos.TrackSimple;
 import es.upm.miw.spotify.models.pojos.Tracks;
 import es.upm.miw.spotify.models.pojos.TracksPager;
@@ -78,6 +80,22 @@ public class FindTrackControllerRest {
     	return resulList;
     }
     
-    
+    @RequestMapping(UrisWebApp.FIND_TRACK_BY_SPOTIFYID)
+    public Track findTrackBySpotifyId(@PathVariable("id") String spotifyId)  {
+    	LOG.info("begin findTrackBySpotifyId");
+    	LOG.info("spotifyId received:"+spotifyId);
+    	Track track = null;
+    	try {
+    		LOG.info("URI:"+spotifyRestUri+UrisSpotifyApi.FIND_TRACK_BY_ID.
+				replaceAll(UrisSpotifyApi.PARAM, URLEncoder.encode(spotifyId, "UTF-8")));
+    		String json = restTemplate.getForObject(spotifyRestUri+UrisSpotifyApi.FIND_TRACK_BY_ID.
+				replaceAll(UrisSpotifyApi.PARAM, URLEncoder.encode(spotifyId, "UTF-8")),String.class);
+    		track =new Gson().fromJson(json, Track.class);
+    		} catch (Exception e) {
+    			LOG.error("error response", e);
+    		}
+    	LOG.info("end findTrackBySpotifyId");
+    	return track;
+    }
     
 }

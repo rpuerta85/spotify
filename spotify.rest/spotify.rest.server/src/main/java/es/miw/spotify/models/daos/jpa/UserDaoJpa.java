@@ -1,9 +1,15 @@
 package es.miw.spotify.models.daos.jpa;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+
+
+
+
+
 
 
 
@@ -17,8 +23,11 @@ import es.spotify.models.entities.User;
 public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao {
  
 	private static final String ADMIN = "ADMIN";
-	private static final String FIND_BY_FAVORITE_TYPE = "SELECT u FROM User u JOIN u.favorites f where f.favoritetype = :favoritetype and u.id = :userId";
+	private static final String FIND_BY_FAVORITE_TYPE = "SELECT u.favorites FROM User u JOIN u.favorites f JOIN f.favoritetype ft where ft.id = :favoritetypeId and u.id = :userId";
 	private static final String FIND__USER_IS_ADMIN_BY_ID = "SELECT u FROM User u JOIN u.userRoles r where r.role = :role and u.id = :userId";
+	private static final String FIND__IS_FAVORITE_FROM_USER = "SELECT  u.favorites FROM User u JOIN u.favorites f WHERE f.idFavorite =:idFavorite AND u.id= :userId";
+	                                                           // SELECT t FROM TemaEntity t JOIN t.votos v where v.ip = :ip and t.id = :idTema
+	//private static final String FIND__IS_FAVORITE_FROM_USER = "SELECT  f FROM  Favorite f JOIN User u  WHERE f.idFavorite =:idFavorite AND u.id= :userId";
 
 	public UserDaoJpa() {
         super(User.class);
@@ -26,17 +35,24 @@ public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao 
 
 	@Override
 	public List<Favorite> getFavoriteByFavoriteType(FavoriteType favoriteType,
-			int userId) { EntityManager entityManager = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
+			Integer userId) { EntityManager entityManager = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
 	        Query query = entityManager.createQuery(FIND_BY_FAVORITE_TYPE);
-	        query.setParameter("favoritetype", favoriteType);
+	        query.setParameter("favoritetypeId", favoriteType.getId());
 	        query.setParameter("userId", userId);
-	        List<Favorite> listaResultado =(List<Favorite>) query.getResultList();
+//	        List<User> user =(List<User>) query.getResultList();
+//	        List<Favorite> listaResultado =user.get(0).getFavorites();
+	        List<Favorite> listaResultado = query.getResultList();
+	        ArrayList<Favorite> resultado= new ArrayList<Favorite>();
+	        for (Favorite favorite : listaResultado) {
+				if(favorite.getFavoritetype().equals(favoriteType))
+					resultado.add(favorite);
+			}
 	        entityManager.close();
-	        return listaResultado;
+	        return resultado;
 	}
 
 	@Override
-	public boolean isAdminUser(int idUser) {
+	public boolean isAdminUser(Integer idUser) {
 		EntityManager entityManager = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
         Query query = entityManager.createQuery(FIND__USER_IS_ADMIN_BY_ID);
         query.setParameter("role", ADMIN);
@@ -46,5 +62,48 @@ public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao 
        
 		return listaResultado.size()>=1;
 	}
+
+	@Override
+	public boolean isFavoriteFromUser(String favoriteId, Integer idUser) {
+		EntityManager entityManager = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
+        Query query = entityManager.createQuery(FIND__IS_FAVORITE_FROM_USER);
+        query.setParameter("idFavorite", favoriteId);
+        query.setParameter("userId", idUser);
+        List<Favorite> listaResultado =(List<Favorite>) query.getResultList();
+        ArrayList<Favorite> resultado= new ArrayList<Favorite>();
+        for (Favorite favorite : listaResultado) {
+			if(favorite.getIdFavorite().equals(favoriteId))
+				return true;
+		}
+        entityManager.close();
+       
+	  return false;
+	}
+
+	@Override
+	public void deleteFavorite(String favoriteId, Integer id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Favorite getFavoriteFromUser(String favoriteId, Integer idUser) {
+		EntityManager entityManager = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
+        Query query = entityManager.createQuery(FIND__IS_FAVORITE_FROM_USER);
+        query.setParameter("idFavorite", favoriteId);
+        query.setParameter("userId", idUser);
+        List<Favorite> listaResultado =(List<Favorite>) query.getResultList();
+        ArrayList<Favorite> resultado= new ArrayList<Favorite>();
+        for (Favorite favorite : listaResultado) {
+			if(favorite.getIdFavorite().equals(favoriteId))
+				return favorite;
+		}
+        entityManager.close();
+     	return null;
+	}
+
+	
+
+	
 
 }

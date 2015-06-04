@@ -50,7 +50,7 @@ public class FindTrackFormBean extends FindFavoriteFormBean {
 	public void process(){
 		logger.info("begin FindTrackFormBean process method");
 		if(findFavoriteFormValidator.validate()){
-			TracksPager track = ControllerWsFactory.getInstance(sessionBean).getFindTrackController().findTrack(findFavoriteForm.getName());
+			TracksPager track = ControllerWsFactory.getInstance(sessionBean).getFindTrackController().findTrackByName(findFavoriteForm.getName());
 			String jsonTrack=null;
 			try {
 				jsonTrack = ObjectMapperJacksonSingleton.getInstance().getObjectMapper().writeValueAsString(track);
@@ -73,5 +73,6 @@ public class FindTrackFormBean extends FindFavoriteFormBean {
 		this.mapMsgs.put(FindFavoriteFormParamsEE.FORM_FIND_FAVORITE_NAME_MSG_ERROR.getV(),
 				messageSource.getMessage ("form.find.track.msg.error", null, LocaleContextHolder.getLocale()));
 	}
+	
 	
 }

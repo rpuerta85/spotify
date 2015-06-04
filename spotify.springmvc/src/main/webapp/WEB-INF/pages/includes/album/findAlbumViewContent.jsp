@@ -5,7 +5,7 @@
  <div class="panel panel-default">
       <div class="panel-heading">
         <h1>
-          <span aria-hidden="true" class="glyphicon glyphicon-user"></span> 
+          <span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span> 
           <spring:message code="findAlbumView.panel.header.title" /><small><spring:message code="findAlbumView.panel.header.subtitle" /></small>
         </h1>
         <p class="lead"><spring:message code="findAlbumView.panel.header.description" /></p>

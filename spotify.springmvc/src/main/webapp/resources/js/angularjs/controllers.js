@@ -68,10 +68,86 @@ function showTracksListController($scope, $http,$location,$window,audio,video){
 	    }
 	    ,
 	    vm.kk = function(songPath){
-	    	video.play(songPath);
-	    	//audio.play(songPath); 
-	    	//alert(songPath);	
+	    	audio.play(songPath);
+	    	//video.play(songPath)
 	    }
 	
 	   
 	} 
+function tracksContentController($scope, $http,$location,$window){
+	var vm=this;
+	   vm.json = "";//$window.jsonObject; 
+	   vm.context = "";
+	   vm.limit = 5;
+	   vm.init = function(context,jsonObject){
+		   //vm.tracks = $window.jsonObject;//tambien funciona
+		   vm.json = window[jsonObject];
+		   vm.context = context;
+	    }
+	} 
+
+function auditoFactory($document) {
+	  var audioElement = $document[0].createElement('audio'); 
+	  return {
+	    audioElement: audioElement,
+	    play: function(filename) {
+	        audioElement.src = filename;
+	        audioElement.autoPlay = false;
+	        audioElement.play();
+	    }
+	    
+
+	  }
+	};
+function videoFactory($document) {
+	    var videoElement = $document[0].createElement('video');
+	    //alert(videoElement);
+	    videoElement.autoPlay = false;
+	    return {
+	       videoElement: videoElement,
+	       play: function(filename) {
+	          videoElement.src = filename;
+	          videoElement.play();
+	       },
+	       resume: function() {
+	          videoElement.play();
+	       },
+	       pause: function() {
+	          videoElement.pause();
+	       },
+	       stop: function() {
+	          videoElement.pause();
+	          videoElement.src = videoElement.currentSrc; 
+	       },
+	       incVol: function() {
+	          if(videoElement.volume < 1) {
+	             videoElement.volume = (videoElement.volume + 0.1).toFixed(2);
+	          }
+	          return videoElement.volume;
+	       },
+	       decVol: function() {
+	          if(videoElement.volume > 0) {
+	             videoElement.volume = (videoElement.volume - 0.1).toFixed(2);
+	          }
+	          return videoElement.volume;
+	       },
+	       timer: function(callback) {
+	          videoElement.ontimeupdate = function() {
+	             callback(videoElement.duration, videoElement.currentTime)
+	          };
+	       },
+	    }
+	 }
+
+function durationTrackFilter(filter, locale) {
+    var currencyFilter = filter('currency');
+    var formats = locale.NUMBER_FORMATS;
+    return function(amount, currencySymbol) {
+      var value = currencyFilter(amount, currencySymbol);
+      var sep = value.indexOf(formats.DECIMAL_SEP);
+      if(amount >= 0) { 
+        return value.substring(1, sep);
+      }
+      return value.substring(1, sep) + ')';
+    };
+  }

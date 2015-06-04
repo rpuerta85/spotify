@@ -18,8 +18,10 @@ public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Integer id;
 	private String idUUID;
+	
+	private String userName;
 
 	@Column(name="create_time")
 	private LocalDateTime createTime;
@@ -43,10 +45,11 @@ public class User implements Serializable {
 	}
 
 	
-	public User(LocalDateTime createTime, String email,
+	public User(String userName, LocalDateTime createTime, String email,
 			boolean enabled, String password) {
 		this();
-		this.idUUID =   GenerateUUIDUnique.generateUniqueId();;
+		this.idUUID =   GenerateUUIDUnique.generateUniqueId();
+		this.userName = userName;
 		this.createTime = createTime;
 		this.email = email;
 		this.enabled = enabled;
@@ -54,13 +57,17 @@ public class User implements Serializable {
 	}
 
 
-	public int getId() {
+	
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
+
 
 	public String getIdUUID() {
 		return idUUID;
@@ -122,6 +129,27 @@ public class User implements Serializable {
 	}
 
 
+	
+
+
+	public String getUserName() {
+		return userName;
+	}
+
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", idUUID=" + idUUID + ", userName="
+				+ userName + ", createTime=" + createTime + ", email=" + email
+				+ ", enabled=" + enabled + ", password=" + password + "]";
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -132,10 +160,12 @@ public class User implements Serializable {
 		result = prime * result + (enabled ? 1231 : 1237);
 		result = prime * result
 				+ ((favorites == null) ? 0 : favorites.hashCode());
-		result = prime * result + id;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((idUUID == null) ? 0 : idUUID.hashCode());
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
+		result = prime * result
+				+ ((userName == null) ? 0 : userName.hashCode());
 		result = prime * result
 				+ ((userRoles == null) ? 0 : userRoles.hashCode());
 		return result;
@@ -168,7 +198,10 @@ public class User implements Serializable {
 				return false;
 		} else if (!favorites.equals(other.favorites))
 			return false;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (idUUID == null) {
 			if (other.idUUID != null)
@@ -180,6 +213,11 @@ public class User implements Serializable {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
+		if (userName == null) {
+			if (other.userName != null)
+				return false;
+		} else if (!userName.equals(other.userName))
+			return false;
 		if (userRoles == null) {
 			if (other.userRoles != null)
 				return false;
@@ -187,16 +225,5 @@ public class User implements Serializable {
 			return false;
 		return true;
 	}
-
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", idUUID=" + idUUID + ", createTime="
-				+ createTime + ", email=" + email + ", enabled=" + enabled
-				+ ", password=" + password + ", favorites=" + favorites
-				+ ", userRoles=" + userRoles + "]";
-	}
-
-	  
 
 }

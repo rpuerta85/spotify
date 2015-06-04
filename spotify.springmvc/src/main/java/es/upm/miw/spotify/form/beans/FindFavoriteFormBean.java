@@ -78,6 +78,12 @@ public abstract class FindFavoriteFormBean extends GenericView {
 	public MessageSource getMessageSource() {
 		return messageSource;
 	}
+	public FindFavoriteForm getFindFavoriteForm() {
+		return findFavoriteForm;
+	}
+	public void setFindFavoriteForm(FindFavoriteForm findFavoriteForm) {
+		this.findFavoriteForm = findFavoriteForm;
+	}
 
 	
 

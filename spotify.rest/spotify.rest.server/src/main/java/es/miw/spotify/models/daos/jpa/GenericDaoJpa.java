@@ -7,9 +7,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.apache.logging.log4j.LogManager;
+
 import es.miw.spotify.models.daos.GenericDao;
 
 public class GenericDaoJpa<T, ID> implements GenericDao<T, ID> {
@@ -106,5 +108,29 @@ public class GenericDaoJpa<T, ID> implements GenericDao<T, ID> {
         entityManager.close();
         return result;
     }
+
+   @Override
+	public T readUUID(String idUUID) {
+		    EntityManager em = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
+		    CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+	        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(this.persistentClass);
+	        Root<T> root = criteriaQuery.from(this.persistentClass);
+	        Predicate predicate = criteriaBuilder.equal(root.get("idUUID"),idUUID);
+	        criteriaQuery.where(predicate);
+	        criteriaQuery.select(root);
+	        TypedQuery<T> typedQuery = em.createQuery(criteriaQuery);
+	        typedQuery.setFirstResult(0); // El primero es 0
+	        typedQuery.setMaxResults(0); // Se realiza la query, se buscan todos
+	        List<T> result = typedQuery.getResultList();
+	        em.close();
+//	        // Se establece la clausula SELECT
+//	        criteriaQuery.select(root); // criteriaQuery.multiselect(root.get(atr))
+//
+//		   @SuppressWarnings("unchecked")
+//		   
+//		   T entity = (T) em.createQuery("SELECT :t FROM TABLE :t where t.idUUID = :idUUID").setParameter("idUUID", idUUID).getSingleResult();
+//		   em.close();
+		 return result.get(0);
+	}
 
 }

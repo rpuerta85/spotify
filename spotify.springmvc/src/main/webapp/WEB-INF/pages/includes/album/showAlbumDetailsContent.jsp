@@ -9,74 +9,13 @@ var jsonObject = ${showAlbumDetailsViewBean.mapMsgs['jsonAlbumes']};
 var jsonObjectAlbumTracks = ${showTracksOfAlbumesListViewComponentBean.mapMsgs['jsonTracks']};
 
 var app = angular.module('showAlbumDetailsCntApp',[]);
-app.factory('audio',function ($document) {
-	  var audioElement = $document[0].createElement('audio'); 
-	  return {
-	    audioElement: audioElement,
-	    play: function(filename) {
-	        audioElement.src = filename;
-	        audioElement.autoPlay = false;
-	        audioElement.play();
-	    }
-	    
-
-	  }
-	});
+app.factory('audio',auditoFactory);
 	
-app.factory('video', function($document) {
-    var videoElement = $document[0].createElement('video');
-    //alert(videoElement);
-    videoElement.autoPlay = false;
-    return {
-       videoElement: videoElement,
-       play: function(filename) {
-          videoElement.src = filename;
-          videoElement.play();
-       },
-       resume: function() {
-          videoElement.play();
-       },
-       pause: function() {
-          videoElement.pause();
-       },
-       stop: function() {
-          videoElement.pause();
-          videoElement.src = videoElement.currentSrc; /** http://stackoverflow.com/a/16978083/1015046 **/
-       },
-       incVol: function() {
-          if(videoElement.volume < 1) {
-             videoElement.volume = (videoElement.volume + 0.1).toFixed(2);
-          }
-          return videoElement.volume;
-       },
-       decVol: function() {
-          if(videoElement.volume > 0) {
-             videoElement.volume = (videoElement.volume - 0.1).toFixed(2);
-          }
-          return videoElement.volume;
-       },
-       timer: function(callback) {
-          videoElement.ontimeupdate = function() {
-             callback(videoElement.duration, videoElement.currentTime)
-          };
-       },
-    }
- });
+app.factory('video', videoFactory);
 	
 app.filter('noFractionCurrency',
 		  [ '$filter', '$locale',
-		  function(filter, locale) {
-		    var currencyFilter = filter('currency');
-		    var formats = locale.NUMBER_FORMATS;
-		    return function(amount, currencySymbol) {
-		      var value = currencyFilter(amount, currencySymbol);
-		      var sep = value.indexOf(formats.DECIMAL_SEP);
-		      if(amount >= 0) { 
-		        return value.substring(1, sep);
-		      }
-		      return value.substring(1, sep) + ')';
-		    };
-		  } ]);
+		    durationTrackFilter ]);
 	app.controller('showAlbumDetailsContentController', ['$scope','$http','$location','$window',showAlbumDetailsContentController]);
 	app.controller('showTracksListController', ['$scope','$http','$location','$window','audio','video',showTracksListController]);
 	// Define a simple audio service 

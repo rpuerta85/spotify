@@ -27,29 +27,54 @@ public class Principal {
          
          
        Role r= new Role("ADMIN");
-   
+       Role r2= new Role("PRINGADO");
        DaoJpaFactory.getFactory().getUserRoleDao().create(r);
-       User u= new User(LocalDateTime.now(), "jjj@jsj.es", true,"pasword1");
+       User u= new User("u1",LocalDateTime.now(), "jjj@jsj.es", true,"*u1*");
     
        DaoJpaFactory.getFactory().getUserDao().create(u);
        System.out.println( DaoJpaFactory.getFactory().getUserDao().read(2));
        FavoriteType ft= new FavoriteType("ALBUM");
        DaoJpaFactory.getFactory().getFavoriteTypeDao().create(ft);
-       Favorite f = new Favorite("gshhshomSpotify",ft);
+       Favorite f = new Favorite("5meb7aKE722LA66ssBhvfM",ft);//1M8Klr6g1qPzykza6wN1BA
        DaoJpaFactory.getFactory().getFavoriteDao().create(f);
-       
+       Favorite f1 = new Favorite("1M8Klr6g1qPzykza6wN1BA",ft);//
+      // DaoJpaFactory.getFactory().getFavoriteDao().create(f1);
        User u99 =DaoJpaFactory.getFactory().getUserDao().read(2);
        u99.getFavorites().add(f);
+       u99.getFavorites().add(f1);
        u99.getUserRoles().add(r);
        DaoJpaFactory.getFactory().getUserDao().update(u99);
-      
-       
+       FavoriteType ft2= new FavoriteType("ARTIST");
+       DaoJpaFactory.getFactory().getFavoriteTypeDao().create(ft2);
+       Favorite f3 = new Favorite("0UWZUmn7sybxMCqrw9tGa7",ft2);//
+       FavoriteType ft3 =new FavoriteType("TRACK");
+       DaoJpaFactory.getFactory().getFavoriteTypeDao().create(ft3);
+	   Favorite f4 = new Favorite("0eGsygTp906u18L0Oimnem",ft3);//
+       //DaoJpaFactory.getFactory().getFavoriteDao().create(f3);
+       u99.getFavorites().add(f3);
+     
+       u99.getFavorites().add(f4);
+       DaoJpaFactory.getFactory().getUserDao().update(u99);
        u99=DaoJpaFactory.getFactory().getUserDao().read(2);
        System.out.println(u99);
        System.out.println(DaoJpaFactory.getFactory().getUserDao().getFavoriteByFavoriteType(ft, 2));
-       List<Favorite> lista =  DaoJpaFactory.getFactory().getUserDao().getFavoriteByFavoriteType(ft, 2);
+       List<Favorite> lista =  DaoJpaFactory.getFactory().getUserDao().getFavoriteByFavoriteType(ft2, 2);
        System.out.println(lista);
-       System.out.println(DaoJpaFactory.getFactory().getUserDao().isAdminUser(u99.getId()));
+       System.out.println(DaoJpaFactory.getFactory().getUserDao().getFavoriteByFavoriteType(ft3, 2));
+       f4=DaoJpaFactory.getFactory().getFavoriteDao().read(8);
+       System.out.println("Es admin:"+DaoJpaFactory.getFactory().getUserDao().isAdminUser(u99.getId()));
+       System.out.println("Esfavorito:"+DaoJpaFactory.getFactory().getUserDao().isFavoriteFromUser("0eGsygTp906u18L0Oimnem", u99.getId()));
+       System.out.println("Es favorito (debe dar false:" +DaoJpaFactory.getFactory().getUserDao().isFavoriteFromUser("lkshfklshfk", u99.getId()));
+       
+       User u2 = new User("u2", LocalDateTime.now(), "123@rr.es", true, "*u2*");
+       DaoJpaFactory.getFactory().getUserDao().create(u2);
+       Favorite f20 = new Favorite("0UWZUmn7sybxMCqrw9tGa7",ft2);
+       u2.getFavorites().add(f20);
+       DaoJpaFactory.getFactory().getUserDao().update(u2);
+       
+       
+       
+       
        
 	}
 
