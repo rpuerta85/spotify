@@ -4,26 +4,18 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.google.gson.Gson;
+
 
 import es.miw.spotify.models.daos.DaoFactory;
 import es.spotify.models.entities.Favorite;
 import es.spotify.models.entities.FavoriteType;
 import es.spotify.models.entities.User;
-import es.upm.miw.spotify.models.pojos.Album;
-import es.upm.miw.spotify.models.pojos.AlbumSimple;
-import es.upm.miw.spotify.models.pojos.AlbumsPager;
-import es.upm.miw.spotify.models.pojos.Page;
-import es.upm.miw.spotify.rest.core.uris.UrisSpotifyApi;
 import es.upm.miw.spotify.rest.core.uris.UrisWebApp;
 
 @RestController
