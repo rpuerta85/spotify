@@ -13,6 +13,9 @@ public interface UrisSpotifyApi {
 	String FIND_ALBUMES_OF_ARTIST_BY_ID = FIND_ARTIST_BY_ID+"/albums?"+MARKET+"&limit="+LIMIT_PARAM;
 	String FIND_ALBUM_BY_ID = "albums/"+PARAM;
 	String FIND_TRACKS_OF_ALBUM_BY_ID = FIND_ALBUM_BY_ID+"/tracks";
+	String FIND_TRACK_BY_ID = "tracks/"+PARAM;
 
 
 }
+
+
