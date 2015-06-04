@@ -1,7 +1,5 @@
 package es.upm.miw.spotify.rest.server;
 
-import java.net.URLEncoder;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,12 +48,14 @@ public class ChangeFavoriteStateControllerRest {
     	if(isFavoriteFromUser){
     		 favorite =DaoFactory.getFactory().getUserDao().getFavoriteFromUser(favoriteId, user.getId());
     		 user.getFavorites().remove(favorite);
+    		 DaoFactory.getFactory().getUserDao().update(user);
+    		 DaoFactory.getFactory().getUserDao().read(user.getId());
+    		 DaoFactory.getFactory().getFavoriteDao().deleteById(favorite.getId());
     	}
     	else{
     		favorite = new Favorite(favoriteId, favoriteType);
     		user.getFavorites().add(favorite);
     	}
-    	DaoFactory.getFactory().getUserDao().update(user);
     	
        	LOG.info("end changeFavoriteState");
 
