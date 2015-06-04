@@ -18,7 +18,7 @@ public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Integer id;
 	private String idUUID;
 	
 	private String userName;
@@ -57,13 +57,17 @@ public class User implements Serializable {
 	}
 
 
-	public int getId() {
+	
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
+
 
 	public String getIdUUID() {
 		return idUUID;
@@ -154,12 +158,16 @@ public class User implements Serializable {
 				+ ((createTime == null) ? 0 : createTime.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + (enabled ? 1231 : 1237);
-		result = prime * result + id;
+		result = prime * result
+				+ ((favorites == null) ? 0 : favorites.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((idUUID == null) ? 0 : idUUID.hashCode());
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
 		result = prime * result
 				+ ((userName == null) ? 0 : userName.hashCode());
+		result = prime * result
+				+ ((userRoles == null) ? 0 : userRoles.hashCode());
 		return result;
 	}
 
@@ -185,7 +193,15 @@ public class User implements Serializable {
 			return false;
 		if (enabled != other.enabled)
 			return false;
-		if (id != other.id)
+		if (favorites == null) {
+			if (other.favorites != null)
+				return false;
+		} else if (!favorites.equals(other.favorites))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (idUUID == null) {
 			if (other.idUUID != null)
@@ -202,11 +218,12 @@ public class User implements Serializable {
 				return false;
 		} else if (!userName.equals(other.userName))
 			return false;
+		if (userRoles == null) {
+			if (other.userRoles != null)
+				return false;
+		} else if (!userRoles.equals(other.userRoles))
+			return false;
 		return true;
 	}
-
-
-	
-	  
 
 }
