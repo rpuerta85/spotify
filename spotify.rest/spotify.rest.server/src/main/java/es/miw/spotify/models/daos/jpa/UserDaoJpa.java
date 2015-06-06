@@ -14,6 +14,7 @@ import javax.persistence.Query;
 
 
 
+
 import es.miw.spotify.models.daos.UserDao;
 import es.spotify.models.entities.Favorite;
 import es.spotify.models.entities.FavoriteType;
@@ -25,6 +26,7 @@ public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao 
 	private static final String ADMIN = "ADMIN";
 	private static final String FIND_BY_FAVORITE_TYPE = "SELECT u.favorites FROM User u JOIN u.favorites f JOIN f.favoritetype ft where ft.id = :favoritetypeId and u.id = :userId";
 	private static final String FIND__USER_IS_ADMIN_BY_ID = "SELECT u FROM User u JOIN u.userRoles r where r.role = :role and u.id = :userId";
+	private static final String FIND__USER_BY_USERNAME = "SELECT u FROM User u  where u.userName= :userName";
 	private static final String FIND__IS_FAVORITE_FROM_USER = "SELECT  u.favorites FROM User u JOIN u.favorites f WHERE f.idFavorite =:idFavorite AND u.id= :userId";
 	                                                           // SELECT t FROM TemaEntity t JOIN t.votos v where v.ip = :ip and t.id = :idTema
 	//private static final String FIND__IS_FAVORITE_FROM_USER = "SELECT  f FROM  Favorite f JOIN User u  WHERE f.idFavorite =:idFavorite AND u.id= :userId";
@@ -80,11 +82,6 @@ public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao 
 	  return false;
 	}
 
-	@Override
-	public void deleteFavorite(String favoriteId, Integer id) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public Favorite getFavoriteFromUser(String favoriteId, Integer idUser) {
@@ -100,6 +97,16 @@ public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao 
 		}
         entityManager.close();
      	return null;
+	}
+
+	@Override
+	public User getUserByUserName(String userName) {
+		EntityManager entityManager = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
+		Query query = entityManager.createQuery(FIND__USER_BY_USERNAME);
+        query.setParameter("userName", userName);
+        User resultado = (User) query.getSingleResult();
+        entityManager.close();
+        return resultado;
 	}
 
 	

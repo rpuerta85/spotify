@@ -71,6 +71,8 @@ public class Principal {
        Favorite f20 = new Favorite("0UWZUmn7sybxMCqrw9tGa7",ft2);
        u2.getFavorites().add(f20);
        DaoJpaFactory.getFactory().getUserDao().update(u2);
+       System.out.println(DaoJpaFactory.getFactory().getUserDao().getUserByUserName("u1"));
+       System.out.println(DaoJpaFactory.getFactory().getUserDao().getUserByUserName("u2"));
        
        
        
