@@ -3,6 +3,7 @@ package es.upm.miw.spotify.controllers.ws;
 import es.upm.miw.spotify.controllers.ControllerFactory;
 import es.upm.miw.spotify.controllers.FindAlbumController;
 import es.upm.miw.spotify.controllers.FindArtistController;
+import es.upm.miw.spotify.controllers.FindFavoriteAlbumsController;
 import es.upm.miw.spotify.controllers.FindTrackController;
 import es.upm.miw.spotify.view.beans.SessionBean;
 
@@ -13,6 +14,7 @@ public class ControllerWsFactory extends ControllerFactory {
 	private FindArtistController findArtistController;
 	private FindAlbumController findAlbumController;
 	private FindTrackController findTrackController;
+	private FindFavoriteAlbumsController findFavoritesAlbumController;
 
 
 	public ControllerWsFactory(SessionBean session) {
@@ -48,6 +50,14 @@ public class ControllerWsFactory extends ControllerFactory {
 			findTrackController = new FindTrackControllerWs(session);
 		}
 		return findTrackController;
+	}
+
+	@Override
+	public FindFavoriteAlbumsController getFindFavoriteAlbumController() {
+		if (findFavoritesAlbumController == null) {
+			findFavoritesAlbumController = new FindFavoritesAlbumsControllerWs(session);
+		}
+		return findFavoritesAlbumController;
 	}
 
 }

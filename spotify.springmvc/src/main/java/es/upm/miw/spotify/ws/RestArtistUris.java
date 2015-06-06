@@ -4,6 +4,7 @@ import es.upm.miw.spotify.rest.core.uris.UrisSpotifyApi;
 
 public interface RestArtistUris {
 	String PARAM = "#param#";
+	String PARAM2 = "#param2#";
 	String FIND_ARTIST_REST_URI = "find/artist?artistName="+PARAM;
 	String FIND_ALBUM_REST_URI = "find/album?albumName="+PARAM;
 	String FIND_TRACK_REST_URI = "find/track?trackName="+PARAM;
@@ -12,5 +13,6 @@ public interface RestArtistUris {
 	String FIND_ALBUM_BY_SPOTIFYID_REST_URI = "find/album/"+PARAM;
 	String FIND_TRACKS_OF_ALBUMID_REST_URI = "find/album/"+PARAM+"/tracks";
 	String FIND_TRACK_BY_SPOTIFYID_REST_URI = "find/track/"+PARAM;
+	String FIND_FAVORITES_ALBUMS_REST_URI = "find/favorites/albums?userUUID="+PARAM +"&favoriteTypeUUID="+ PARAM2;
 
 }
