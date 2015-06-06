@@ -31,7 +31,9 @@ public class FindAlbumControllerRest {
 	 private String spotifyRestUri;
 
 	 @Autowired
-	 private RestTemplate  restTemplate;
+	 private RestTemplate  restTemplate;//cliente REST, el cual se instancia en cuanto
+	 //se crea el contexto de la aplicacio,. Se crea concretamente en spotify.rest.client.RestConfig
+	 // Por tanto, este objeto aqui ya se encuentra instanciado, nohace falta hace NEW
 	
     @RequestMapping(UrisWebApp.FIND_ALBUM_BY_NAME)
     public AlbumsPager findAlbumByName(@RequestParam(value="albumName", defaultValue="") String albumName)  {
