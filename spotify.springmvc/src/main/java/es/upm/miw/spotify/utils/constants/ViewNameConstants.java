@@ -13,5 +13,7 @@ public interface ViewNameConstants {
 	String SHOW_ALBUM_DETAILS_VIEWNAME = "showAlbumDetails";
 	String SHOW_TRACK_DETAILS_VIEWNAME = "showTrackDetails";
 	String FIND_FAVORITES_ALBUMS_VIEWNAME = "showFavoritesAlbums";
+	String SHOW_USERS_VIEWNAME = "showUsers";
+	String FIND_FAVORITES_ARTISTS_VIEWNAME = "showFavoritesArtists";
 
 }

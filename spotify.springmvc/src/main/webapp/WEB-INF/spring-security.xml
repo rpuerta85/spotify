@@ -12,8 +12,8 @@
 		<!-- access denied page -->
 		<access-denied-handler error-page="/403" />
 		<form-login 
-		    login-page="/" 
-		    default-target-url="/" 
+		    login-page="/login" 
+		    default-target-url="/login" 
 			authentication-failure-url="/login?error" 
 			username-parameter="username"
 			password-parameter="password" />
@@ -26,20 +26,28 @@
 			
 			
 			
-		<logout logout-success-url="/" logout-url="/login?logout" invalidate-session="true" delete-cookies="JSESSIONID"  />
+		<logout logout-success-url="/" logout-url="/logout" invalidate-session="true" delete-cookies="JSESSIONID"  />
 		<!-- enable csrf protection -->
 		<csrf/>
 	</http>
-	
+	<beans:bean id="restAuthenticationProvider" class="es.upm.miw.spotify.security.RestAuthenticationProvider">
+</beans:bean>
+
+<authentication-manager alias="authenticationManager">
+    <authentication-provider ref="restAuthenticationProvider"/>
+</authentication-manager> 
 	<!-- Select users and user_roles from database -->
-	<authentication-manager>
+	<!-- <authentication-manager>
 		<authentication-provider>
 			<jdbc-user-service data-source-ref="dataSource"
 				users-by-username-query=
-					"select username,password, enabled from users where username=?"
+					"select u.username,u.password, u.enabled from users u where u.username=?"
 				authorities-by-username-query=
-					"select username, role from user_roles where username =?  " />
+					"select u.username, r.role 
+					from users_roles ur 
+					INNER JOIN users u ON (ur.user_id = u.id) 
+					INNER JOIN role r ON (r.id = ur.userroles_id) where u.username =?  " />
 		</authentication-provider>
-	</authentication-manager>
+	</authentication-manager>  -->
 
 </beans:beans>

@@ -15,6 +15,8 @@ public interface ViewUrlConstants {
 	String SHOW_TRACK_DETAILS_GETPATH = "track/details";
 	String SHOW_TRACK_DETAILS_PATH=SHOW_TRACK_DETAILS_GETPATH+IDPARAM;
 	String FIND_FAVORITES_ALBUM_PATH = "favorites/albums/find";
+	String SHOW_USERS_REGISTERED_PATH = "user/show/all";
+	String FIND_FAVORITES_ARTISTS_PATH = "favorites/artists/find";
 
 
 }

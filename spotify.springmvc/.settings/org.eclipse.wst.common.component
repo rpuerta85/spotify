@@ -7,10 +7,13 @@
         <dependent-module archiveName="spotify.model-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/spotify.model/spotify.model">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="spotify.rest.core-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/spotify.rest.core/spotify.rest.core">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="spotify.rest.client-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/spotify.rest.client/spotify.rest.client">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="spotify.rest.core-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/spotify.rest.core/spotify.rest.core">
+        <dependent-module archiveName="spotify.rest.server.war" deploy-path="/WEB-INF/lib" handle="module:/resource/spotify.rest.server/spotify.rest.server">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="java-output-path" value="/spotify.springmvc/target/classes"/>

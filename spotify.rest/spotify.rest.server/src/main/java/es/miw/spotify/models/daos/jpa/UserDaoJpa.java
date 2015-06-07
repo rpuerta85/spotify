@@ -2,19 +2,8 @@ package es.miw.spotify.models.daos.jpa;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
-
-
-
-
-
-
-
-
-
 import es.miw.spotify.models.daos.UserDao;
 import es.spotify.models.entities.Favorite;
 import es.spotify.models.entities.FavoriteType;
@@ -28,7 +17,8 @@ public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao 
 	private static final String FIND__USER_IS_ADMIN_BY_ID = "SELECT u FROM User u JOIN u.userRoles r where r.role = :role and u.id = :userId";
 	private static final String FIND__USER_BY_USERNAME = "SELECT u FROM User u  where u.userName= :userName";
 	private static final String FIND__IS_FAVORITE_FROM_USER = "SELECT  u.favorites FROM User u JOIN u.favorites f WHERE f.idFavorite =:idFavorite AND u.id= :userId";
-	                                                           // SELECT t FROM TemaEntity t JOIN t.votos v where v.ip = :ip and t.id = :idTema
+	private static final String FIND__USER_BY_USERNAME_AND_PASSWORD = "SELECT u FROM User u JOIN u.userRoles r  where  u.userName= :userName and u.password= :password";
+	// SELECT t FROM TemaEntity t JOIN t.votos v where v.ip = :ip and t.id = :idTema
 	//private static final String FIND__IS_FAVORITE_FROM_USER = "SELECT  f FROM  Favorite f JOIN User u  WHERE f.idFavorite =:idFavorite AND u.id= :userId";
 
 	public UserDaoJpa() {
@@ -109,8 +99,18 @@ public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao 
         return resultado;
 	}
 
-	
+	@Override
+	public List<User> getUserByUserNameAndPassword(String userName, String password) {
+		List<User> listaResultado = new ArrayList<User>();
+		User resultado = null;
+		EntityManager entityManager = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
+		Query query = entityManager.createQuery(FIND__USER_BY_USERNAME_AND_PASSWORD);
+        query.setParameter("userName", userName);
+        query.setParameter("password", password);
+        listaResultado = query.getResultList();
+        entityManager.close();
+        return listaResultado;
+	}
 
-	
 
 }

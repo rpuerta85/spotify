@@ -4,6 +4,7 @@ package es.miw.spotify.models.daos.jpa;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -11,6 +12,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.apache.logging.log4j.LogManager;
+import org.springframework.stereotype.Component;
 
 import es.miw.spotify.models.daos.GenericDao;
 
@@ -20,7 +22,8 @@ public class GenericDaoJpa<T, ID> implements GenericDao<T, ID> {
     public GenericDaoJpa(Class<T> persistentClass) {
         this.persistentClass = persistentClass;
     }
-
+    // Injected database connection:
+   
     @Override
     public void create(T entity) {
         EntityManager entityManager = DaoJpaFactory.getEntityManagerFactory().createEntityManager();

@@ -13,6 +13,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import es.upm.miw.spotify.models.properties.beans.HomeViewPropertiesManager;
 import es.upm.miw.spotify.utils.constants.ViewUrlConstants;
+import es.upm.miw.spotify.view.beans.SessionBean;
 
 
 
@@ -24,7 +25,6 @@ public class LogoutController {
 	//concretamente se autocompleta con los valore de los ficheros .properties de internacionalizacion
 	@Autowired
 	private HomeViewPropertiesManager indexViewPropertiesManager;
-	
 	
 	@RequestMapping(value = { "/" + ViewUrlConstants.LOGOUT_VIEW_PATH }, method = RequestMethod.GET)
 	public String logout(HttpSession session, SessionStatus status) {

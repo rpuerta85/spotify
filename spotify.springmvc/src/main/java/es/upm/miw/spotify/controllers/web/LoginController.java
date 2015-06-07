@@ -28,10 +28,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 
+
+
+
+
+import es.upm.miw.spotify.models.pojos.UserWeb;
 import es.upm.miw.spotify.models.properties.beans.HomeViewPropertiesManager;
+import es.upm.miw.spotify.security.models.SpringSecurityPrincipal;
+import es.upm.miw.spotify.security.models.WebUserDetails;
 import es.upm.miw.spotify.utils.constants.ViewNameConstants;
 import es.upm.miw.spotify.utils.constants.ViewUrlConstants;
 import es.upm.miw.spotify.view.beans.HomeViewBean;
+import es.upm.miw.spotify.view.beans.SessionBean;
 
 @Controller
 public class LoginController {
@@ -40,6 +48,9 @@ public class LoginController {
 	//concretamente se autocompleta con los valore de los ficheros .properties de internacionalizacion
 	@Autowired
 	private HomeViewPropertiesManager indexViewPropertiesManager;
+	
+	@Autowired
+	private SessionBean session;
 	
 	@RequestMapping(value = { ViewUrlConstants.HOME_VIEW_PATH  , "home","/welcome**" }, method = RequestMethod.GET)
 	public ModelAndView homeView() {
@@ -54,30 +65,35 @@ public class LoginController {
 
 	@RequestMapping(value = "/admin**", method = RequestMethod.GET)
 	public ModelAndView adminPage() {
-
 		ModelAndView model = new ModelAndView();
 		model.addObject("title", "Spring Security Login Form - Database Authentication");
 		model.addObject("message", "This page is for ROLE_ADMIN only!");
 		model.setViewName("admin");
-
 		return model;
 
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = {"/login"}, method = RequestMethod.GET)
 	public ModelAndView login(@RequestParam(value = "error", required = false) String error,
 			@RequestParam(value = "logout", required = false) String logout) {
-
+		log.info("login page");
 		ModelAndView model = new ModelAndView();
 		if (error != null) {
 			model.addObject("error", "Invalid username and password!");
-		}
+		
 
+		}else if(error==null && logout==null){
+			updateSession();
+			
+			
+		}
+		HomeViewBean homeViewBean = new HomeViewBean();
+		model = homeViewBean.update();
 		if (logout != null) {
 			model.addObject("msg", "You've been logged out successfully.");
 		}
-		//model.setViewName("login");
 		model.setViewName(ViewNameConstants.HOME_VIEWNAME);
+		log.info("redirect to "+model.getViewName()+" page ");
 		return model;
 
 	}
@@ -101,6 +117,15 @@ public class LoginController {
 		model.setViewName("403");
 		return model;
 
+	}
+	private void updateSession() {
+		if (session.getUserWeb() == null) {
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			Object o = auth.getPrincipal();
+			SpringSecurityPrincipal userDetails = (SpringSecurityPrincipal) o;
+			UserWeb userWeb = userDetails.getUserWeb();
+			session.setUserWeb(userWeb);
+		}
 	}
 
 }

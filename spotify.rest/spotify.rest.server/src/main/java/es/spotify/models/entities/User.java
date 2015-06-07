@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import es.miw.spotify.models.entities.utils.GenerateUUIDUnique;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

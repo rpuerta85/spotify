@@ -151,3 +151,34 @@ function durationTrackFilter(filter, locale) {
       return value.substring(1, sep) + ')';
     };
   }
+
+function showUsersContentController($scope, $http,$location,$window){
+	var vm=this;
+	   vm.jsonObject =""; 
+	   vm.context = "${pageContext.request.contextPath}";
+	   vm.csrf = "";
+	   vm.init = function(context,csrf){
+		   vm.jsonObject = $window.jsonObject;
+		   vm.csrf = csrf;
+		   vm.context = context;
+	    }
+	   /*vm.moreResult = function(){
+		   $http({
+	            url: vm.context+"/"+vm.urlMoreResult+"/"+vm.jsonObject.id+"?limit="+vm.limit,
+	            method: "GET",
+	            headers: {
+	            	'Content-Type' :'application/x-www-form-urlencoded;charset=UTF-8'
+	            	 },
+	            data:"" 
+	       
+	         }).success(function(data, status, headers, config) {
+	        	alert(data)
+	        	 
+	        }).error(function(data, status, headers, config) {
+	        	$scope.status = status;
+	            alert("fail:"+status);
+	        });
+		  
+	   }*/
+	   
+	} 

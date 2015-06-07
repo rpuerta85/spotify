@@ -50,10 +50,28 @@
             <li><a href="${pageContext.request.contextPath}/<spring:message code="header.menu.url.artist.find.path" />"><span aria-hidden="true" class="glyphicon glyphicon-user"></span>&nbsp; <spring:message code="header.menu.artist.title" /></a></li>
             <li><a href="${pageContext.request.contextPath}/<spring:message code="header.menu.url.album.find.path" />"><span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span>&nbsp; <spring:message code="header.menu.track.title" /></a></li>
             <li><a href="${pageContext.request.contextPath}/<spring:message code="header.menu.url.track.find.path" />"><span aria-hidden="true" class="glyphicon glyphicon-music"></span>&nbsp; <spring:message code="header.menu.album.title" /></a></li>
-                            </ul>
+             <sec:authorize access="hasRole('ROLE_ADMIN')">
+	            <li class="dropdown">
+	                <a aria-expanded="false" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">
+	                    <span aria-hidden="true" class="glyphicon glyphicon-wrench"></span>&nbsp;
+	                   <spring:message code="header.menu.usuarios.title" /> <span class="caret"></span>
+	                </a>
+	                <ul role="menu" class="dropdown-menu">
+	                  <li><a href="${pageContext.request.contextPath}/<spring:message code="header.menu.url.admin.users.path" />"><spring:message code="header.menu.usuarios.admin.title" /></a></li>
+	                  <li><a href="${pageContext.request.contextPath}/<spring:message code="header.menu.url.admin.users.new.path" />"><spring:message code="header.menu.usuarios.admin.new.title" /></a></li>
+	                </ul>
+	              </li>
+              </sec:authorize>
+              
+                            
+          </ul>
+                            
+                            
+                            
           <ul class="nav navbar-nav navbar-right">
             <li class="pull-right">
     		<!-- El formalario de autenticacion de muestra SOLO si no estamos logeados, es decir, si no tenemos nombre de usuario -->
+    		
     		<c:if test="${pageContext.request.userPrincipal.name == null}">
                   <form method="post" action="<c:url value='/j_spring_security_check' />" role="form" class="navbar-form navbar-right form-inline">
 	                  <div class="form-group">
@@ -68,7 +86,7 @@
                 </form>
              </c:if>
               <!-- Este formulario solo se muestra si tenemos el ROLO ROLE_USER -->
-               <sec:authorize access="hasRole('ROLE_USER')">
+               <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
 					<!-- For login user -->
 					<form action="${pageContext.request.contextPath}/logout" method="get" id="logoutForm">
 						<input type="hidden" name="${_csrf.parameterName}"

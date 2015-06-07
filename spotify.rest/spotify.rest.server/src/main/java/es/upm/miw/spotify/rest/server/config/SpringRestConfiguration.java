@@ -3,25 +3,25 @@ package es.upm.miw.spotify.rest.server.config;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import javax.annotation.Resource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import es.upm.miw.spotify.model.config.SpringModelConfiguration;
+
 
 @Configuration
 @EnableWebMvc
-@Import(SpringModelConfiguration.class)
-@ComponentScan("es.upm.miw.*")
+//@Import({SpringModelConfiguration.class/*,SecurityConfig.class*/})
+@ComponentScan("es.*")
 public class SpringRestConfiguration extends WebMvcConfigurerAdapter {
 
 	private static final String PATTERN_DATE = "dd/MM/yyyy HH:mm";
@@ -48,6 +48,14 @@ public class SpringRestConfiguration extends WebMvcConfigurerAdapter {
 			objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
 	        return objectMapper;
 	  }
-
-
+		@Bean(name = "dataSource")
+		public DriverManagerDataSource dataSource() {
+		    DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
+		    driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
+		    driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/test");
+		    driverManagerDataSource.setUsername("rootSpotify");
+		    driverManagerDataSource.setPassword("rootSpotify");
+		    return driverManagerDataSource;
+		}
+		
 }

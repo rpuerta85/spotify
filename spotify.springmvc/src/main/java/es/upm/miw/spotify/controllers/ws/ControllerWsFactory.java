@@ -5,6 +5,7 @@ import es.upm.miw.spotify.controllers.FindAlbumController;
 import es.upm.miw.spotify.controllers.FindArtistController;
 import es.upm.miw.spotify.controllers.FindFavoriteAlbumsController;
 import es.upm.miw.spotify.controllers.FindTrackController;
+import es.upm.miw.spotify.controllers.ShowUsersController;
 import es.upm.miw.spotify.view.beans.SessionBean;
 
 
@@ -15,7 +16,7 @@ public class ControllerWsFactory extends ControllerFactory {
 	private FindAlbumController findAlbumController;
 	private FindTrackController findTrackController;
 	private FindFavoriteAlbumsController findFavoritesAlbumController;
-
+	private ShowUsersController showUsersController;
 
 	public ControllerWsFactory(SessionBean session) {
 		this.session = session;
@@ -58,6 +59,14 @@ public class ControllerWsFactory extends ControllerFactory {
 			findFavoritesAlbumController = new FindFavoritesAlbumsControllerWs(session);
 		}
 		return findFavoritesAlbumController;
+	}
+
+	@Override
+	public ShowUsersController getShowUsersController() {
+		if (showUsersController == null) {
+			showUsersController = new ShowUsersControllerWs(session);
+		}
+		return showUsersController;
 	}
 
 }

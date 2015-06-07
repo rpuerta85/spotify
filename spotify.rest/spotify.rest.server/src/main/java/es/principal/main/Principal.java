@@ -1,5 +1,6 @@
 package es.principal.main;
 
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,20 +17,21 @@ import es.spotify.models.entities.Favorite;
 import es.spotify.models.entities.FavoriteType;
 import es.spotify.models.entities.Role;
 import es.spotify.models.entities.User;
+import es.upm.miw.spotify.models.utils.Encript;
 
 public class Principal {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws NoSuchAlgorithmException {
 		 Map<String, String> properties = new HashMap<>();
          properties. put(PersistenceUnitProperties.DDL_GENERATION,
                  PersistenceUnitProperties.DROP_AND_CREATE);
          EntityManager em = Persistence.createEntityManagerFactory("BBDD", properties).createEntityManager();
          
-         
+         Encript e = new Encript();
        Role r= new Role("ADMIN");
        Role r2= new Role("PRINGADO");
        DaoJpaFactory.getFactory().getUserRoleDao().create(r);
-       User u= new User("u1",LocalDateTime.now(), "jjj@jsj.es", true,"*u1*");
+       User u= new User("u1",LocalDateTime.now(), "jjj@jsj.es", true,e.encriptacion("*u1*"));
     
        DaoJpaFactory.getFactory().getUserDao().create(u);
        System.out.println( DaoJpaFactory.getFactory().getUserDao().read(2));
@@ -66,7 +68,7 @@ public class Principal {
        System.out.println("Esfavorito:"+DaoJpaFactory.getFactory().getUserDao().isFavoriteFromUser("0eGsygTp906u18L0Oimnem", u99.getId()));
        System.out.println("Es favorito (debe dar false:" +DaoJpaFactory.getFactory().getUserDao().isFavoriteFromUser("lkshfklshfk", u99.getId()));
        
-       User u2 = new User("u2", LocalDateTime.now(), "123@rr.es", true, "*u2*");
+       User u2 = new User("u2", LocalDateTime.now(), "123@rr.es", true, e.encriptacion("*u2*"));
        DaoJpaFactory.getFactory().getUserDao().create(u2);
        Favorite f20 = new Favorite("0UWZUmn7sybxMCqrw9tGa7",ft2);
        u2.getFavorites().add(f20);

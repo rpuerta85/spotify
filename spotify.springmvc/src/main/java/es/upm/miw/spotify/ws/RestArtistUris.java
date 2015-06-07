@@ -14,5 +14,6 @@ public interface RestArtistUris {
 	String FIND_TRACKS_OF_ALBUMID_REST_URI = "find/album/"+PARAM+"/tracks";
 	String FIND_TRACK_BY_SPOTIFYID_REST_URI = "find/track/"+PARAM;
 	String FIND_FAVORITES_ALBUMS_REST_URI = "find/favorites/albums?userUUID="+PARAM +"&favoriteTypeUUID="+ PARAM2;
-
+	String FIND_FAVORITES_ARTISTS_REST_URI = "find/favorites/artists?userUUID="+PARAM +"&favoriteTypeUUID="+ PARAM2;;
+	String SHOW_USERS_ALL="user/show/all";
 }

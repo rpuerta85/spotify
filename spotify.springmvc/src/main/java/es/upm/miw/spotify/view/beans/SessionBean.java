@@ -3,31 +3,30 @@ package es.upm.miw.spotify.view.beans;
 import java.io.Serializable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
+import es.upm.miw.spotify.models.pojos.UserWeb;
 
 @Component
-@Scope(value = "session", proxyMode = ScopedProxyMode.INTERFACES)
+@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class SessionBean implements Serializable {
 
 	private static final long serialVersionUID = 6802589690326067836L;
 	
-	private User user;
+	private UserWeb userWeb;
 	
 
 	public static final String NAME = "sessionBean";
 
-	public SessionBean() {
-		user = null;
+	
+	public UserWeb getUserWeb() {
+		return userWeb;
 	}
 
-	public User getUser() {
-		return user;
+
+	public void setUserWeb(UserWeb userWeb) {
+		this.userWeb = userWeb;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
 
 	public static String getName() {
 		return NAME;

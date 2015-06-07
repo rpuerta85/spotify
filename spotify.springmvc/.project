@@ -3,6 +3,7 @@
 	<name>spotify.controller</name>
 	<comment></comment>
 	<projects>
+		<project>spotify.rest.server</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

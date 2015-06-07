@@ -13,4 +13,6 @@ public interface UserDao extends GenericDao<User , Integer> {
 	public abstract boolean isFavoriteFromUser(String favoriteId, Integer idUser);
 	public abstract Favorite getFavoriteFromUser(String favoriteId, Integer idUser);
 	public abstract User getUserByUserName(String userName);
+	public abstract List<User>  getUserByUserNameAndPassword(String userName,String password);
+	
 }
