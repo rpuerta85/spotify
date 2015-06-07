@@ -20,8 +20,8 @@ import es.upm.miw.spotify.view.beans.FindFavoritesAlbumsViewBean;
 import es.upm.miw.spotify.view.beans.SessionBean;
 
 @Controller
-public class FindFavoriteAlbumControllerWeb {
-	private static final Logger logger = LogManager.getLogger(FindFavoriteAlbumControllerWeb.class);
+public class FindFavoritesAlbumsControllerWeb {
+	private static final Logger logger = LogManager.getLogger(FindFavoritesAlbumsControllerWeb.class);
 	
 	@Autowired
 	private SessionBean session;
