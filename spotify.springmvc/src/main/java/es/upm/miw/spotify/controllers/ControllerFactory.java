@@ -7,4 +7,5 @@ public abstract class ControllerFactory {
 	public abstract FindFavoritesAlbumsController getFindFavoriteAlbumController();
 	public abstract FindFavoritesArtistsController getFindFavoriteArtistsController();
 	public abstract ShowUsersController getShowUsersController();
+
 }

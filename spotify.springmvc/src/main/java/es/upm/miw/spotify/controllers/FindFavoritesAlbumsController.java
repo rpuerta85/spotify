@@ -5,7 +5,7 @@ import es.upm.miw.spotify.models.pojos.AlbumsPager;
 import es.upm.miw.spotify.models.pojos.Page;
 import es.upm.miw.spotify.models.pojos.TrackSimple;
 
-public interface FindFavoriteAlbumsController {
+public interface FindFavoritesAlbumsController {
 	AlbumsPager findAlbums(String userUUID, String favoriteTypeUUID);
 //	Album findAlbumBySpotifyId(String spotifyId);
 //	Page<TrackSimple> findTracksOfAlbumId(String spotifyId);

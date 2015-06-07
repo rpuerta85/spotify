@@ -16,4 +16,6 @@ public interface RestArtistUris {
 	String FIND_FAVORITES_ALBUMS_REST_URI = "find/favorites/albums?userUUID="+PARAM +"&favoriteTypeUUID="+ PARAM2;
 	String FIND_FAVORITES_ARTISTS_REST_URI = "find/favorites/artists?userUUID="+PARAM +"&favoriteTypeUUID="+ PARAM2;;
 	String SHOW_USERS_ALL="user/show/all";
+
+
 }
