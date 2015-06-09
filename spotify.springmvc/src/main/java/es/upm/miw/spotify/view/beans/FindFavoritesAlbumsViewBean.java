@@ -30,7 +30,7 @@ public class FindFavoritesAlbumsViewBean extends GenericView{
 	public ModelAndView update() {
 		ModelAndView model = new ModelAndView();
 		this.setMsgs();
-		model.addObject(NAME, this);
+ 		model.addObject(NAME, this);
 		//actualizamos el resto de componente por lo que esta formado la vista, en este caso
 		//actualizamos tambien el componente de formulario findArtistFormBean
 	    this.process();

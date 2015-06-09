@@ -13,9 +13,6 @@
         <dependent-module archiveName="spotify.rest.client-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/spotify.rest.client/spotify.rest.client">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="spotify.rest.server.war" deploy-path="/WEB-INF/lib" handle="module:/resource/spotify.rest.server/spotify.rest.server">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <property name="java-output-path" value="/spotify.springmvc/target/classes"/>
         <property name="context-root" value="spotify"/>
     </wb-module>

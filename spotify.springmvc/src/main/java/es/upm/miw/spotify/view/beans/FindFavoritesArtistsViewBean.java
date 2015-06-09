@@ -31,16 +31,16 @@ public class FindFavoritesArtistsViewBean extends GenericView{
 	public ModelAndView update() {
 		ModelAndView model = new ModelAndView();
 		this.setMsgs();
-		model.addObject(NAME, this);
 		//actualizamos el resto de componente por lo que esta formado la vista, en este caso
 		//actualizamos tambien el componente de formulario findArtistFormBean
 	    this.process();
-		
+		model.addObject(NAME, this);
+
 		return model;
 	}
 	@Override
 	protected void setMsgs() {
-		mapMsgs.put(ShowAlbumDetailsParamsEE.SHOW_ALBUM_DETAILS_URL.getV(),ViewUrlConstants.SHOW_ALBUM_DETAILS_GETPATH);
+		mapMsgs.put(ShowArtistsViewParamsEE.JSON_ARTISTS.getV(),ViewUrlConstants.SHOW_ARTIST_DETAILS_GETPATH);
 				
 	}
 	public void process(){
@@ -49,6 +49,8 @@ public class FindFavoritesArtistsViewBean extends GenericView{
 		String json=null;
 		try {
 			json = ObjectMapperJacksonSingleton.getInstance().getObjectMapper().writeValueAsString(artists);
+			mapMsgs.put(ShowArtistsViewParamsEE.JSON_ARTISTS.getV(),json);
+
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 			logger.error("error in parsing json:"+e);

@@ -42,6 +42,27 @@ public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao 
 	        entityManager.close();
 	        return resultado;
 	}
+	public List<Favorite> getFavoriteAlbum(
+			Integer userId) { 
+		DAdo
+		
+		EntityManager entityManager = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
+	        Query query = entityManager.createQuery(FIND_BY_FAVORITE_TYPE);
+	        query.setParameter("favoritetypeId", favoriteType.getId());
+	        query.setParameter("userId", userId);
+//	        List<User> user =(List<User>) query.getResultList();
+//	        List<Favorite> listaResultado =user.get(0).getFavorites();
+	        List<Favorite> listaResultado = query.getResultList();
+	        ArrayList<Favorite> resultado= new ArrayList<Favorite>();
+	        for (Favorite favorite : listaResultado) {
+				if(favorite.getFavoritetype().equals(favoriteType))
+					resultado.add(favorite);
+			}
+	        entityManager.close();
+	        return resultado;
+	}
+	
+	
 
 	@Override
 	public boolean isAdminUser(Integer idUser) {

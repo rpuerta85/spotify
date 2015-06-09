@@ -77,8 +77,8 @@ public class Principal {
        System.out.println(DaoJpaFactory.getFactory().getUserDao().getUserByUserName("u2"));
        
        
-       
-       
+       System.out.println(e.encriptacion("*u1*"));
+       System.out.println(e.encriptacion("*u2*"));
        
 	}
 

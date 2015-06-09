@@ -37,21 +37,21 @@ public class ShowUsersControllerWs extends ControllerWs implements
 		log.info("begin showUsersAll");
 		RestTemplate restTemplate = ControllerWs.buildRestClient();
 		String json = "{}";
-		ResponseEntity<User[]> responseEntity = restTemplate.getForEntity(ControllerWs.URI+RestArtistUris.SHOW_USERS_ALL, User[].class);
+		/*ResponseEntity<User[]> responseEntity = restTemplate.getForEntity(ControllerWs.URI+RestArtistUris.SHOW_USERS_ALL, User[].class);
 		User[] resulList =responseEntity.getBody();
 		List<User> resulList2= new ArrayList<User>();
-		resulList2 = Arrays.asList(resulList);
-		/*ParameterizedTypeReference<List<User>> responseType = 
+		resulList2 = Arrays.asList(resulList);*/
+		ParameterizedTypeReference<List<User>> responseType = 
 				new ParameterizedTypeReference<List<User>>() {
 		  };
 		  log.info("rest uti:"+ControllerWs.URI+RestArtistUris.SHOW_USERS_ALL);
 		  ResponseEntity<List<User>> result = restTemplate.
 				  exchange(ControllerWs.URI+RestArtistUris.SHOW_USERS_ALL, HttpMethod.GET, null, responseType);
 		  List<User> resulList = result.getBody();
-		 json = new Gson().toJson(resulList);*/
+		 json = new Gson().toJson(resulList);
 		 log.info("rest response:" + json);		 
 		log.debug("end showUsersAll");
-		return resulList2;
+		return resulList;
 	}
 
 	

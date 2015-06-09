@@ -31,7 +31,7 @@ public class ShowUsersControllerRest {
 	private ObjectMapper objectMapper;
 	 
 	@RequestMapping(value =UrisWebApp.SHOW_USERS_ALL,method = RequestMethod.GET)
-    public @ResponseBody List<User> showUsersAll(){
+    public /*@ResponseBody*/ List<User> showUsersAll(){
     	List<User> userList = DaoFactory.getFactory().getUserDao().findAll();
     	try {
     		String json = objectMapper.writeValueAsString(userList);

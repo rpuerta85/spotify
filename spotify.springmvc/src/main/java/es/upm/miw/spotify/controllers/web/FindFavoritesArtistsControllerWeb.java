@@ -17,6 +17,7 @@ import es.upm.miw.spotify.utils.constants.ViewNameConstants;
 import es.upm.miw.spotify.utils.constants.ViewUrlConstants;
 import es.upm.miw.spotify.view.beans.FindAlbumViewBean;
 import es.upm.miw.spotify.view.beans.FindFavoritesAlbumsViewBean;
+import es.upm.miw.spotify.view.beans.FindFavoritesArtistsViewBean;
 import es.upm.miw.spotify.view.beans.SessionBean;
 
 @Controller
@@ -37,9 +38,9 @@ public class FindFavoritesArtistsControllerWeb {
 	public ModelAndView findArtistsAction() {
 		logger.info("findArtistsAlbums GET");
 		
-		FindFavoritesAlbumsViewBean findFavoritesAlbumsViewBean = new FindFavoritesAlbumsViewBean(messageSource,session);
-		ModelAndView model = findFavoritesAlbumsViewBean.update();
-		model.setViewName(ViewNameConstants.FIND_FAVORITES_ALBUMS_VIEWNAME);
+		FindFavoritesArtistsViewBean findFavoritesArtistsViewBean = new FindFavoritesArtistsViewBean(messageSource,session);
+		ModelAndView model = findFavoritesArtistsViewBean.update();
+		model.setViewName(ViewNameConstants.FIND_FAVORITES_ARTISTS_VIEWNAME);
 		logger.info("redirect to "+model.getViewName()+" page ");
 		return model;
 	}
