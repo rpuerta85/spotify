@@ -84,7 +84,7 @@ public class FindFavoritesArtistsViewBean extends GenericView{
 				jsonArtist);
 		this.mapMsgs.put(FindFavoritesForUserParamsEE.FIND_FAVORITE_TEXT.getV(),
 				messageSource.getMessage ("favorites.msg.title", null, LocaleContextHolder.getLocale()));
-		mapMsgs.put(ShowArtistDetailsParamsEE.SHOW_ARTIST_DETAILS_URL.getV(),ViewUrlConstants.SHOW_ARTIST_DETAILS_PATH);
+		mapMsgs.put(ShowArtistDetailsParamsEE.SHOW_ARTIST_DETAILS_URL.getV(),ViewUrlConstants.SHOW_ARTIST_DETAILS_GETPATH);
 	}
 //* GETTETS AND SETTERS */
 	public boolean isSuccess() {
