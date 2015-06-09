@@ -18,7 +18,7 @@ function albumContentController($scope, $http,$location){
         <h1>
             <span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span> 
              <spring:message code="showAlbumsView.panel.header.title" />
-              <small><spring:message code="showAlbumsView.panel.header.subtitle" /><kbd>"${findFavoritesAlbumsViewBean.mapMsgs['favoriteName']}"</kbd></small>
+              <small><spring:message code="showAlbumsView.panel.header.subtitle" /><kbd>"${findFavoritesAlbumsViewBean.mapMsgs['favoriteText']}"</kbd></small>
         </h1>
         <p class="lead"><spring:message code="showAlbumsView.panel.header.description" /> </p>
       </div>

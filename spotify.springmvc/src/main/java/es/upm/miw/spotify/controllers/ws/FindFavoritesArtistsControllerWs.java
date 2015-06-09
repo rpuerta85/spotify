@@ -18,15 +18,15 @@ public class FindFavoritesArtistsControllerWs implements
 	}
 
 	@Override
-	public ArtistsPager findArtists(String userUUID, String favoriteTypeUUID) {
+	public ArtistsPager findArtistsForUser(String userUUID) {
 		log.info("begin findArtistsJSON");
-		log.info("datas  received:"+ "userrUUId " + userUUID + " favoriteType UUID " + favoriteTypeUUID);
+		log.info("datas  received:"+ "userrUUId " + userUUID );
 		RestTemplate restTemplate = ControllerWs.buildRestClient();
 		String json = "{}";
 		ArtistsPager artists = null;
 		try {
 			String favoritesURI = RestArtistUris.FIND_FAVORITES_ARTISTS_REST_URI.replace(RestArtistUris.PARAM,userUUID);
-		       favoritesURI = favoritesURI.replace(RestArtistUris.PARAM2,favoriteTypeUUID);
+		    
 		log.info("URI:" + ControllerWs.URI+ favoritesURI);
 		artists = restTemplate.getForObject( ControllerWs.URI+ favoritesURI,ArtistsPager.class );
 		log.info("rest response:" + json);

@@ -50,11 +50,9 @@ public class FindFavoritesTracksControllerRest {
 	 private RestTemplate  restTemplate;
 	
     @RequestMapping(UrisWebApp.FIND_FAVORITE_TRACKS)
-    public TracksPager findFavoritesAlbums(@RequestParam(value="userUUID") String userUUID, @RequestParam(value="favoriteTypeUUID")String favoriteTypeUUID)  {
-    	  
-    	FavoriteType favoriteType = DaoFactory.getFactory().getFavoriteTypeDao().readUUID(favoriteTypeUUID);
+    public TracksPager findFavoritesAlbums(@RequestParam(value="userUUID") String userUUID)  {
     	User user =  DaoFactory.getFactory().getUserDao().readUUID(userUUID);
-    	List<Favorite> artistsFavorites=	DaoFactory.getFactory().getUserDao().getFavoriteByFavoriteType(favoriteType, user.getId());
+    	List<Favorite> artistsFavorites=	DaoFactory.getFactory().getUserDao().getFavoritesTracks( user.getId());
     	LOG.info("begin findFavoritesTracks");
     	LOG.info("album received:");
     	 TracksPager tracks = new TracksPager();
@@ -70,12 +68,10 @@ public class FindFavoritesTracksControllerRest {
     		LOG.info("response json:"+json);
     		Track track = new Gson().fromJson(json, Track.class);
     		tracks.tracks.items.add(track);
-    		
     		} catch (Exception e) {
     			LOG.error("error response", e);
     		}
-		
-    	}
+	   	}
        	return tracks;
     }
 }

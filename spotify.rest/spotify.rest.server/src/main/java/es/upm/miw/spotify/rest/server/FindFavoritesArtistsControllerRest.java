@@ -48,17 +48,14 @@ public class FindFavoritesArtistsControllerRest {
 	 private RestTemplate  restTemplate;
 	
     @RequestMapping(UrisWebApp.FIND_FAVORITE_ARTISTS)
-    public ArtistsPager findFavoritesAlbums(@RequestParam(value="userUUID") String userUUID, @RequestParam(value="favoriteTypeUUID")String favoriteTypeUUID)  {
-    	  
-    	FavoriteType favoriteType = DaoFactory.getFactory().getFavoriteTypeDao().readUUID(favoriteTypeUUID);
-    	User user =  DaoFactory.getFactory().getUserDao().readUUID(userUUID);
-    	List<Favorite> artistsFavorites=	DaoFactory.getFactory().getUserDao().getFavoriteByFavoriteType(favoriteType, user.getId());
+    public ArtistsPager findFavoritesAlbums(@RequestParam(value="userUUID") String userUUID){
+     	User user =  DaoFactory.getFactory().getUserDao().readUUID(userUUID);
+    	List<Favorite> artistsFavorites=	DaoFactory.getFactory().getUserDao().getFavoritesArtists(user.getId());
     	LOG.info("begin findFavoritesArstits");
     	LOG.info("album received:");
     	 ArtistsPager artists = new ArtistsPager();
     	 artists.artists= new Pager<Artist>();
     	 artists.artists.items = new ArrayList<Artist>();
-    	 
        	for (Favorite favorite : artistsFavorites) {
 		try {
     		LOG.info("URI:"+spotifyRestUri+UrisSpotifyApi.FIND_ARTIST_BY_ID.
@@ -72,8 +69,7 @@ public class FindFavoritesArtistsControllerRest {
     		} catch (Exception e) {
     			LOG.error("error response", e);
     		}
-		
-    	}
+		}
        	return artists;
     }
 }

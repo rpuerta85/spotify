@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "spring" uri = "http://www.springframework.org/tags" %>
 <script>
-//alert("heheheqqqqq");
-//alert("hehehe");
 var app = angular.module('artistCntApp',[]);
 app.controller('artistCntCtrl', artistContentController);
 function artistContentController($scope, $http,$location){
@@ -25,7 +23,7 @@ function artistContentController($scope, $http,$location){
             <span aria-hidden="true" class="glyphicon glyphicon-user"></span> 
              <spring:message code="showArtistsView.panel.header.title" /> 
              <small><spring:message code="showArtistsView.panel.header.subtitle" />
-             <kbd>"${findFavoritesArtistsViewBean.mapMsgs['favoriteName']}"</kbd></small>
+             <kbd>"${findFavoritesArtistsViewBean.mapMsgs['favoriteText']}"</kbd></small>
         </h1>
         <p class="lead"><spring:message code="showArtistsView.panel.header.description" /> </p>
       </div>

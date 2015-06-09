@@ -13,6 +13,7 @@ import es.upm.miw.spotify.form.web.ee.FindFavoriteFormParamsEE;
 import es.upm.miw.spotify.models.pojos.AlbumsPager;
 import es.upm.miw.spotify.models.utils.ObjectMapperJacksonSingleton;
 import es.upm.miw.spotify.utils.constants.ViewUrlConstants;
+import es.upm.miw.spotify.views.web.ee.FindFavoritesForUserParamsEE;
 import es.upm.miw.spotify.views.web.ee.ShowAlbumDetailsParamsEE;
 import es.upm.miw.spotify.views.web.ee.ShowArtistsViewParamsEE;
 
@@ -31,8 +32,7 @@ public class FindFavoritesAlbumsViewBean extends GenericView{
 		ModelAndView model = new ModelAndView();
 		this.setMsgs();
  		model.addObject(NAME, this);
-		//actualizamos el resto de componente por lo que esta formado la vista, en este caso
-		//actualizamos tambien el componente de formulario findArtistFormBean
+		
 	    this.process();
 		
 		return model;
@@ -40,34 +40,45 @@ public class FindFavoritesAlbumsViewBean extends GenericView{
 	@Override
 	protected void setMsgs() {
 		mapMsgs.put(ShowAlbumDetailsParamsEE.SHOW_ALBUM_DETAILS_URL.getV(),ViewUrlConstants.SHOW_ALBUM_DETAILS_GETPATH);
+		
 				
 	}
 	public void process(){
-		logger.info("begin FindFavoriteAlbumsViewBean process method");//findAlbums(userUUID, favoriteTypeUUID)
-		AlbumsPager albums = ControllerWsFactory.getInstance(sessionBean).getFindFavoriteAlbumController().findAlbums("6722052B96424CB5A143BB05FD627C67", "64229A2A136842F9A9E47BBF30C6BBCC");
-		String json=null;
-		try {
-			json = ObjectMapperJacksonSingleton.getInstance().getObjectMapper().writeValueAsString(albums);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-			logger.error("error in parsing json:"+e);
-		}
-		logger.info("JSON album:"+json);
-		addSuccessMsg(json);
-		this.success = true;
+		logger.info("begin FindFavoriteAlbumsViewBean process method");//"6722052B96424CB5A143BB05FD627C67"
+		
+		if(sessionBean.getUserWeb()!=null){
+			String userUUID = sessionBean.getUserWeb().getIdUUID();
+			AlbumsPager albums = ControllerWsFactory.getInstance(sessionBean).getFindFavoriteAlbumController().findAlbumsForUser(userUUID);
+			String json=null;
+
+			try {
+				json = ObjectMapperJacksonSingleton.getInstance().getObjectMapper().writeValueAsString(albums);
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+				logger.error("error in parsing json:"+e);
+			}
+			logger.info("JSON album:"+json);
+			addSuccessMsg(json);
+			this.success = true;
+			}
+		else
+			this.success=false;
 		
 		logger.info("end FindFvaoritesAlbumViewBean process method");
 	}
 	
 
-	protected void addErrorMsg(){
-		this.mapMsgs.put(FindFavoriteFormParamsEE.FORM_FIND_FAVORITE_NAME_MSG_ERROR.getV(),
-				messageSource.getMessage ("form.find.album.msg.error", null, LocaleContextHolder.getLocale()));
-	}
 	protected void addSuccessMsg(String jsonArtist){
-		this.mapMsgs.put(ShowArtistsViewParamsEE.JSON_ARTISTS.getV(),
-				jsonArtist);
+		this.mapMsgs.put(ShowArtistsViewParamsEE.JSON_ARTISTS.getV(),jsonArtist);
+		this.mapMsgs.put(FindFavoritesForUserParamsEE.FIND_FAVORITE_TEXT.getV(),
+				messageSource.getMessage ("favorites.msg.title", null, LocaleContextHolder.getLocale()));
 	}
+	
+	protected void addErrorMsg(){
+		this.mapMsgs.put(FindFavoritesForUserParamsEE.FIND_FAVORITES_MSG_ERROR.getV(),
+				messageSource.getMessage ("favorites.msg.empty", null, LocaleContextHolder.getLocale()));
+	}
+	
 //* GETTETS AND SETTERS */
 	public boolean isSuccess() {
 		return success;

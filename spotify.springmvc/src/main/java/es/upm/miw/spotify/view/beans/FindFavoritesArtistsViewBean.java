@@ -8,13 +8,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import es.upm.miw.spotify.controllers.web.ShowArtistsDetailsController;
 import es.upm.miw.spotify.controllers.ws.ControllerWsFactory;
 import es.upm.miw.spotify.form.web.ee.FindFavoriteFormParamsEE;
 import es.upm.miw.spotify.models.pojos.AlbumsPager;
 import es.upm.miw.spotify.models.pojos.ArtistsPager;
 import es.upm.miw.spotify.models.utils.ObjectMapperJacksonSingleton;
+import es.upm.miw.spotify.utils.constants.ViewNameConstants;
 import es.upm.miw.spotify.utils.constants.ViewUrlConstants;
+import es.upm.miw.spotify.views.web.ee.FindFavoritesForUserParamsEE;
 import es.upm.miw.spotify.views.web.ee.ShowAlbumDetailsParamsEE;
+import es.upm.miw.spotify.views.web.ee.ShowArtistDetailsParamsEE;
 import es.upm.miw.spotify.views.web.ee.ShowArtistsViewParamsEE;
 
 
@@ -45,31 +49,42 @@ public class FindFavoritesArtistsViewBean extends GenericView{
 	}
 	public void process(){
 		logger.info("begin FindFavoriteArtistsViewBean process method");//findArtists(userUUID, favoriteTypeUUID)
-		ArtistsPager artists = ControllerWsFactory.getInstance(sessionBean).getFindFavoriteArtistsController().findArtists("6722052B96424CB5A143BB05FD627C67", "F41C1808A95146CBB8BF4771AABC6C40");
-		String json=null;
-		try {
-			json = ObjectMapperJacksonSingleton.getInstance().getObjectMapper().writeValueAsString(artists);
-			mapMsgs.put(ShowArtistsViewParamsEE.JSON_ARTISTS.getV(),json);
+		if(sessionBean.getUserWeb()!=null){
+			String userUUID = sessionBean.getUserWeb().getIdUUID();//"6722052B96424CB5A143BB05FD627C67"
+			ArtistsPager artists = ControllerWsFactory.getInstance(sessionBean).getFindFavoriteArtistsController().findArtistsForUser(userUUID);
+			String json=null;
+			ModelAndView model = new ModelAndView();
+			model.addObject(NAME, this);
 
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-			logger.error("error in parsing json:"+e);
+			try {
+				json = ObjectMapperJacksonSingleton.getInstance().getObjectMapper().writeValueAsString(artists);
+				mapMsgs.put(ShowArtistsViewParamsEE.JSON_ARTISTS.getV(),json);
+				model.setViewName(ViewNameConstants.SHOW_ARTISTS_VIEWNAME);
+	
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+				logger.error("error in parsing json:"+e);
+			}
+			logger.info("JSON artists:"+json);
+			addSuccessMsg(json);
+			this.success = true;
 		}
-		logger.info("JSON artists:"+json);
-		addSuccessMsg(json);
-		this.success = true;
-		
+		else
+			 this.success=false;
 		logger.info("end FindFavorritesArstsisViewBean process method");
 	}
 	
 
 	protected void addErrorMsg(){
-		this.mapMsgs.put(FindFavoriteFormParamsEE.FIND_FAVORITES_MSG_ERROR.getV(),
-				messageSource.getMessage ("form.find.album.msg.error", null, LocaleContextHolder.getLocale()));
+		this.mapMsgs.put(FindFavoritesForUserParamsEE.FIND_FAVORITES_MSG_ERROR.getV(),
+				messageSource.getMessage ("favorites.msg.empty", null, LocaleContextHolder.getLocale()));
 	}
 	protected void addSuccessMsg(String jsonArtist){
 		this.mapMsgs.put(ShowArtistsViewParamsEE.JSON_ARTISTS.getV(),
 				jsonArtist);
+		this.mapMsgs.put(FindFavoritesForUserParamsEE.FIND_FAVORITE_TEXT.getV(),
+				messageSource.getMessage ("favorites.msg.title", null, LocaleContextHolder.getLocale()));
+		mapMsgs.put(ShowArtistDetailsParamsEE.SHOW_ARTIST_DETAILS_URL.getV(),ViewUrlConstants.SHOW_ARTIST_DETAILS_PATH);
 	}
 //* GETTETS AND SETTERS */
 	public boolean isSuccess() {

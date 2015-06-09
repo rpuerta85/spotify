@@ -88,20 +88,18 @@ public class FindFavoritesAlbumsControllerWs extends ControllerWs implements
 
 
 	@Override
-	public AlbumsPager findAlbums(String userUUID, String favoriteTypeUUID) {
+	public AlbumsPager findAlbumsForUser(String userUUID) {
 		log.info("begin findFavoritesAlbums");
-		log.info("datas  received:"+ "userrUUId " + userUUID + " favoriteType UUID " + favoriteTypeUUID);
+		log.info("datas  received:"+ "userrUUId " + userUUID );
 		
 		RestTemplate restTemplate = ControllerWs.buildRestClient();
 		String json = "{}";
 		AlbumsPager albums = null;
 		try {
 			String favoritesURI = RestArtistUris.FIND_FAVORITES_ALBUMS_REST_URI.replace(RestArtistUris.PARAM,userUUID);
-			       favoritesURI = favoritesURI.replace(RestArtistUris.PARAM2,favoriteTypeUUID);
 			log.info("URI:" + ControllerWs.URI+ favoritesURI);
 		albums = restTemplate.getForObject( ControllerWs.URI+ favoritesURI,AlbumsPager.class );
-		
-		log.info("rest response:" + json);
+			log.info("rest response:" + json);
 		} catch (Exception e) {
 			log.error("error response", e);
 		}

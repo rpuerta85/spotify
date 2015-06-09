@@ -51,12 +51,28 @@
             <li><a href="${pageContext.request.contextPath}/<spring:message code="header.menu.url.album.find.path" />"><span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span>&nbsp; <spring:message code="header.menu.track.title" /></a></li>
             <li><a href="${pageContext.request.contextPath}/<spring:message code="header.menu.url.track.find.path" />"><span aria-hidden="true" class="glyphicon glyphicon-music"></span>&nbsp; <spring:message code="header.menu.album.title" /></a></li>
              <sec:authorize access="hasRole('ROLE_ADMIN')">
+                 <li class="dropdown">
+			              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
+			                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>&nbsp;Favoritos <b class="caret"></b>
+			              </a>
+			              <ul class="dropdown-menu" role="menu">
+				                <li><a href="${pageContext.request.contextPath}/<spring:message code="header.menu.url.favorites.artists.find.path" />"><span aria-hidden="true" class="glyphicon glyphicon-user"></span>&nbsp; <spring:message code="header.menu.url.favorites.artists.find.title" /></a></li>
+				                <li><a href="${pageContext.request.contextPath}/<spring:message code="header.menu.url.favorites.albums.find.path" />"><span aria-hidden="true" class="glyphicon glyphicon-user"></span>&nbsp; <spring:message code="header.menu.url.favorites.albums.find.title" /></a></li>
+				                <li><a href="${pageContext.request.contextPath}/<spring:message code="header.menu.url.favorites.tracks.find.path" />"><span aria-hidden="true" class="glyphicon glyphicon-user"></span>&nbsp; <spring:message code="header.menu.url.favorites.tracks.find.title" /></a></li>
+				                <li class="divider"></li>
+				                <li class="dropdown-header">Género</li>
+				                <ul>
+				                  <li><a href="">Tipo1</a></li>
+				                </ul>
+			              </ul>
+			            </li>
 	            <li class="dropdown">
 	                <a aria-expanded="false" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">
 	                    <span aria-hidden="true" class="glyphicon glyphicon-wrench"></span>&nbsp;
 	                   <spring:message code="header.menu.usuarios.title" /> <span class="caret"></span>
 	                </a>
 	                <ul role="menu" class="dropdown-menu">
+	              
 	                  <li><a href="${pageContext.request.contextPath}/<spring:message code="header.menu.url.admin.users.path" />"><spring:message code="header.menu.usuarios.admin.title" /></a></li>
 	                  <li><a href="${pageContext.request.contextPath}/<spring:message code="header.menu.url.admin.users.new.path" />"><spring:message code="header.menu.usuarios.admin.new.title" /></a></li>
 	                </ul>

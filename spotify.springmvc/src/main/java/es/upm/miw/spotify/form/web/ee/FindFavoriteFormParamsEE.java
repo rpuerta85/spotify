@@ -10,8 +10,7 @@ public enum FindFavoriteFormParamsEE {
 	FORM_FIND_FAVORITE_ACTION_POST("formFindFavoriteActionPost"),
 	FORM_FIND_FAVORITE_METHOD("formFindFavoriteMethod"),
 	FORM_FIND_FAVORITE_INPUTTEXT_ID("formFindFavoriteInputTextId"),
-	FORM_FIND_FAVORITE_INPUTTEXT_NAME("formFindFavoriteInputTextName"),
-	FIND_FAVORITES_MSG_ERROR("findFavoritesError");
+	FORM_FIND_FAVORITE_INPUTTEXT_NAME("formFindFavoriteInputTextName");
 	
 	private String v;
 

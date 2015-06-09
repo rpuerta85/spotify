@@ -59,10 +59,10 @@ public class Principal {
        DaoJpaFactory.getFactory().getUserDao().update(u99);
        u99=DaoJpaFactory.getFactory().getUserDao().read(2);
        System.out.println(u99);
-       System.out.println(DaoJpaFactory.getFactory().getUserDao().getFavoriteByFavoriteType(ft, 2));
-       List<Favorite> lista =  DaoJpaFactory.getFactory().getUserDao().getFavoriteByFavoriteType(ft2, 2);
+       System.out.println(DaoJpaFactory.getFactory().getUserDao().getFavoritesAlbums(2));
+       List<Favorite> lista =  DaoJpaFactory.getFactory().getUserDao().getFavoritesAlbums(2);
        System.out.println(lista);
-       System.out.println(DaoJpaFactory.getFactory().getUserDao().getFavoriteByFavoriteType(ft3, 2));
+       System.out.println(DaoJpaFactory.getFactory().getUserDao().getFavoritesTracks(2));
        f4=DaoJpaFactory.getFactory().getFavoriteDao().read(8);
        System.out.println("Es admin:"+DaoJpaFactory.getFactory().getUserDao().isAdminUser(u99.getId()));
        System.out.println("Esfavorito:"+DaoJpaFactory.getFactory().getUserDao().isFavoriteFromUser("0eGsygTp906u18L0Oimnem", u99.getId()));

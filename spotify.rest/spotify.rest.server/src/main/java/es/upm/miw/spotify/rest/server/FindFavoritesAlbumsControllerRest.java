@@ -45,11 +45,11 @@ public class FindFavoritesAlbumsControllerRest {
 	 private RestTemplate  restTemplate;
 	
     @RequestMapping(UrisWebApp.FIND_FAVORITE_ALBUMS)
-    public AlbumsPager findFavoritesAlbums(@RequestParam(value="userUUID") String userUUID, @RequestParam(value="favoriteTypeUUID")String favoriteTypeUUID)  {
+    public AlbumsPager findFavoritesAlbums(@RequestParam(value="userUUID") String userUUID)  {
     	  
-    	FavoriteType favoriteType = DaoFactory.getFactory().getFavoriteTypeDao().readUUID(favoriteTypeUUID);
+    	
     	User user =  DaoFactory.getFactory().getUserDao().readUUID(userUUID);
-    	List<Favorite> albumesFavorites=	DaoFactory.getFactory().getUserDao().getFavoriteByFavoriteType(favoriteType, user.getId());
+    	List<Favorite> albumesFavorites=	DaoFactory.getFactory().getUserDao().getFavoritesAlbums(user.getId());
     	LOG.info("begin findFavoritesAlbums");
     	LOG.info("album received:");
     	AlbumsPager albums = new AlbumsPager();
