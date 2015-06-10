@@ -9,12 +9,12 @@ import es.upm.miw.spotify.models.pojos.ArtistsPager;
 import es.upm.miw.spotify.view.beans.SessionBean;
 import es.upm.miw.spotify.ws.RestArtistUris;
 
-public class FindFavoritesArtistsControllerWs implements
+public class FindFavoritesArtistsControllerWs extends ControllerWs implements
 		FindFavoritesArtistsController {
 	private static final Logger log = LogManager.getLogger(FindFavoritesArtistsControllerWs.class);
 
 	public FindFavoritesArtistsControllerWs(SessionBean session) {
-		// TODO Auto-generated constructor stub
+		super(session);
 	}
 
 	@Override

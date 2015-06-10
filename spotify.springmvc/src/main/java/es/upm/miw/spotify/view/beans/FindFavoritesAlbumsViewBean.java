@@ -12,6 +12,7 @@ import es.upm.miw.spotify.controllers.ws.ControllerWsFactory;
 import es.upm.miw.spotify.form.web.ee.FindFavoriteFormParamsEE;
 import es.upm.miw.spotify.models.pojos.AlbumsPager;
 import es.upm.miw.spotify.models.utils.ObjectMapperJacksonSingleton;
+import es.upm.miw.spotify.utils.constants.ViewNameConstants;
 import es.upm.miw.spotify.utils.constants.ViewUrlConstants;
 import es.upm.miw.spotify.views.web.ee.FindFavoritesForUserParamsEE;
 import es.upm.miw.spotify.views.web.ee.ShowAlbumDetailsParamsEE;
@@ -50,9 +51,11 @@ public class FindFavoritesAlbumsViewBean extends GenericView{
 			String userUUID = sessionBean.getUserWeb().getIdUUID();
 			AlbumsPager albums = ControllerWsFactory.getInstance(sessionBean).getFindFavoriteAlbumController().findAlbumsForUser(userUUID);
 			String json=null;
-
+            ModelAndView model = new ModelAndView();
+			model.addObject(NAME, this);     
 			try {
 				json = ObjectMapperJacksonSingleton.getInstance().getObjectMapper().writeValueAsString(albums);
+				model.setViewName(ViewNameConstants.SHOW_ALBUMS_VIEWNAME);
 			} catch (JsonProcessingException e) {
 				e.printStackTrace();
 				logger.error("error in parsing json:"+e);

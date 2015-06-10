@@ -98,7 +98,7 @@ public class FindFavoritesAlbumsControllerWs extends ControllerWs implements
 		try {
 			String favoritesURI = RestArtistUris.FIND_FAVORITES_ALBUMS_REST_URI.replace(RestArtistUris.PARAM,userUUID);
 			log.info("URI:" + ControllerWs.URI+ favoritesURI);
-		albums = restTemplate.getForObject( ControllerWs.URI+ favoritesURI,AlbumsPager.class );
+		    albums = restTemplate.getForObject( ControllerWs.URI+ favoritesURI,AlbumsPager.class );
 			log.info("rest response:" + json);
 		} catch (Exception e) {
 			log.error("error response", e);

@@ -1,5 +1,7 @@
 package es.upm.miw.spotify.controllers.web;
 
+import java.lang.ProcessBuilder.Redirect;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,29 +41,11 @@ public class FindFavoritesAlbumsControllerWeb {
 		
 		FindFavoritesAlbumsViewBean findFavoritesAlbumsViewBean = new FindFavoritesAlbumsViewBean(messageSource,session);
 		ModelAndView model = findFavoritesAlbumsViewBean.update();
-		model.setViewName(ViewNameConstants.FIND_FAVORITES_ALBUMS_VIEWNAME);
+		if(findFavoritesAlbumsViewBean.isSuccess())
+		   model.setViewName(ViewNameConstants.FIND_FAVORITES_ALBUMS_VIEWNAME);
+		else
+			model.setViewName(ViewNameConstants.HOME_VIEWNAME);
 		logger.info("redirect to "+model.getViewName()+" page ");
 		return model;
 	}
-	
-//	@RequestMapping(value = ViewUrlConstants.ROOT_PATH+ViewUrlConstants.FIND_ALBUM_PATH,
-//			method = RequestMethod.POST)
-//	public ModelAndView findAlbumAction(@RequestParam(value = "albumName",required = false) String albumName) {
-//		logger.info("Begin findAlbumAction POST");
-//		logger.info("param recived:"+albumName);
-//		FindAlbumFormBean findAlbumFormBean = new FindAlbumFormBean(messageSource,
-//				new FindFavoriteForm(albumName), session);
-//		FindAlbumViewBean findAlbumViewBean = new FindAlbumViewBean(findAlbumFormBean);
-//		ModelAndView model = findAlbumViewBean.update();
-//		findAlbumViewBean.process();
-//		if(findAlbumViewBean.isSuccess()) {
-//			model.setViewName(ViewNameConstants.SHOW_ALBUMS_VIEWNAME);
-//		}else{
-//		    model.setViewName(ViewNameConstants.FIND_ALBUM_VIEWNAME);
-//		}
-//		logger.info("End findAlbumAction POST");
-//		logger.info("redirect to "+model.getViewName()+" page ");
-//		return model;
-//	}
-//	
 }
