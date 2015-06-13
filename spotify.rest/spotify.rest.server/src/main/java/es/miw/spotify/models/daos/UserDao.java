@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
-import es.miw.spotify.models.daos.jpa.DaoJpaFactory;
 import es.spotify.models.entities.Favorite;
 import es.spotify.models.entities.FavoriteType;
 import es.spotify.models.entities.User;

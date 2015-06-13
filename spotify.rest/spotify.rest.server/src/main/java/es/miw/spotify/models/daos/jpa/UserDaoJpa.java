@@ -4,14 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import es.miw.spotify.models.daos.UserDao;
 import es.spotify.models.entities.Favorite;
 import es.spotify.models.entities.FavoriteType;
 import es.spotify.models.entities.User;
-
-
+@Component
 public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao {
  
 	private static final String TRACK = "TRACK";
@@ -26,71 +30,63 @@ public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao 
 	private static final String FIND_FAVORITE_TYPE = "SELECT ft FROM FavoriteType ft  where ft.description= :description";
 	// SELECT t FROM TemaEntity t JOIN t.votos v where v.ip = :ip and t.id = :idTema
 	//private static final String FIND__IS_FAVORITE_FROM_USER = "SELECT  f FROM  Favorite f JOIN User u  WHERE f.idFavorite =:idFavorite AND u.id= :userId";
-
+	  
 	public UserDaoJpa() {
         super(User.class);
     }
-
 	
 	private List<Favorite> getFavoriteByFavoriteType(FavoriteType favoriteType,
-			Integer userId) { EntityManager entityManager = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
+			Integer userId) { 
 	        Query query = entityManager.createQuery(FIND_BY_FAVORITE_TYPE);
 	        query.setParameter("favoritetypeId", favoriteType.getId());
 	        query.setParameter("userId", userId);
-//	        List<User> user =(List<User>) query.getResultList();
-//	        List<Favorite> listaResultado =user.get(0).getFavorites();
 	        List<Favorite> listaResultado = query.getResultList();
 	        ArrayList<Favorite> resultado= new ArrayList<Favorite>();
 	        for (Favorite favorite : listaResultado) {
 				if(favorite.getFavoritetype().equals(favoriteType))
 					resultado.add(favorite);
 			}
-	        entityManager.close();
+	       // entityManager.close();
 	        return resultado;
 	}
 	@Override
 	public List<Favorite> getFavoritesAlbums(Integer userId) { 
-		   	EntityManager entityManager = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
 	        Query query = entityManager.createQuery(FIND_FAVORITE_TYPE);
 	        query.setParameter("description", ALBUM);
 	        FavoriteType favoriteType = (FavoriteType) query.getSingleResult();
-	        entityManager.close();
+	        //entityManager.close();
 	        return getFavoriteByFavoriteType(favoriteType, userId);
 	}
 	@Override
 	public List<Favorite> getFavoritesArtists(Integer userId) { 
-	   	EntityManager entityManager = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
         Query query = entityManager.createQuery(FIND_FAVORITE_TYPE);
         query.setParameter("description", ARTIST);
         FavoriteType favoriteType = (FavoriteType) query.getSingleResult();
-        entityManager.close();
+        //entityManager.close();
         return getFavoriteByFavoriteType(favoriteType, userId);
 }
 	@Override
 	public List<Favorite> getFavoritesTracks(Integer userId) { 
-	   	EntityManager entityManager = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
         Query query = entityManager.createQuery(FIND_FAVORITE_TYPE);
         query.setParameter("description", TRACK);
         FavoriteType favoriteType = (FavoriteType) query.getSingleResult();
-        entityManager.close();
+        //entityManager.close();
         return getFavoriteByFavoriteType(favoriteType, userId);
 }
 
 	@Override
 	public boolean isAdminUser(Integer idUser) {
-		EntityManager entityManager = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
         Query query = entityManager.createQuery(FIND__USER_IS_ADMIN_BY_ID);
         query.setParameter("role", ADMIN);
         query.setParameter("userId", idUser);
         List<User> listaResultado =(List<User>) query.getResultList();
-        entityManager.close();
+       // entityManager.close();
        
 		return listaResultado.size()>=1;
 	}
 
 	@Override
 	public boolean isFavoriteFromUser(String favoriteId, Integer idUser) {
-		EntityManager entityManager = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
         Query query = entityManager.createQuery(FIND__IS_FAVORITE_FROM_USER);
         query.setParameter("idFavorite", favoriteId);
         query.setParameter("userId", idUser);
@@ -100,7 +96,7 @@ public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao 
 			if(favorite.getIdFavorite().equals(favoriteId))
 				return true;
 		}
-        entityManager.close();
+        //entityManager.close();
        
 	  return false;
 	}
@@ -108,7 +104,6 @@ public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao 
 
 	@Override
 	public Favorite getFavoriteFromUser(String favoriteId, Integer idUser) {
-		EntityManager entityManager = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
         Query query = entityManager.createQuery(FIND__IS_FAVORITE_FROM_USER);
         query.setParameter("idFavorite", favoriteId);
         query.setParameter("userId", idUser);
@@ -118,17 +113,16 @@ public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao 
 			if(favorite.getIdFavorite().equals(favoriteId))
 				return favorite;
 		}
-        entityManager.close();
+       // entityManager.close();
      	return null;
 	}
 
 	@Override
 	public User getUserByUserName(String userName) {
-		EntityManager entityManager = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
 		Query query = entityManager.createQuery(FIND__USER_BY_USERNAME);
         query.setParameter("userName", userName);
         User resultado = (User) query.getSingleResult();
-        entityManager.close();
+        //entityManager.close();
         return resultado;
 	}
 
@@ -136,12 +130,11 @@ public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao 
 	public List<User> getUserByUserNameAndPassword(String userName, String password) {
 		List<User> listaResultado = new ArrayList<User>();
 		User resultado = null;
-		EntityManager entityManager = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
-		Query query = entityManager.createQuery(FIND__USER_BY_USERNAME_AND_PASSWORD);
+		Query query =entityManager.createQuery(FIND__USER_BY_USERNAME_AND_PASSWORD);
         query.setParameter("userName", userName);
         query.setParameter("password", password);
         listaResultado = query.getResultList();
-        entityManager.close();
+        //entityManager.close();
         return listaResultado;
 	}
 

@@ -5,8 +5,8 @@
 <script>
 var app = angular.module('showUsersCntApp',[]);
 app.controller('showUsersCntCtrl', showUsersContentController);
-var jsonObject = ${showUsersViewBean.userList};
-alert(JSON.stringify(jsonObject));
+var jsonObject = ${showUsersViewBean.mapMsgs['jsonUsers']};
+//alert(JSON.stringify(jsonObject));
 </script>    
 <div ng-app='showUsersCntApp' ng-controller="showUsersCntCtrl as vm" data-ng-init="vm.init('${pageContext.request.contextPath}','${_csrf.token}')" >
   <div class="container">
@@ -14,7 +14,10 @@ alert(JSON.stringify(jsonObject));
       <div class="panel-heading">
         <h1>
             <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> 
-            Usuarios: <small>usuarios registrados en el sistema</small>
+           <spring:message
+					code="showUsersView.panel.header.title" /> 
+					<small><spring:message
+					code="showUsersView.panel.header.subtitle" /></small>
         </h1>
       </div>
       <div class="panel-body">
@@ -26,13 +29,20 @@ alert(JSON.stringify(jsonObject));
               <table class="table table-striped table-condensed">
                 <thead>
                   <tr>
-                      <th>Id</th>
-                      <th>Usuario</th>
-                      <th>¿Administrador?</th>
-                      <th>¿Activo?</th>
-                      <th>Email</th>
-                      <th>Fecha de alta</th>
-                      <th>Acciones</th>
+                      <th><spring:message
+					code="showUsersView.table.user.field.id" /></th>
+                      <th><spring:message
+					code="showUsersView.table.user.field.user" /></th>
+                      <th><spring:message
+					code="showUsersView.table.user.field.role" /></th>
+                      <th><spring:message
+					code="showUsersView.table.user.field.enabled" /></th>
+                      <th><spring:message
+					code="showUsersView.table.user.field.email" /></th>
+                      <th><spring:message
+					code="showUsersView.table.user.field.createdate" /></th>
+                      <th><spring:message
+					code="showUsersView.table.user.field.actions" /></th>
                   </tr>
                 </thead>
              <!--   {% for entity in entities %}
@@ -47,22 +57,22 @@ alert(JSON.stringify(jsonObject));
                     {% set activo = '<span class="glyphicon glyphicon-ban-circle rojo" aria-hidden="true"></span>' %}
                   {% endif %}-->
                   <tr ng-model="vm.jsonObject" ng-repeat="user in vm.jsonObject track by $index" >
-                      <td><a title='Mostrar' href="">{{ user.userName }}</a></td>
-                      <td> entity.username </td>
-                      <td>admin | raw </td>
-                      <td> activo | raw </td>
-                      <td> entity.email </td>
-                      <td> entity.createTime</td>
+                      <td><a title='Mostrar' href="">{{user.idUUID}}</a></td>
+                      <td>{{user.userName}}  </td>
+                      <td>{{user.userRoles[0].role}} </td>
+                      <td> {{user.enabled}}</td>
+                      <td> {{user.email}} </td>
+                      <td> {{user.createTime2 | date:'dd-MM-yyyy'}}</td>
                       <td>
                       <table>
                         <tr>
                           <td>
-                              <a title='Mostrar' href="">
+                              <a title='Mostrar' ng-href="${pageContext.request.contextPath}/user/show/{{user.idUUID}}" >
                                 <span class="glyphicon glyphicon-search" aria-hidden="true">&nbsp;</span>
                               </a>
                           </td>
                           <td>
-                              <a title='Editar'  href="{{ path('usuario_edit', { 'id': entity.id }) }}">
+                              <a title='Editar'  ng-href="${pageContext.request.contextPath}/user/edit/{{user.idUUID}}">
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true">&nbsp;</span>
                               </a>
                           </td>
@@ -84,7 +94,7 @@ alert(JSON.stringify(jsonObject));
                   <h4>¡No se han encontrado resultados!</h4>
                 </div>
                 <p>
-                  <a href="">
+                  <a href="${pageContext.request.contextPath}/">
                     <button type="button" class="btn btn-primary btn-lg">Inicio</button>
                   </a>
                 </p>

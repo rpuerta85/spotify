@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import es.miw.spotify.models.daos.DaoFactory;
+import es.miw.spotify.models.daos.jpa.UserDaoJpa;
 import es.spotify.models.entities.Role;
 import es.spotify.models.entities.User;
 import es.upm.miw.spotify.models.pojos.UserWeb;
@@ -32,12 +29,15 @@ public class LoginControllerRest {
     @Qualifier("beanObjectMapper")
 	private ObjectMapper objectMapper;
 	 
+    @Autowired
+	 private UserDaoJpa  userDaoJpa;
+    
 	 @RequestMapping(value =UrisWebApp.LOGIN_USER,method = RequestMethod.POST)
     public UserWeb loginRest(@RequestParam(value="userName") String userName,
     		@RequestParam(value="password") String password){
     	//System.out.println(userName);
     	//System.out.println(password);
-    	List<User> userList = DaoFactory.getFactory().getUserDao().getUserByUserNameAndPassword(userName, password);
+    	List<User> userList = userDaoJpa.getUserByUserNameAndPassword(userName, password);
     	
     	UserWeb userWeb = null;
     	if(userList.size()!=0){

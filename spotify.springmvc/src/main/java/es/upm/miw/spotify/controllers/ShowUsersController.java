@@ -1,9 +1,8 @@
 package es.upm.miw.spotify.controllers;
 
 import java.util.List;
-
-import es.spotify.models.entities.User;
+import es.upm.miw.spotify.models.pojos.UserPojo;
 
 public interface ShowUsersController {
-	List<User> showUsersAll();
+	List<UserPojo> showUsersAll();
 }

@@ -162,9 +162,11 @@ function showUsersContentController($scope, $http,$location,$window){
 		   vm.csrf = csrf;
 		   vm.context = context;
 	    }
-	   /*vm.moreResult = function(){
+	   
+	  /*//esto seria para hacerlo por ajax , pero mejor por href con spring
+	   * vm.showUser = function(user){
 		   $http({
-	            url: vm.context+"/"+vm.urlMoreResult+"/"+vm.jsonObject.id+"?limit="+vm.limit,
+	            url: vm.context+"/user/show/"+user.idUUID,
 	            method: "GET",
 	            headers: {
 	            	'Content-Type' :'application/x-www-form-urlencoded;charset=UTF-8'
@@ -172,7 +174,7 @@ function showUsersContentController($scope, $http,$location,$window){
 	            data:"" 
 	       
 	         }).success(function(data, status, headers, config) {
-	        	alert(data)
+	        	//alert(data)
 	        	 
 	        }).error(function(data, status, headers, config) {
 	        	$scope.status = status;
@@ -180,5 +182,9 @@ function showUsersContentController($scope, $http,$location,$window){
 	        });
 		  
 	   }*/
+	   
+	   
+	   
+	   
 	   
 	} 

@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
 import org.eclipse.persistence.config.PersistenceUnitProperties;
+import org.springframework.web.context.WebApplicationContext;
 
 import es.miw.spotify.models.daos.jpa.DaoJpaFactory;
 import es.spotify.models.entities.Favorite;
