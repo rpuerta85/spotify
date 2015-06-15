@@ -18,6 +18,7 @@ public interface ViewUrlConstants {
 	String SHOW_USERS_REGISTERED_PATH = "user/show/all";
 	String FIND_FAVORITES_ARTISTS_PATH = "favorites/artists/find";
 	String FIND_FAVORITES_TRACKS_PATH = "favorites/tracks/find";
-
-
+	String CHANGE_FAVORITE_ALBUM_STATE="album/favorite/change/state" + IDPARAM;
+	String CHANGE_FAVORITE_ARTIST_STATE="artist/favorite/change/state"+ IDPARAM;
+	String CHANGE_FAVORITE_TRACK_STATE="track/favorite/change/state" +IDPARAM;
 }

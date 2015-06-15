@@ -1,7 +1,5 @@
 package es.upm.miw.spotify.controllers.web;
 
-import java.lang.ProcessBuilder.Redirect;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +45,6 @@ public class FindFavoritesAlbumsControllerWeb {
 			model.setViewName(ViewNameConstants.HOME_VIEWNAME);
 		logger.info("redirect to "+model.getViewName()+" page ");
 		return model;
+		
 	}
 }

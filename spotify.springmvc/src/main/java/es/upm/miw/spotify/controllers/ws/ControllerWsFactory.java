@@ -1,5 +1,6 @@
 package es.upm.miw.spotify.controllers.ws;
 
+import es.upm.miw.spotify.controllers.ChangeStateFavoriteController;
 import es.upm.miw.spotify.controllers.ControllerFactory;
 import es.upm.miw.spotify.controllers.FindAlbumController;
 import es.upm.miw.spotify.controllers.FindArtistController;
@@ -21,6 +22,7 @@ public class ControllerWsFactory extends ControllerFactory {
 	private ShowUsersController showUsersController;
 	private FindFavoritesArtistsController findFavoritesArtistsController;
 	private FindFavoritesTracksController findFavoritesTracksController;
+	private ChangeStateFavoriteController changeStateFavoriteController;
 	public ControllerWsFactory(SessionBean session) {
 		this.session = session;
 	}
@@ -84,6 +86,13 @@ public class ControllerWsFactory extends ControllerFactory {
 			findFavoritesTracksController= new FindFavoritesTracksControllerWs(session);
 		}
 		return findFavoritesTracksController;
+	}
+
+	@Override
+	public ChangeStateFavoriteController getChangeStateFavoriteController() {
+		if(changeStateFavoriteController==null)
+			changeStateFavoriteController= new ChangeStateFavoriteControllerWS(session);
+		return  changeStateFavoriteController;
 	}
 
 }

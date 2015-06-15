@@ -42,6 +42,7 @@ public class Principal {
        Favorite f1 = new Favorite("1M8Klr6g1qPzykza6wN1BA",ft);//
       // DaoJpaFactory.getFactory().getFavoriteDao().create(f1);
        User u99 =DaoJpaFactory.getFactory().getUserDao().read(2);
+       
        u99.getFavorites().add(f);
        u99.getFavorites().add(f1);
        u99.getUserRoles().add(r);

@@ -5,6 +5,7 @@
  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/angularjs/controllers.js"></script>
  
 <script>
+alert("hola dese track");
 var jsonObject = ${showTrackDetailsViewBean.mapMsgs['jsonTracks']};
 var jsonObjectArtistAlbumes = ${showAlbumesOfArtistListViewComponentBean.mapMsgs['jsonAlbumes']};
 var app = angular.module('showTrackDetailsCntApp',[]);
@@ -37,8 +38,10 @@ data-ng-init="vm.init('${pageContext.request.contextPath}')">
                 </p>  
               </div>
               <div class="col-md-6">
+             
                 <p><spring:message
 					code="showArtistDetails.panel.header.title" /> 
+					 
 					<a ng-href="${pageContext.request.contextPath}/${showTrackDetailsViewBean.mapMsgs['showArtistDetailsUrl']}/{{ vm.jsonObject.artists[0].id }}" title="<spring:message
 					code="showTrackDetails.link.artist.title" />">
                   {{ vm.jsonObject.artists[0].name }}
@@ -51,6 +54,10 @@ data-ng-init="vm.init('${pageContext.request.contextPath}')">
                 <p> <spring:message
 					code="showTrackDetails.track.button.duration.title" /> {{vm.jsonObject.duration_ms / 60000 | noFractionCurrency }}:{{(vm.jsonObject.duration_ms /1000)%60 | noFractionCurrency }}
                 </p>
+                 <a ng-href="${pageContext.request.contextPath}/track/favorite/change/state/{{ vm.jsonObject.id }}" title="<spring:message
+					code="showTrackDetails.link.artist.title" />">
+                  {{ vm.jsonObject.artists[0].name }}
+                </a>
                 <button   ng-controller="showTracksListController as vm2" ng-click="vm2.kk(vm.jsonObject.preview_url)" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-modal-sm" title="<spring:message
 					code="showTrackDetails.track.button.playSong.title" />">
                   <spring:message

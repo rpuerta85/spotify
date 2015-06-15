@@ -72,7 +72,7 @@ public class FindFavoritesTracksControllerWs extends ControllerWs implements
 		} catch (Exception e) {
 			log.error("error response", e);
 		}
-		log.debug("end findTrack");
+		log.debug("end findFavoritesTracks");
 		return tracks;
 	}
 

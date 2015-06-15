@@ -21,8 +21,7 @@ data-ng-init="vm.init('${pageContext.request.contextPath}')"
                 <div class="panel-body">
                   <div class='row'>
                     <div class='col-sm-1'>
-                    
-                        <button id="btnGuardarCorreo" type="button" class="btn-link" onclick="crearContenidoCapaCorreoOrdinario('Tema');">
+                              <button id="btnGuardarCorreo" type="button" class="btn-link" onclick="crearContenidoCapaCorreoOrdinario('Tema');">
                             <big> <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span></big>
                         </button>
             

@@ -15,6 +15,7 @@ import es.upm.miw.spotify.models.pojos.Album;
 import es.upm.miw.spotify.models.pojos.AlbumsPager;
 import es.upm.miw.spotify.models.pojos.Page;
 import es.upm.miw.spotify.models.pojos.TrackSimple;
+import es.upm.miw.spotify.models.pojos.User;
 import es.upm.miw.spotify.view.beans.SessionBean;
 import es.upm.miw.spotify.ws.RestArtistUris;
 
@@ -95,6 +96,10 @@ public class FindFavoritesAlbumsControllerWs extends ControllerWs implements
 		RestTemplate restTemplate = ControllerWs.buildRestClient();
 		String json = "{}";
 		AlbumsPager albums = null;
+		String usserUUIDSession = session.getUserWeb().getIdUUID();
+		boolean usuarioLoggeado =usserUUIDSession.equals(userUUID);
+		
+		if(usuarioLoggeado)
 		try {
 			String favoritesURI = RestArtistUris.FIND_FAVORITES_ALBUMS_REST_URI.replace(RestArtistUris.PARAM,userUUID);
 			log.info("URI:" + ControllerWs.URI+ favoritesURI);

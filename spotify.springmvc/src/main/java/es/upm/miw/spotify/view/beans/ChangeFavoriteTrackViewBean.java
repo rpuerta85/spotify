@@ -12,7 +12,7 @@ import es.upm.miw.spotify.controllers.web.ShowArtistsDetailsController;
 import es.upm.miw.spotify.controllers.ws.ControllerWsFactory;
 import es.upm.miw.spotify.form.web.ee.FindFavoriteFormParamsEE;
 import es.upm.miw.spotify.models.pojos.AlbumsPager;
-import es.upm.miw.spotify.models.pojos.ArtistsPager;
+import es.upm.miw.spotify.models.pojos.TracksPager;
 import es.upm.miw.spotify.models.utils.ObjectMapperJacksonSingleton;
 import es.upm.miw.spotify.utils.constants.ViewNameConstants;
 import es.upm.miw.spotify.utils.constants.ViewUrlConstants;
@@ -20,17 +20,20 @@ import es.upm.miw.spotify.views.web.ee.FindFavoritesForUserParamsEE;
 import es.upm.miw.spotify.views.web.ee.ShowAlbumDetailsParamsEE;
 import es.upm.miw.spotify.views.web.ee.ShowArtistDetailsParamsEE;
 import es.upm.miw.spotify.views.web.ee.ShowArtistsViewParamsEE;
+import es.upm.miw.spotify.views.web.ee.ShowTrackDetailsParamsEE;
 
 
-public class FindFavoritesArtistsViewBean extends GenericView{
-	private static final Logger logger = LogManager.getLogger( FindFavoritesArtistsViewBean.class);
-	private static final String NAME = "findFavoritesArtistsViewBean";
+public class ChangeFavoriteTrackViewBean extends GenericView{
+	private static final Logger logger = LogManager.getLogger( ChangeFavoriteTrackViewBean.class);
+	private static final String NAME = "changeFavoriteTrackViewBean";
 	private SessionBean sessionBean;
+	private String spotifyId;
 	private boolean success = false;
 	protected MessageSource messageSource;
-	public FindFavoritesArtistsViewBean(MessageSource messageSource, SessionBean session) {
+	public ChangeFavoriteTrackViewBean(MessageSource messageSource, SessionBean session, String spotifyId) {
 	    this.sessionBean= session;
 	    this.messageSource= messageSource;
+	    this.spotifyId= spotifyId;
 	}
 	public ModelAndView update() {
 		ModelAndView model = new ModelAndView();
@@ -39,40 +42,32 @@ public class FindFavoritesArtistsViewBean extends GenericView{
 		//actualizamos tambien el componente de formulario findArtistFormBean
 	    this.process();
 		model.addObject(NAME, this);
-
+		model.setViewName(ViewNameConstants.SHOW_TRACKS_VIEWNAME);
 		return model;
 	}
 	@Override
 	protected void setMsgs() {
-		mapMsgs.put(ShowArtistsViewParamsEE.SHOW_ARTIST_DETAILS_URL.getV(),ViewUrlConstants.SHOW_ARTIST_DETAILS_GETPATH);
+		mapMsgs.put(ShowTrackDetailsParamsEE.JSON_TRACKS.getV(),ViewUrlConstants.SHOW_TRACK_DETAILS_GETPATH);
 				
 	}
 	public void process(){
-		logger.info("begin FindFavoriteArtistsViewBean process method");//findArtists(userUUID, favoriteTypeUUID)
+		logger.info("begin ChangeFavoriteTracksViewBean process method");
 		if(sessionBean.getUserWeb()!=null){
-			String userUUID = sessionBean.getUserWeb().getIdUUID();//"6722052B96424CB5A143BB05FD627C67"
-			ArtistsPager artists = ControllerWsFactory.getInstance(sessionBean).getFindFavoriteArtistsController().findArtistsForUser(userUUID);
-			String json=null;
+			String userUUID = sessionBean.getUserWeb().getIdUUID();
+			
+			ControllerWsFactory.getInstance(sessionBean)
+			               .getChangeStateFavoriteController().changeTrackFavoriteState(spotifyId, userUUID);
 			ModelAndView model = new ModelAndView();
 			model.addObject(NAME, this);
-			try {
-				json = ObjectMapperJacksonSingleton.getInstance().getObjectMapper().writeValueAsString(artists);
-				mapMsgs.put(ShowArtistsViewParamsEE.JSON_ARTISTS.getV(),json);
-				model.setViewName(ViewNameConstants.SHOW_ARTISTS_VIEWNAME);
+			model.setViewName(ViewNameConstants.SHOW_TRACKS_VIEWNAME);
 	
-			} catch (JsonProcessingException e) {
-				e.printStackTrace();
-				logger.error("error in parsing json:"+e);
-			}
-			logger.info("JSON artists:"+json);
-			addSuccessMsg(json);
 			this.success = true;
 		}
 		else{
 			 this.success=false;
 			
 		}
-		logger.info("end FindFavorritesArstsisViewBean process method");
+		logger.info("end ChangeFavorritesTracksViewBean process method");
 	}
 	
 
@@ -81,11 +76,10 @@ public class FindFavoritesArtistsViewBean extends GenericView{
 				messageSource.getMessage ("favorites.msg.empty", null, LocaleContextHolder.getLocale()));
 	}
 	protected void addSuccessMsg(String jsonArtist){
-		this.mapMsgs.put(ShowArtistsViewParamsEE.JSON_ARTISTS.getV(),
-				jsonArtist);
 		this.mapMsgs.put(FindFavoritesForUserParamsEE.FIND_FAVORITE_TEXT.getV(),
 				messageSource.getMessage ("favorites.msg.title", null, LocaleContextHolder.getLocale()));
-		mapMsgs.put(ShowArtistDetailsParamsEE.SHOW_ARTIST_DETAILS_URL.getV(),ViewUrlConstants.SHOW_ARTIST_DETAILS_GETPATH);
+		mapMsgs.put(ShowTrackDetailsParamsEE.SHOW_TRACK_DETAILS_URL.getV(), ViewUrlConstants.SHOW_TRACK_DETAILS_GETPATH);
+			
 	}
 //* GETTETS AND SETTERS */
 	public boolean isSuccess() {

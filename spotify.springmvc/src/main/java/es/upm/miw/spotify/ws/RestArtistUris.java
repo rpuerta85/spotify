@@ -1,5 +1,7 @@
 package es.upm.miw.spotify.ws;
 
+import org.springframework.web.bind.annotation.RequestParam;
+
 import es.upm.miw.spotify.rest.core.uris.UrisSpotifyApi;
 
 public interface RestArtistUris {
@@ -16,7 +18,12 @@ public interface RestArtistUris {
 	String FIND_FAVORITES_ALBUMS_REST_URI = "find/favorites/albums?userUUID="+PARAM;
 	String FIND_FAVORITES_ARTISTS_REST_URI = "find/favorites/artists?userUUID="+PARAM; 
 	String FIND_FAVORITES_TRACKS_REST_URI = "find/favorites/tracks?userUUID="+PARAM;
+	
 	String SHOW_USERS_ALL="user/show/all";
+	String CHANGE_ALBUM_FAVORITE_STATE = "change/favorite/album/state?favoriteId=" +PARAM +"&userUUID="+ PARAM2;
+	String CHANGE_ARTIST_FAVORITE_STATE = "change/favorite/artist/state?favoriteId=" +PARAM +"&userUUID="+ PARAM2;
+	String CHANGE_TRACK_FAVORITE_STATE = "change/favorite/track/state?favoriteId=" +PARAM +"&userUUID="+ PARAM2;
+
 
 
 }

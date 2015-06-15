@@ -3,7 +3,7 @@ package es.upm.miw.spotify.views.web.ee;
 
 public enum ShowArtistsViewParamsEE {
 	
-	JSON_ARTISTS("jsonArtists");
+	JSON_ARTISTS("jsonArtists"), SHOW_ARTIST_DETAILS_URL ("showArtistDetailsUrl");
 	private String v;
 
 	private ShowArtistsViewParamsEE(String v) {

@@ -5,7 +5,7 @@
 <script>
 var app = angular.module('tracksCntApp',[]);
 app.controller('tracksCntCtrl', tracksContentController);
-window.jsonObject = ${findFavoritesTracksViewBean.mapMsgs['jsonArtists']};
+window.jsonObject = ${findFavoritesTracksViewBean.mapMsgs['jsonTracks']};
 </script>    
 <div ng-app='tracksCntApp' ng-controller="tracksCntCtrl as vm" data-ng-init="vm.init('${pageContext.request.contextPath}','jsonObject')" >
 <div class="panel panel-default">
@@ -13,7 +13,7 @@ window.jsonObject = ${findFavoritesTracksViewBean.mapMsgs['jsonArtists']};
         <h1>
             <span aria-hidden="true" class="glyphicon glyphicon-music"></span> 
             <spring:message code="showTracksView.panel.header.title" /> 
-            <small><spring:message code="showTracksView.panel.header.subtitle" /><kbd>"${findFavoritesTracksViewBean.mapMsgs['favoriteName']}"</kbd></small>
+            <small><spring:message code="showTracksView.panel.header.subtitle" /><kbd>"${findFavoritesTracksViewBean.mapMsgs['favoriteText']}"</kbd></small>
         </h1>
         <p class="lead"><spring:message code="showTracksView.panel.header.description" /> </p>
       </div>

@@ -11,5 +11,5 @@ http://localhost:9080/api/find/favorites/tracks?userUUID=6722052B96424CB5A143BB0
 
 QUITAR UNO Q ES FAVORITO
 
-http://localhost:9080/api/add/favorite?favoriteId=0eGsygTp906u18L0Oimnem&favoriteTypeUUID=66A70CBC1A8E4BC28E7724BED6C4CFF6&userUUID=6722052B96424CB5A143BB05FD627C67
+http://localhost:9080/api/change/favorite/album/state?favoriteId=1M8Klr6g1qPzykza6wN1BA&userUUID=6722052B96424CB5A143BB05FD627C67
 @RequestParam(value="favoriteId") String favoriteId, @RequestParam(value="favoriteTypeUUID") String favoriteTypeUUID,  @RequestParam(value="userUUID") String userUUID

@@ -37,12 +37,12 @@ public class FindFavoritesTracksControllerWeb {
 	@RequestMapping(value = { ViewUrlConstants.ROOT_PATH+ViewUrlConstants.FIND_FAVORITES_TRACKS_PATH}, 
 			method = RequestMethod.GET)
 	public ModelAndView findArtistsAction() {
-		logger.info("findTracksAlbums GET");
+		logger.info("findFavoritesTracks GET");
 		
 		FindFavoritesTracksViewBean findFavoritesTracksViewBean = new FindFavoritesTracksViewBean(messageSource,session);
 		ModelAndView model = findFavoritesTracksViewBean.update();
 		if(findFavoritesTracksViewBean.isSuccess())
-		   model.setViewName(ViewNameConstants.FIND_FAVORITES_TRACKS_VIEWNAME);
+		   model.setViewName(ViewNameConstants.SHOW_TRACKS_VIEWNAME);
 		else
 			model.setViewName(ViewNameConstants.HOME_VIEWNAME);
 		logger.info("redirect to "+model.getViewName()+" page ");

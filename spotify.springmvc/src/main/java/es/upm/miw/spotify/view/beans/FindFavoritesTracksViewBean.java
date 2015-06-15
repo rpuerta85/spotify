@@ -39,13 +39,14 @@ public class FindFavoritesTracksViewBean extends GenericView{
 		//actualizamos el resto de componente por lo que esta formado la vista, en este caso
 		//actualizamos tambien el componente de formulario findArtistFormBean
 	    this.process();
-		model.addObject(NAME, this);
+		//model.addObject(NAME, this);
+	    model.setViewName(ViewNameConstants.SHOW_TRACKS_VIEWNAME);
 
 		return model;
 	}
 	@Override
 	protected void setMsgs() {
-		mapMsgs.put(ShowTrackDetailsParamsEE.JSON_TRACKS.getV(),ViewUrlConstants.SHOW_TRACK_DETAILS_GETPATH);
+		mapMsgs.put(ShowTrackDetailsParamsEE.SHOW_TRACK_DETAILS_URL.getV(),ViewUrlConstants.SHOW_TRACK_DETAILS_GETPATH);
 				
 	}
 	public void process(){
@@ -65,7 +66,7 @@ public class FindFavoritesTracksViewBean extends GenericView{
 				e.printStackTrace();
 				logger.error("error in parsing json:"+e);
 			}
-			logger.info("JSON artists:"+json);
+			logger.info("JSON trakcs:"+json);
 			addSuccessMsg(json);
 			this.success = true;
 		}
@@ -81,8 +82,8 @@ public class FindFavoritesTracksViewBean extends GenericView{
 		this.mapMsgs.put(FindFavoritesForUserParamsEE.FIND_FAVORITES_MSG_ERROR.getV(),
 				messageSource.getMessage ("favorites.msg.empty", null, LocaleContextHolder.getLocale()));
 	}
-	protected void addSuccessMsg(String jsonArtist){
-		this.mapMsgs.put(ShowTrackDetailsParamsEE.JSON_TRACKS.getV(),jsonArtist);
+	protected void addSuccessMsg(String jsonTracks){
+		this.mapMsgs.put(ShowTrackDetailsParamsEE.JSON_TRACKS.getV(),jsonTracks);
 		this.mapMsgs.put(FindFavoritesForUserParamsEE.FIND_FAVORITE_TEXT.getV(),
 				messageSource.getMessage ("favorites.msg.title", null, LocaleContextHolder.getLocale()));
 		mapMsgs.put(ShowTrackDetailsParamsEE.SHOW_TRACK_DETAILS_URL.getV(), ViewUrlConstants.SHOW_TRACK_DETAILS_GETPATH);
