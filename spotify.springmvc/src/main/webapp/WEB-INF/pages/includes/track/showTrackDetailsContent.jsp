@@ -24,9 +24,11 @@ data-ng-init="vm.init('${pageContext.request.contextPath}')">
               <small><span class="glyphicon glyphicon-music" aria-hidden="true"></span><spring:message
 					code="showTrackDetails.panel.header.title" /></small>
               <mark>&nbsp;{{ vm.jsonObject.name }}</mark>
-               <button id="btnGuardarCorreo" type="button" class="btn-link" onclick="crearContenidoCapaCorreoOrdinario('Álbum','vm.jsonObject.name','','vm.jsonObject.id' );">
-                  <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-             </button>
+               <a ng-href="${pageContext.request.contextPath}/track/favorite/change/state/{{ vm.jsonObject.id }}" title="{{ vm.jsonObject.name }} />">
+                             <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                </a>
+               
+           
             </h1>
           </div>
 
@@ -54,10 +56,7 @@ data-ng-init="vm.init('${pageContext.request.contextPath}')">
                 <p> <spring:message
 					code="showTrackDetails.track.button.duration.title" /> {{vm.jsonObject.duration_ms / 60000 | noFractionCurrency }}:{{(vm.jsonObject.duration_ms /1000)%60 | noFractionCurrency }}
                 </p>
-                 <a ng-href="${pageContext.request.contextPath}/track/favorite/change/state/{{ vm.jsonObject.id }}" title="<spring:message
-					code="showTrackDetails.link.artist.title" />">
-                  {{ vm.jsonObject.artists[0].name }}
-                </a>
+                
                 <button   ng-controller="showTracksListController as vm2" ng-click="vm2.kk(vm.jsonObject.preview_url)" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-modal-sm" title="<spring:message
 					code="showTrackDetails.track.button.playSong.title" />">
                   <spring:message

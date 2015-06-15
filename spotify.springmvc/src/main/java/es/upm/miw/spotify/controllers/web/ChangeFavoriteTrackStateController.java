@@ -32,7 +32,7 @@ public class ChangeFavoriteTrackStateController {
 	@Autowired
 	private MessageSource messageSource;
 	
-	@RequestMapping(value = { ViewUrlConstants.ROOT_PATH+ViewUrlConstants.CHANGE_FAVORITE_TRACK_STATE}, 
+	@RequestMapping(value = { ViewUrlConstants.ROOT_PATH+ViewUrlConstants.CHANGE_FAVORITE_TRACK_STATE_PATH}, 
 			method = RequestMethod.GET)
 	public ModelAndView showTrackDetailsAction(@PathVariable("id") String spotifyidTrack) {
 		logger.info("showTrackDetailsAction GET");

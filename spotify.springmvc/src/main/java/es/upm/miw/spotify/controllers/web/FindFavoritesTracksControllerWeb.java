@@ -42,7 +42,7 @@ public class FindFavoritesTracksControllerWeb {
 		FindFavoritesTracksViewBean findFavoritesTracksViewBean = new FindFavoritesTracksViewBean(messageSource,session);
 		ModelAndView model = findFavoritesTracksViewBean.update();
 		if(findFavoritesTracksViewBean.isSuccess())
-		   model.setViewName(ViewNameConstants.SHOW_TRACKS_VIEWNAME);
+		   model.setViewName(ViewNameConstants.FIND_FAVORITES_TRACKS_VIEWNAME);
 		else
 			model.setViewName(ViewNameConstants.HOME_VIEWNAME);
 		logger.info("redirect to "+model.getViewName()+" page ");

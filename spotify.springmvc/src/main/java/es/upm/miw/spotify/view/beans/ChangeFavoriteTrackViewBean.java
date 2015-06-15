@@ -48,7 +48,7 @@ public class ChangeFavoriteTrackViewBean extends GenericView{
 	@Override
 	protected void setMsgs() {
 		mapMsgs.put(ShowTrackDetailsParamsEE.JSON_TRACKS.getV(),ViewUrlConstants.SHOW_TRACK_DETAILS_GETPATH);
-				
+	    			
 	}
 	public void process(){
 		logger.info("begin ChangeFavoriteTracksViewBean process method");
@@ -79,7 +79,7 @@ public class ChangeFavoriteTrackViewBean extends GenericView{
 		this.mapMsgs.put(FindFavoritesForUserParamsEE.FIND_FAVORITE_TEXT.getV(),
 				messageSource.getMessage ("favorites.msg.title", null, LocaleContextHolder.getLocale()));
 		mapMsgs.put(ShowTrackDetailsParamsEE.SHOW_TRACK_DETAILS_URL.getV(), ViewUrlConstants.SHOW_TRACK_DETAILS_GETPATH);
-			
+		mapMsgs.put(ShowTrackDetailsParamsEE.CHANGE_FAVORITE_TRACK_STATE.getV(),ViewUrlConstants.CHANGE_FAVORITE_TRACK_STATE_GETPATH);	
 	}
 //* GETTETS AND SETTERS */
 	public boolean isSuccess() {

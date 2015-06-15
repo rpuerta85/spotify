@@ -53,7 +53,19 @@ function showAlbumDetailsContentController($scope, $http,$location,$window){
 	    }
 	   
 	} 
-
+function showAlbumDetailsContentController($scope, $http,$location,$window){
+	
+	var vm=this;
+	   vm.jsonObject =""; 
+	   vm.context = "${pageContext.request.contextPath}";
+	   vm.urlMoreResult = "";
+	   vm.init = function(context){
+		   vm.jsonObject = $window.jsonObject;
+		   vm.context = context;
+		   //vm.urlMoreResult = $window.urlMoreResult; 
+	    }
+	   
+	} 
 function showTracksListController($scope, $http,$location,$window,audio,video){
 	var vm=this;
 	   vm.jsonObject =""; 
@@ -187,4 +199,17 @@ function showUsersContentController($scope, $http,$location,$window){
 	   
 	   
 	   
-	} 
+	}
+
+/*function changeFavoriteTrackStateController($scope, $http,$location,$window){
+	var vm=this;
+	   vm.jsonObject =""; 
+	   vm.context = "${pageContext.request.contextPath}";
+	   vm.csrf = "";
+	   vm.init = function(context,csrf){
+		   vm.jsonObject = $window.jsonObject;
+		   vm.csrf = csrf;
+		   vm.context = context;
+	    }
+	   
+	}*/

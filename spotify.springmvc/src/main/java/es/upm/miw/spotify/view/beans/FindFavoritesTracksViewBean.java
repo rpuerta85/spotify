@@ -39,8 +39,8 @@ public class FindFavoritesTracksViewBean extends GenericView{
 		//actualizamos el resto de componente por lo que esta formado la vista, en este caso
 		//actualizamos tambien el componente de formulario findArtistFormBean
 	    this.process();
-		//model.addObject(NAME, this);
-	    model.setViewName(ViewNameConstants.SHOW_TRACKS_VIEWNAME);
+		model.addObject(NAME, this);
+	    
 
 		return model;
 	}
@@ -60,7 +60,7 @@ public class FindFavoritesTracksViewBean extends GenericView{
 			try {
 				json = ObjectMapperJacksonSingleton.getInstance().getObjectMapper().writeValueAsString(tracks);
 				mapMsgs.put(ShowTrackDetailsParamsEE.JSON_TRACKS.getV(),json);
-				model.setViewName(ViewNameConstants.SHOW_TRACKS_VIEWNAME);
+				model.setViewName(ViewNameConstants.FIND_FAVORITES_TRACKS_VIEWNAME);
 	
 			} catch (JsonProcessingException e) {
 				e.printStackTrace();

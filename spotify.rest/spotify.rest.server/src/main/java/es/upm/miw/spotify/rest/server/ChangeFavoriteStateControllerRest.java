@@ -67,14 +67,14 @@ public class ChangeFavoriteStateControllerRest {
        	LOG.info("end changeAlbumFavoriteState");
 
     }
-//    @RequestMapping(UrisWebApp.CHANGE_FAVORITE_ARTIST_STATE)
-//    public void changeFavoriteArtistStateToUser(@RequestParam(value="favoriteId") String favoriteId,  @RequestParam(value="userUUID") String userUUID)  {
-//    	LOG.info("begin change changeArtistFavoriteState");
-//    	LOG.info("favoriteUUID received:"+favoriteId + "userrUUID received " + userUUID );
-//    	this.changeFavoriteStateToUser(favoriteId, userUUID, "ALBUM");
-//       	LOG.info("end changeArtistFavoriteState");
-//
-//    }
+    @RequestMapping(UrisWebApp.CHANGE_FAVORITE_ARTIST_STATE)
+    public void changeFavoriteArtistStateToUser(@RequestParam(value="favoriteId") String favoriteId,  @RequestParam(value="userUUID") String userUUID)  {
+    	LOG.info("begin change changeArtistFavoriteState");
+    	LOG.info("favoriteUUID received:"+favoriteId + "userrUUID received " + userUUID );
+    	this.changeFavoriteStateToUser(favoriteId, userUUID, "ALBUM");
+       	LOG.info("end changeArtistFavoriteState");
+
+    }
     @RequestMapping(UrisWebApp.CHANGE_FAVORITE_TRACK_STATE)
     public void changeFavoriteTrackToUser(@RequestParam(value="favoriteId") String favoriteId,  @RequestParam(value="userUUID") String userUUID)  {
     	LOG.info("begin change changeTRcakFavoriteState");
