@@ -3,6 +3,7 @@ package es.miw.spotify.models.daos.jpa;
 
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -12,9 +13,13 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.apache.logging.log4j.LogManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import es.miw.spotify.models.daos.GenericDao;
+//le ponemos Component, para que Spring pueda inyectarnos El EntityManager que nos creamos en la clase
+//SpringRestConfiguration la cual se carga en la carga del programa en el servidor
 
 public class GenericDaoJpa<T, ID> implements GenericDao<T, ID> {
     private Class<T> persistentClass;
@@ -22,11 +27,14 @@ public class GenericDaoJpa<T, ID> implements GenericDao<T, ID> {
     public GenericDaoJpa(Class<T> persistentClass) {
         this.persistentClass = persistentClass;
     }
-    // Injected database connection:
    
-    @Override
+    // Injected database connection:
+    @Autowired
+    @Qualifier("entityManager")
+	 EntityManager entityManager;
+
+	@Override
     public void create(T entity) {
-        EntityManager entityManager = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(entity);
@@ -37,15 +45,14 @@ public class GenericDaoJpa<T, ID> implements GenericDao<T, ID> {
             if (entityManager.getTransaction().isActive())
                 entityManager.getTransaction().rollback();
         } finally {
-            entityManager.close();
+           // entityManager.close();
         }
     }
 
     @Override
     public T read(ID id) {
-        EntityManager entityManager = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
         T entity = entityManager.find(persistentClass, id);
-        entityManager.close();
+        //entityManager.close();
         return entity;
     }
 
@@ -53,7 +60,6 @@ public class GenericDaoJpa<T, ID> implements GenericDao<T, ID> {
     // colección, se debe borrar de la tabla explicitamente
     @Override
     public void update(T entity) {
-        EntityManager entityManager = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
         try {
             entityManager.getTransaction().begin();
             entityManager.merge(entity);
@@ -64,13 +70,12 @@ public class GenericDaoJpa<T, ID> implements GenericDao<T, ID> {
             if (entityManager.getTransaction().isActive())
                 entityManager.getTransaction().rollback();
         } finally {
-            entityManager.close();
+           // entityManager.close();
         }
     }
 
     @Override
     public void deleteById(ID id) {
-        EntityManager entityManager = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
         T entity = entityManager.find(persistentClass, id);
         if (entity != null) {
             try {
@@ -83,14 +88,13 @@ public class GenericDaoJpa<T, ID> implements GenericDao<T, ID> {
                 if (entityManager.getTransaction().isActive())
                     entityManager.getTransaction().rollback();
             } finally {
-                entityManager.close();
+               //entityManager.close();
             }
         }
     }
 
     @Override
     public List<T> findAll() {
-        EntityManager entityManager = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
         // Se crea un criterio de consulta
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(this.persistentClass);
@@ -108,24 +112,23 @@ public class GenericDaoJpa<T, ID> implements GenericDao<T, ID> {
         typedQuery.setFirstResult(0); // El primero es 0
         typedQuery.setMaxResults(0); // Se realiza la query, se buscan todos
         List<T> result = typedQuery.getResultList();
-        entityManager.close();
+       // entityManager.close();
         return result;
     }
 
    @Override
 	public T readUUID(String idUUID) {
-		    EntityManager em = DaoJpaFactory.getEntityManagerFactory().createEntityManager();
-		    CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+		    CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 	        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(this.persistentClass);
 	        Root<T> root = criteriaQuery.from(this.persistentClass);
 	        Predicate predicate = criteriaBuilder.equal(root.get("idUUID"),idUUID);
 	        criteriaQuery.where(predicate);
 	        criteriaQuery.select(root);
-	        TypedQuery<T> typedQuery = em.createQuery(criteriaQuery);
+	        TypedQuery<T> typedQuery = entityManager.createQuery(criteriaQuery);
 	        typedQuery.setFirstResult(0); // El primero es 0
 	        typedQuery.setMaxResults(0); // Se realiza la query, se buscan todos
 	        List<T> result = typedQuery.getResultList();
-	        em.close();
+	        //entityManager.close();
 //	        // Se establece la clausula SELECT
 //	        criteriaQuery.select(root); // criteriaQuery.multiselect(root.get(atr))
 //

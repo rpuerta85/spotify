@@ -21,4 +21,5 @@ public interface ViewUrlConstants {
 	String CHANGE_FAVORITE_ALBUM_STATE="album/favorite/change/state" + IDPARAM;
 	String CHANGE_FAVORITE_ARTIST_STATE="artist/favorite/change/state"+ IDPARAM;
 	String CHANGE_FAVORITE_TRACK_STATE="track/favorite/change/state" +IDPARAM;
+	String NEW_USER_PATH = "user/new";
 }

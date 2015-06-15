@@ -1,6 +1,9 @@
 package es.upm.miw.spotify.rest.server;
 
-import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -9,16 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
-import es.miw.spotify.models.daos.DaoFactory;
+import es.miw.spotify.models.daos.jpa.UserDaoJpa;
 import es.spotify.models.entities.User;
-import es.upm.miw.spotify.models.pojos.AlbumsPager;
-import es.upm.miw.spotify.rest.core.uris.UrisSpotifyApi;
+import es.upm.miw.spotify.models.pojos.UserPojo;
 import es.upm.miw.spotify.rest.core.uris.UrisWebApp;
 
 @RestController
@@ -30,16 +31,37 @@ public class ShowUsersControllerRest {
     @Qualifier("beanObjectMapper")
 	private ObjectMapper objectMapper;
 	 
+    @Autowired
+	 private UserDaoJpa  userDaoJpa;
+    
 	@RequestMapping(value =UrisWebApp.SHOW_USERS_ALL,method = RequestMethod.GET)
-    public /*@ResponseBody*/ List<User> showUsersAll(){
-    	List<User> userList = DaoFactory.getFactory().getUserDao().findAll();
+    public List<UserPojo> showUsersAll(){
+    	List<User> userList = userDaoJpa.findAll();
+    	UserPojo userPojoList[] = null;
+    	Gson gson = new Gson();
+    	String json="{}";
     	try {
-    		String json = objectMapper.writeValueAsString(userList);
+    		LOG.info("num users :"+userList.size());
+    		List<UserPojo> userPojoList2 = new ArrayList<UserPojo>();
+    		GregorianCalendar gregorianCalendar = new GregorianCalendar();
+    		
+    		
+    		json = objectMapper.writeValueAsString(userList);
+    		userPojoList=gson.fromJson(json, UserPojo[].class);
+    		for(int i = 0;i<userList.size() && i<userPojoList2.size();i++){
+    			gregorianCalendar.set (userList.get(i).getCreateTime(). getYear(), 
+    					userList.get(i).getCreateTime().getMonthValue(),
+    					userList.get(i).getCreateTime().getDayOfMonth());
+    			System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").
+    					format(gregorianCalendar.getTime()));
+
+    			userPojoList2.get(i).setCreateTime2(gregorianCalendar.getTimeInMillis());
+    		}
     		LOG.info("response json:"+json);
     		} catch (Exception e) {
     			LOG.error("error response", e);
     		}
-    	return userList;
+    	return Arrays.asList(userPojoList) ;
     }
 
 }

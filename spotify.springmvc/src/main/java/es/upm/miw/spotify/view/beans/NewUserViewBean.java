@@ -12,38 +12,42 @@ import org.springframework.web.servlet.ModelAndView;
 
 import es.spotify.models.entities.User;
 import es.upm.miw.spotify.controllers.ws.ControllerWsFactory;
+import es.upm.miw.spotify.form.beans.FindFavoriteFormBean;
+import es.upm.miw.spotify.form.beans.UserFormBean;
 import es.upm.miw.spotify.models.pojos.UserPojo;
 import es.upm.miw.spotify.views.web.ee.ShowUsersParamsEE;
 
-public class ShowUsersViewBean extends GenericView {
-	private static final Logger logger = LogManager.getLogger(ShowUsersViewBean.class);
-	private static final String NAME = "showUsersViewBean";
+public class NewUserViewBean extends GenericView {
+	private static final Logger logger = LogManager.getLogger(NewUserViewBean.class);
+	private static final String NAME = "newUserViewBean";
 	private boolean success = false;
 	private SessionBean sessionBean;
-	private List<UserPojo> userList;
+	private UserFormBean userFormBean;
 	
-	public ShowUsersViewBean(SessionBean sessionBean) {
+	public NewUserViewBean(SessionBean sessionBean,UserFormBean userFormBean) {
 		super();
 		this.sessionBean = sessionBean;
-		userList = new ArrayList<UserPojo>();
+		this.userFormBean = userFormBean;
 	}
 
 	public ModelAndView update() {
 		ModelAndView model = new ModelAndView();
-		this.userList = ControllerWsFactory.getInstance(sessionBean).getShowUsersController().showUsersAll();
 		this.setMsgs();
+		userFormBean.update();
+		model.addObject(UserFormBean.getName(), userFormBean);
+		
 		model.addObject(NAME, this);
 		return model;
 	}
 
 	public void process(){
-		logger.info("begin FindAlbumViewBean process method");
-		logger.info("end FindAlbumViewBean process method");
+		logger.info("begin NewUserViewBean process method");
+		logger.info("end NewUserViewBean process method");
 	}
 
 	@Override
 	protected void setMsgs() {
-	    try {
+	    /*try {
 			mapMsgs.put(ShowUsersParamsEE.JSON_USERS.getV(), toJson(this.userList));
 		} catch (JsonGenerationException e) {
 			e.printStackTrace();
@@ -51,7 +55,7 @@ public class ShowUsersViewBean extends GenericView {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}*/
 		//mapMsgs.put(ShowTrackDetailsParamsEE.FAVORITE_NAME.getV(),(findAlbumFormBean.getFindFavoriteForm()!=null)?findAlbumFormBean.getFindFavoriteForm().getName():"");
 
 	}
@@ -77,12 +81,13 @@ public class ShowUsersViewBean extends GenericView {
 		this.sessionBean = sessionBean;
 	}
 
-	public List<UserPojo> getUserList() {
-		return userList;
+	public UserFormBean getUserFormBean() {
+		return userFormBean;
 	}
 
-	public void setUserList(List<UserPojo> userList) {
-		this.userList = userList;
+	public void setUserFormBean(UserFormBean userFormBean) {
+		this.userFormBean = userFormBean;
 	}
+
 	
 }

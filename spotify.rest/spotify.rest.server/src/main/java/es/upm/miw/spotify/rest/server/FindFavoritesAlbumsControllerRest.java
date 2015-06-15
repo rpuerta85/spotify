@@ -16,11 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-
 import com.google.gson.Gson;
-
-import es.miw.spotify.models.daos.DaoFactory;
 import es.miw.spotify.models.daos.UserDao;
+import es.miw.spotify.models.daos.jpa.FavoriteDaoJpa;
+import es.miw.spotify.models.daos.jpa.FavoriteTypeDaoJpa;
 import es.miw.spotify.models.daos.jpa.UserDaoJpa;
 import es.spotify.models.entities.Favorite;
 import es.spotify.models.entities.FavoriteType;
@@ -44,12 +43,15 @@ public class FindFavoritesAlbumsControllerRest {
 	 @Autowired
 	 private RestTemplate  restTemplate;
 	
+	 @Autowired
+	 private UserDaoJpa  userDaoJpa;
+	 
     @RequestMapping(UrisWebApp.FIND_FAVORITE_ALBUMS)
     public AlbumsPager findFavoritesAlbums(@RequestParam(value="userUUID") String userUUID)  {
     	  
     	
-    	User user =  DaoFactory.getFactory().getUserDao().readUUID(userUUID);
-    	List<Favorite> albumesFavorites=	DaoFactory.getFactory().getUserDao().getFavoritesAlbums(user.getId());
+    	User user =  userDaoJpa.readUUID(userUUID);
+    	List<Favorite> albumesFavorites=	userDaoJpa.getFavoritesAlbums(user.getId());
     	LOG.info("begin findFavoritesAlbums");
     	LOG.info("album received:");
     	AlbumsPager albums = new AlbumsPager();
