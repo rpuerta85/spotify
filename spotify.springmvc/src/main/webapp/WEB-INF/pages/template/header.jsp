@@ -48,8 +48,8 @@
         <div class="navbar-collapse collapse navbar-responsive-collapse" id="navbar">
           <ul class="nav navbar-nav">
             <li><a href="${pageContext.request.contextPath}/<spring:message code="header.menu.url.artist.find.path" />"><span aria-hidden="true" class="glyphicon glyphicon-user"></span>&nbsp; <spring:message code="header.menu.artist.title" /></a></li>
-            <li><a href="${pageContext.request.contextPath}/<spring:message code="header.menu.url.album.find.path" />"><span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span>&nbsp; <spring:message code="header.menu.track.title" /></a></li>
-            <li><a href="${pageContext.request.contextPath}/<spring:message code="header.menu.url.track.find.path" />"><span aria-hidden="true" class="glyphicon glyphicon-music"></span>&nbsp; <spring:message code="header.menu.album.title" /></a></li>
+            <li><a href="${pageContext.request.contextPath}/<spring:message code="header.menu.url.album.find.path" />"><span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span>&nbsp; <spring:message code="header.menu.album.title" /></a></li>
+            <li><a href="${pageContext.request.contextPath}/<spring:message code="header.menu.url.track.find.path" />"><span aria-hidden="true" class="glyphicon glyphicon-music"></span>&nbsp; <spring:message code="header.menu.track.title" /></a></li>
              <sec:authorize access="hasRole('ROLE_ADMIN')">
                  <li class="dropdown">
 			              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
