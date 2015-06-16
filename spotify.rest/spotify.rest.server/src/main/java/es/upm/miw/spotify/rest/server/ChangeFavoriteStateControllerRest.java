@@ -71,7 +71,7 @@ public class ChangeFavoriteStateControllerRest {
     public void changeFavoriteArtistStateToUser(@RequestParam(value="favoriteId") String favoriteId,  @RequestParam(value="userUUID") String userUUID)  {
     	LOG.info("begin change changeArtistFavoriteState");
     	LOG.info("favoriteUUID received:"+favoriteId + "userrUUID received " + userUUID );
-    	this.changeFavoriteStateToUser(favoriteId, userUUID, "ALBUM");
+    	this.changeFavoriteStateToUser(favoriteId, userUUID, "ARTIST");
        	LOG.info("end changeArtistFavoriteState");
 
     }
