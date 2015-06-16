@@ -42,7 +42,7 @@ public class ChangeFavoriteTrackStateController {
 				new ChangeFavoriteTrackViewBean(messageSource, session, spotifyidTrack);
 	
 		ModelAndView model = changeFavoriteTrackViewBean.update();
-		model.setViewName(ViewNameConstants.SHOW_TRACK_DETAILS_VIEWNAME);
+		model.setViewName(ViewNameConstants.FIND_FAVORITES_TRACKS_VIEWNAME);
 		logger.info("End showTracksDetailsAction GET");
 		logger.info("redirect to "+model.getViewName()+" page ");
 		return model;
