@@ -35,7 +35,7 @@ public class ChangeFavoriteAlbumStateController {
 	
 	@RequestMapping(value = { ViewUrlConstants.ROOT_PATH+ViewUrlConstants.CHANGE_FAVORITE_ALBUM_STATE_PATH}, 
 			method = RequestMethod.GET)
-	public ModelAndView showAlbumDetailsAction(@PathVariable("id") String spotifyidAlbum) {
+	public ModelAndView changeAlbumStateAction(@PathVariable("id") String spotifyidAlbum) {
 		logger.info("showAlbumDetailsAction GET");
 		logger.info("idTrack received"+spotifyidAlbum);
 		
@@ -43,7 +43,7 @@ public class ChangeFavoriteAlbumStateController {
 				new ChangeFavoriteAlbumViewBean(messageSource, session, spotifyidAlbum);
 	
 		ModelAndView model = changeFavoriteAlbumViewBean.update();
-		model.setViewName(ViewNameConstants.FIND_FAVORITES_ALBUMS_VIEWNAME);
+		model.setViewName("redirect:/"+ ViewUrlConstants.FIND_FAVORITES_ALBUM_PATH);
 		logger.info("End showAlbumsDetailsAction GET");
 		logger.info("redirect to "+model.getViewName()+" page ");
 		return model;

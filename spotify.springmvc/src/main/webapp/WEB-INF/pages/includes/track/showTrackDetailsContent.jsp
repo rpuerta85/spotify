@@ -5,7 +5,6 @@
  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/angularjs/controllers.js"></script>
  
 <script>
-alert("hola dese track");
 var jsonObject = ${showTrackDetailsViewBean.mapMsgs['jsonTracks']};
 var jsonObjectArtistAlbumes = ${showAlbumesOfArtistListViewComponentBean.mapMsgs['jsonAlbumes']};
 var app = angular.module('showTrackDetailsCntApp',[]);

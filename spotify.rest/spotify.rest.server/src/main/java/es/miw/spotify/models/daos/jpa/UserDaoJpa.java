@@ -22,8 +22,8 @@ public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao 
 	private static final String ARTIST = "ARTIST";
 	private static final String ALBUM = "ALBUM";
 	private static final String ADMIN = "ADMIN";
-	//private static final String FIND_BY_FAVORITE_TYPE = "SELECT distinct u.favorites FROM User u JOIN u.favorites f JOIN f.favoritetype ft where ft.id = :favoritetypeId and u.id = :userId";
-	private static final String FIND_BY_FAVORITE_TYPE = "SELECT  distinct f FROM  Favorite f JOIN User u  WHERE f.favoritetype =:favoriteType AND u.id= :userId";
+	private static final String FIND_BY_FAVORITE_TYPE = "SELECT  u.favorites FROM User u  JOIN FavoriteType ft where ft.id = :favoritetypeId and u.id = :userId";
+	//private static final String FIND_BY_FAVORITE_TYPE = "SELECT  distinct f FROM  Favorite f JOIN User u  WHERE f.favoritetype =:favoriteType AND u.id= :userId";
 	private static final String FIND__USER_IS_ADMIN_BY_ID = "SELECT u FROM User u JOIN u.userRoles r where r.role = :role and u.id = :userId";
 	private static final String FIND__USER_BY_USERNAME = "SELECT u FROM User u  where u.userName= :userName";
 	private static final String FIND__IS_FAVORITE_FROM_USER = "SELECT  u.favorites FROM User u JOIN u.favorites f WHERE f.idFavorite =:idFavorite AND u.id= :userId";
@@ -39,10 +39,14 @@ public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao 
 	private List<Favorite> getFavoriteByFavoriteType(FavoriteType favoriteType,
 			Integer userId) { 
 	        Query query = entityManager.createQuery(FIND_BY_FAVORITE_TYPE);
-	        query.setParameter("favoriteType", favoriteType);
+	        query.setParameter("favoritetypeId", favoriteType.getId());
 	        query.setParameter("userId", userId);
 	        List<Favorite> listaResultado = (List<Favorite>) query.getResultList();
 	        ArrayList<Favorite> resultado= new ArrayList<Favorite>();
+	        for (Favorite favorite : listaResultado) {
+				if(favorite.getFavoritetype().equals(favoriteType))
+					resultado.add(favorite);
+			}
             return listaResultado;
 	}
 	@Override

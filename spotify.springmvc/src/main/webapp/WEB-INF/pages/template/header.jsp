@@ -61,9 +61,9 @@
 				                <li><a href="${pageContext.request.contextPath}/<spring:message code="header.menu.url.favorites.tracks.find.path" />"><span aria-hidden="true" class="glyphicon glyphicon-user"></span>&nbsp; <spring:message code="header.menu.url.favorites.tracks.find.title" /></a></li>
 				                <li class="divider"></li>
 				                <li class="dropdown-header">Género</li>
-				                <ul>
+				               <!--  <ul>
 				                  <li><a href="">Tipo1</a></li>
-				                </ul>
+				                </ul>-->
 			              </ul>
 			            </li>
 	            <li class="dropdown">

@@ -25,7 +25,7 @@ public class Principal {
 	public static void main(String[] args) throws NoSuchAlgorithmException {
 		 Map<String, String> properties = new HashMap<>();
          properties. put(PersistenceUnitProperties.DDL_GENERATION,
-                 PersistenceUnitProperties.DROP_AND_CREATE);
+        		 PersistenceUnitProperties.DROP_AND_CREATE);
          EntityManager em = Persistence.createEntityManagerFactory("BBDD", properties).createEntityManager();
          
          Encript e = new Encript();
@@ -82,6 +82,7 @@ public class Principal {
        System.out.println(e.encriptacion("*u1*"));
        System.out.println(e.encriptacion("*u2*"));
        
+      
 	}
 
 }

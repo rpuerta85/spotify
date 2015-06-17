@@ -3,11 +3,9 @@
 <%@ taglib prefix = "spring" uri = "http://www.springframework.org/tags" %>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/angularjs/controllers.js"></script>
 <script>
-alert("showFavoritesTracksContent");
 var app = angular.module('tracksCntApp',[]);
 app.controller('tracksCntCtrl', tracksContentController);
 window.jsonObject = ${findFavoritesTracksViewBean.mapMsgs['jsonTracks']};
-alert(jsonObject);
 </script>    
 <div ng-app='tracksCntApp' ng-controller="tracksCntCtrl as vm" data-ng-init="vm.init('${pageContext.request.contextPath}','jsonObject')" >
 <div class="panel panel-default">

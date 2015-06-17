@@ -34,7 +34,7 @@ public class ChangeFavoriteTrackStateController {
 	
 	@RequestMapping(value = { ViewUrlConstants.ROOT_PATH+ViewUrlConstants.CHANGE_FAVORITE_TRACK_STATE_PATH}, 
 			method = RequestMethod.GET)
-	public ModelAndView showTrackDetailsAction(@PathVariable("id") String spotifyidTrack) {
+	public ModelAndView changeTrackStateAction(@PathVariable("id") String spotifyidTrack) {
 		logger.info("showTrackDetailsAction GET");
 		logger.info("idTrack received"+spotifyidTrack);
 		
@@ -42,7 +42,8 @@ public class ChangeFavoriteTrackStateController {
 				new ChangeFavoriteTrackViewBean(messageSource, session, spotifyidTrack);
 	
 		ModelAndView model = changeFavoriteTrackViewBean.update();
-		model.setViewName(ViewNameConstants.FIND_FAVORITES_TRACKS_VIEWNAME);
+		model.setViewName("redirect:/"+ ViewUrlConstants.FIND_FAVORITES_TRACKS_PATH);
+		
 		logger.info("End showTracksDetailsAction GET");
 		logger.info("redirect to "+model.getViewName()+" page ");
 		return model;

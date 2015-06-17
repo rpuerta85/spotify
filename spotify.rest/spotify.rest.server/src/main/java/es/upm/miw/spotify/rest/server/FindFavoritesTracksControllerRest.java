@@ -50,7 +50,7 @@ public class FindFavoritesTracksControllerRest {
 	 private UserDaoJpa  userDaoJpa;
 	 
     @RequestMapping(UrisWebApp.FIND_FAVORITE_TRACKS)
-    public TracksPager findFavoritesAlbums(@RequestParam(value="userUUID") String userUUID)  {
+    public TracksPager findFavoritesTracks(@RequestParam(value="userUUID") String userUUID)  {
     	User user =  userDaoJpa.readUUID(userUUID);
     	List<Favorite> artistsFavorites=	userDaoJpa.getFavoritesTracks( user.getId());
     	LOG.info("begin findFavoritesTracks");
