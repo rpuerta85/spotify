@@ -1,21 +1,13 @@
 package es.upm.miw.spotify.view.beans;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
 import org.springframework.web.servlet.ModelAndView;
 
-import es.spotify.models.entities.User;
-import es.upm.miw.spotify.controllers.ws.ControllerWsFactory;
-import es.upm.miw.spotify.form.beans.FindFavoriteFormBean;
 import es.upm.miw.spotify.form.beans.UserFormBean;
-import es.upm.miw.spotify.models.pojos.UserPojo;
-import es.upm.miw.spotify.views.web.ee.ShowUsersParamsEE;
+
+
 
 public class NewUserViewBean extends GenericView {
 	private static final Logger logger = LogManager.getLogger(NewUserViewBean.class);
@@ -24,9 +16,9 @@ public class NewUserViewBean extends GenericView {
 	private SessionBean sessionBean;
 	private UserFormBean userFormBean;
 	
-	public NewUserViewBean(SessionBean sessionBean,UserFormBean userFormBean) {
+	public NewUserViewBean(UserFormBean userFormBean) {
 		super();
-		this.sessionBean = sessionBean;
+		
 		this.userFormBean = userFormBean;
 	}
 
@@ -42,6 +34,8 @@ public class NewUserViewBean extends GenericView {
 
 	public void process(){
 		logger.info("begin NewUserViewBean process method");
+		userFormBean.process();
+		this.success= userFormBean.isSuccess();
 		logger.info("end NewUserViewBean process method");
 	}
 

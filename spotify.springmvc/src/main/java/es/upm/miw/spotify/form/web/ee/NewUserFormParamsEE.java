@@ -8,8 +8,8 @@ public enum NewUserFormParamsEE {
 	FORM_NEW_USER_INPUTTEXT_CREATETIME_VALUE("formNewUserInputCreateTimeValue"),
 	FORM_NEW_USER_INPUTTEXT_ISADMIN_VALUE("formNewUserInputTextIsAdminValue"),
 	FORM_NEW_USER_INPUTTEXT_ISENABLED_VALUE("formNewUserInputTextIsEnabledValue"),
-	FORM_NEW_USER_INPUTTEXT_EMAIL_VALUE("formNewUserInputTextEmailValue");
-	
+	FORM_NEW_USER_INPUTTEXT_EMAIL_VALUE("formNewUserInputTextEmailValue"),
+	FORM_NEW_USER_ACTION_POST("formNewUserActionPost");
 	
 	private String v;
 

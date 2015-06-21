@@ -4,9 +4,9 @@
 <div class="container">
 	<div class="panel panel-default">
 		<div class="panel-body">
-			<form class="form-horizontal" action="/admin/usuario/1/update"
+			<form class="form-horizontal" action="${pageContext.request.contextPath}/user/new"
 				method="post" name="miwspotifybundle_usuario">
-				<input type="hidden" value="PUT" name="_method">
+				<!-- <input type="hidden" value="PUT" name="_method">-->
 				<div id="miwspotifybundle_usuario">
 					<div class="form-group">
 						<label for="miwspotifybundle_usuario_username"
@@ -14,7 +14,7 @@
 							<spring:message code="form.new.user.inputText.user" /></label>
 						<div class="col-sm-10">
 							<input type="text" value="${newUserFormBean.mapMsgs['formNewUserInputTextUsernameValue']}" class="form-control"
-								required="required" name="miwspotifybundle_usuario[username]"
+								required="required" name="userName"
 								id="miwspotifybundle_usuario_username">
 						</div>
 					</div>
@@ -23,7 +23,7 @@
 							class="col-sm-2 control-label required"><spring:message code="form.new.user.inputText.password" /></label>
 						<div class="col-sm-10">
 							<input type="password" class="form-control" required="required"
-								name="miwspotifybundle_usuario[password]"
+								name="password"
 								id="miwspotifybundle_usuario_password" value="${newUserFormBean.mapMsgs['formNewUserInputTextPasswordValue']}">
 						</div>
 					</div>
@@ -32,7 +32,7 @@
 						<div class="col-sm-10">
 							<div class="checkbox">
 								<label><input type="checkbox" checked="checked"
-									value="${newUserFormBean.mapMsgs['formNewUserInputTextIsAdminValue']}" name="miwspotifybundle_usuario[isAdmin]"
+									value="${newUserFormBean.mapMsgs['formNewUserInputTextIsAdminValue']}" name="isAdmin"
 									id="miwspotifybundle_usuario_isAdmin"> <spring:message
 										code="form.new.user.inputText.administrador" /> </label>
 							</div>
@@ -43,7 +43,7 @@
 						<div class="col-sm-10">
 							<div class="checkbox">
 								<label><input type="checkbox" checked="checked"
-									value="${newUserFormBean.mapMsgs['formNewUserInputTextIsEnabledValue']}" name="miwspotifybundle_usuario[isActive]"
+									value="${newUserFormBean.mapMsgs['formNewUserInputTextIsEnabledValue']}" name="isEnabled"
 									id="miwspotifybundle_usuario_isActive"> <spring:message
 										code="form.new.user.inputText.activo" /> </label>
 							</div>
@@ -54,7 +54,7 @@
 							class="col-sm-2 control-label required"><spring:message code="form.new.user.inputText.mail" /></label>
 						<div class="col-sm-10">
 							<input type="email" value="${newUserFormBean.mapMsgs['formNewUserInputTextEmailValue']}" class="form-control"
-								required="required" name="miwspotifybundle_usuario[email]"
+								required="required" name="email"
 								id="miwspotifybundle_usuario_email">
 						</div>
 					</div>
@@ -63,7 +63,7 @@
 						<div class="col-sm-10">
 							<div class="form-inline" id="miwspotifybundle_usuario_createTime">
 								<select class="form-control"
-									name="miwspotifybundle_usuario[createTime][date][month]"
+									name="createTime_month"
 									id="miwspotifybundle_usuario_createTime_date_month"><option
 										value="1">Jan</option>
 									<option value="2">Feb</option>
@@ -78,7 +78,7 @@
 									<option value="11">Nov</option>
 									<option selected="selected" value="12">Dec</option></select><select
 									class="form-control"
-									name="miwspotifybundle_usuario[createTime][date][day]"
+									name="createTime_day"
 									id="miwspotifybundle_usuario_createTime_date_day"><option
 										value="1">1</option>
 									<option value="2">2</option>
@@ -111,7 +111,7 @@
 									<option value="29">29</option>
 									<option selected="selected" value="30">30</option>
 									<option value="31">31</option></select><select class="form-control"
-									name="miwspotifybundle_usuario[createTime][date][year]"
+									name="createTime_year"
 									id="miwspotifybundle_usuario_createTime_date_year"><option
 										value="2010">2010</option>
 									<option value="2011">2011</option>
@@ -125,7 +125,7 @@
 									<option value="2019">2019</option>
 									<option value="2020">2020</option></select> &nbsp; <select
 									class="form-control"
-									name="miwspotifybundle_usuario[createTime][time][hour]"
+									name="createTime_hour"
 									id="miwspotifybundle_usuario_createTime_time_hour"><option
 										value="0">00</option>
 									<option value="1">01</option>
@@ -151,7 +151,7 @@
 									<option value="21">21</option>
 									<option value="22">22</option>
 									<option value="23">23</option></select>:<select class="form-control"
-									name="miwspotifybundle_usuario[createTime][time][minute]"
+									name="createTime_minute"
 									id="miwspotifybundle_usuario_createTime_time_minute"><option
 										value="0">00</option>
 									<option value="1">01</option>
@@ -219,14 +219,14 @@
 					<div class="form-group">
 						<div class="col-sm-2"></div>
 						<div class="col-sm-10">
-							<button class="btn" name="miwspotifybundle_usuario[submit]"
+							<button class="btn" name="submit"
 								id="miwspotifybundle_usuario_submit" type="submit">
 								<spring:message code="form.new.user.button.submit.name" /></button>
 						</div>
 					</div>
-					<input type="hidden"
+					<!-- ><input type="hidden"
 						value="c0UJLsUldMSKWYEmv3JriNMzs9NnVsaQ0EORm-SOeKA"
-						class="form-control" name="miwspotifybundle_usuario[_token]"
+						class="form-control" name="_token"
 						id="miwspotifybundle_usuario__token">
 				</div>
 			</form>
@@ -248,9 +248,9 @@
 												type="submit"><spring:message code="form.new.user.button.delete.name" /></button>
 										</div>
 									</div>
-									<input type="hidden"
+									<!-- <input type="hidden"
 										value="DC4EMqY5klr9R8NJ92det-IQqb49KZObP6B3xn_gCVk"
-										class="form-control" name="form[_token]" id="form__token">
+										class="form-control" name="form[_token]" id="form__token">-->
 								</div>
 							</form></td>
 					</tr>

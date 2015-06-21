@@ -8,6 +8,7 @@ import es.upm.miw.spotify.controllers.FindFavoritesAlbumsController;
 import es.upm.miw.spotify.controllers.FindFavoritesArtistsController;
 import es.upm.miw.spotify.controllers.FindFavoritesTracksController;
 import es.upm.miw.spotify.controllers.FindTrackController;
+import es.upm.miw.spotify.controllers.NewUserController;
 import es.upm.miw.spotify.controllers.ShowUsersController;
 import es.upm.miw.spotify.view.beans.SessionBean;
 
@@ -23,6 +24,8 @@ public class ControllerWsFactory extends ControllerFactory {
 	private FindFavoritesArtistsController findFavoritesArtistsController;
 	private FindFavoritesTracksController findFavoritesTracksController;
 	private ChangeStateFavoriteController changeStateFavoriteController;
+	private NewUserController newUserController;
+
 	public ControllerWsFactory(SessionBean session) {
 		this.session = session;
 	}
@@ -93,6 +96,13 @@ public class ControllerWsFactory extends ControllerFactory {
 		if(changeStateFavoriteController==null)
 			changeStateFavoriteController= new ChangeStateFavoriteControllerWS(session);
 		return  changeStateFavoriteController;
+	}
+
+	public NewUserController getNewUserController() {
+		if(newUserController==null)
+			newUserController= new NewUserControllerControllerWS(session);
+		return  newUserController;
+		
 	}
 
 }

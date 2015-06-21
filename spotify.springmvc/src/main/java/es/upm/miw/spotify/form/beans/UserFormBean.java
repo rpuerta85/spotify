@@ -1,20 +1,35 @@
 package es.upm.miw.spotify.form.beans;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 
+import es.spotify.models.entities.Favorite;
+import es.spotify.models.entities.Role;
+import es.spotify.models.entities.User;
+import es.upm.miw.spotify.controllers.ws.ControllerWsFactory;
 import es.upm.miw.spotify.form.web.ee.FindFavoriteFormParamsEE;
 import es.upm.miw.spotify.form.web.ee.NewUserFormParamsEE;
 import es.upm.miw.spotify.models.forms.FindFavoriteForm;
 import es.upm.miw.spotify.models.forms.UserForm;
 import es.upm.miw.spotify.models.forms.validators.FindFavoriteFormValidator;
 import es.upm.miw.spotify.models.forms.validators.UserFormValidator;
+import es.upm.miw.spotify.models.pojos.UserWeb;
+import es.upm.miw.spotify.utils.constants.ViewUrlConstants;
 import es.upm.miw.spotify.view.beans.GenericView;
 import es.upm.miw.spotify.view.beans.SessionBean;
+import es.upm.miw.spotify.views.web.ee.CommonViewParamsEE;
 import es.upm.miw.spotify.views.web.ee.ShowArtistsViewParamsEE;
 
 public class UserFormBean extends GenericView {
@@ -46,7 +61,38 @@ public class UserFormBean extends GenericView {
 		logger.info("filling the bean "+ UserFormBean.getName()+":"+"values:"+this.mapMsgs.toString());
 		this.setMsgs();
 	}
+	public void process() {
+		logger.info("begin UserFormBean process method");
+		if(userFormValidator.validate()){
+			String userName =userForm.getUserName();
+			String email = userForm.getEmail();
+	        Boolean enabled = userForm.isEnabled();
+            String password =userForm.getPassword();
+            Date  fecha = new Date(userForm.getCreateTime());
+			ControllerWsFactory.getInstance(sessionBean).getNewUserController().newUser(userName,
+					email, enabled, password, fecha);
+//			logger.info("JSON Track:"+jsonTrack);
+//			addSuccessMsg(jsonTrack);
+			this.success=true;
+		}
+		else{
+			this.success = false;
+			addErrorMsg();
+			logger.info("msg error Track validation:"+mapMsgs.get(CommonViewParamsEE.MSG.getV()));
+			this.success=false;
+			
+		}
+		
+		
+		
+		logger.info("end UserFormBean process method");
+		
+	}
 
+	private void addErrorMsg() {
+		// TODO Auto-generated method stub
+		
+	}
 	public void setMsgs(){
 		logger.info("Begin setMsgs of UserFormBean");//init the form
 		this.mapMsgs.put(NewUserFormParamsEE.FORM_NEW_USER_INPUTTEXT_USERNAME_VALUE.getV(),"");
@@ -55,6 +101,7 @@ public class UserFormBean extends GenericView {
 		this.mapMsgs.put(NewUserFormParamsEE.FORM_NEW_USER_INPUTTEXT_ISADMIN_VALUE.getV(),"");
 		this.mapMsgs.put(NewUserFormParamsEE.FORM_NEW_USER_INPUTTEXT_ISENABLED_VALUE.getV(),"");
 		this.mapMsgs.put(NewUserFormParamsEE.FORM_NEW_USER_INPUTTEXT_EMAIL_VALUE.getV(),"");
+		this.mapMsgs.put(NewUserFormParamsEE.FORM_NEW_USER_ACTION_POST.getV(), ViewUrlConstants.NEW_USER_PATH);
 		logger.info("End setMsgs of UserFormBean");
 
 	}
