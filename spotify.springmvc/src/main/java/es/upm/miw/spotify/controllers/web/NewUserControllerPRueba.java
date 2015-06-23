@@ -1,13 +1,12 @@
 package es.upm.miw.spotify.controllers.web;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +18,7 @@ import es.upm.miw.spotify.form.beans.FindArtistFormBean;
 import es.upm.miw.spotify.form.beans.UserFormBean;
 import es.upm.miw.spotify.models.forms.FindFavoriteForm;
 import es.upm.miw.spotify.models.forms.UserForm;
+import es.upm.miw.spotify.models.pojos.UserWeb;
 import es.upm.miw.spotify.models.properties.beans.HomeViewPropertiesManager;
 import es.upm.miw.spotify.utils.constants.ViewNameConstants;
 import es.upm.miw.spotify.utils.constants.ViewUrlConstants;
@@ -29,9 +29,10 @@ import es.upm.miw.spotify.view.beans.NewUserViewBean;
 import es.upm.miw.spotify.view.beans.SessionBean;
 import es.upm.miw.spotify.view.beans.ShowUsersViewBean;
 
-@Controller
-public class NewUserController {
-	private static final Logger log = LogManager.getLogger(NewUserController.class);
+//@Controller
+//@SessionAttributes(types = UserForm.class)
+public class NewUserControllerPRueba {
+	private static final Logger log = LogManager.getLogger(NewUserControllerPRueba.class);
 	@Autowired
 	private HomeViewPropertiesManager indexViewPropertiesManager;
 	
@@ -50,38 +51,20 @@ public class NewUserController {
 		NewUserViewBean newUserViewBean = new NewUserViewBean(userFormBean);
 		ModelAndView model = newUserViewBean.update();
 		model.setViewName(ViewNameConstants.NEW_USER_VIEWNAME);
+		model.addObject("UserForm", new UserForm()); 
 		log.info("End newUser GET");
 		log.info("redirect to "+model.getViewName()+" page ");
 		return model;
 
 	}
-	@RequestMapping(value = ViewUrlConstants.ROOT_PATH+ViewUrlConstants.NEW_USER_PATH,
-			method = RequestMethod.POST)
-	public ModelAndView newUser(
-			                            @RequestParam(value = "userName")String userName,
-			                            @RequestParam(value = "password") String password,
-	                                    @RequestParam(value = "isAdmin", required = false ) String isAdmin ,
-	                                    @RequestParam(value = "isEnabled", required = false) 	String isEnabled,
-	                                    @RequestParam(value = "email")String email,
-	                                    @RequestParam(value = "createTime_day") Integer createTime_day,
-	                                    @RequestParam(value = "createTime_month") Integer createTime_month,
-	                                    @RequestParam(value = "createTime_year") Integer createTime_year,
-	                                    @RequestParam(value = "createTime_hour") Integer createTime_hour,
-	                                    @RequestParam(value = "createTime_minute") Integer createTime_minute
-	                                    ) {
+//	@RequestMapping(value = ViewUrlConstants.ROOT_PATH+ViewUrlConstants.NEW_USER_PATH,
+//			method = RequestMethod.POST)
+	public ModelAndView newUser( @ModelAttribute UserForm userForm) {
 		log.info("newUser page");
 		log.info("newUser POST");
-		UserForm userForm = new UserForm();
-		userForm.setUserName(userName);
-		userForm.setPassword(password);
-		userForm.setAdmin(isAdmin!=null);
-		userForm.setEnabled(isEnabled!=null);
-		userForm.setEmail(email);
-		Calendar date = GregorianCalendar.getInstance();
-		date.set(createTime_year,  createTime_month -1, createTime_day, createTime_hour, createTime_minute);
-		userForm.setCreateTime(date.getTimeInMillis());
-		log.info("fecha " + date.getTime());
-		UserFormBean userFormBean =new UserFormBean(messageSource, userForm, session);
+		
+		UserFormBean userFormBean =new UserFormBean(messageSource, 
+				       userForm, session);
 		NewUserViewBean newUserViewBean = new NewUserViewBean(userFormBean);
 		ModelAndView model = newUserViewBean.update();
 		newUserViewBean.process();
@@ -90,7 +73,7 @@ public class NewUserController {
 		}else{
 		    model.setViewName(ViewNameConstants.NEW_USER_VIEWNAME);
 		}
-		log.info("End newUser POST");
+		log.info("End findAlbumAction POST");
 		log.info("redirect to "+model.getViewName()+" page ");
 		return model;
 	}

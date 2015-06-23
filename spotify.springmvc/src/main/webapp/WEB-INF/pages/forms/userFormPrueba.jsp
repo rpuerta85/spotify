@@ -1,39 +1,41 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="container">
 	<div class="panel panel-default">
 		<div class="panel-body"> <!-- ${pageContext.request.contextPath}/user/new -->
-			<form class="form-horizontal" action="${pageContext.request.contextPath}/user/new"
-				method="post" name="miwspotifybundle_usuario">
-				<!--  <input type="hidden" value="PUT" name="_method">-->
+			<form:form class="form-horizontal" action="${pageContext.request.contextPath}/user/new"
+				method="post" name="miwspotifybundle_usuario" modelAttribute="userForm" commandName="UserForm">
+				<input type="hidden" value="PUT" name="_method">
 				<div id="miwspotifybundle_usuario">
 					<div class="form-group">
 						<label for="miwspotifybundle_usuario_username"
 							class="col-sm-2 control-label required">
 							<spring:message code="form.new.user.inputText.user" /></label>
 						<div class="col-sm-10">
-							<input type="text" value="${newUserFormBean.mapMsgs['formNewUserInputTextUsernameValue']}" class="form-control"
+							<form:input path="userName" value="${newUserFormBean.mapMsgs['formNewUserInputTextUsernameValue']}" class="form-control"
 								required="required" name="userName"
-								id="miwspotifybundle_usuario_username">
+								id="miwspotifybundle_usuario_username"/>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="miwspotifybundle_usuario_password"
 							class="col-sm-2 control-label required"><spring:message code="form.new.user.inputText.password" /></label>
 						<div class="col-sm-10">
-							<input type="password" class="form-control" required="required"
+							<form:password path="password"  class="form-control" required="required"
 								name="password"
-								id="miwspotifybundle_usuario_password" value="${newUserFormBean.mapMsgs['formNewUserInputTextPasswordValue']}">
+								id="miwspotifybundle_usuario_password" value="${newUserFormBean.mapMsgs['formNewUserInputTextPasswordValue']}"/>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-sm-2"></div>
 						<div class="col-sm-10">
 							<div class="checkbox">
-								<label><input type="checkbox" checked="checked"
+								<label><form:checkbox path="isAdmin" checked="checked"
 									value="${newUserFormBean.mapMsgs['formNewUserInputTextIsAdminValue']}" name="isAdmin"
-									id="miwspotifybundle_usuario_isAdmin"> <spring:message
+									id="miwspotifybundle_usuario_isAdmin"/> <spring:message
 										code="form.new.user.inputText.administrador" /> </label>
 							</div>
 						</div>
@@ -42,9 +44,9 @@
 						<div class="col-sm-2"></div>
 						<div class="col-sm-10">
 							<div class="checkbox">
-								<label><input type="checkbox" checked="checked"
+								<label><form:checkbox path="isEnabled"  checked="checked"
 									value="${newUserFormBean.mapMsgs['formNewUserInputTextIsEnabledValue']}" name="isEnabled"
-									id="miwspotifybundle_usuario_isActive"> <spring:message
+									id="miwspotifybundle_usuario_isActive"/> <spring:message
 										code="form.new.user.inputText.activo" /> </label>
 							</div>
 						</div>
@@ -53,11 +55,15 @@
 						<label for="miwspotifybundle_usuario_email"
 							class="col-sm-2 control-label required"><spring:message code="form.new.user.inputText.mail" /></label>
 						<div class="col-sm-10">
-							<input type="email" value="${newUserFormBean.mapMsgs['formNewUserInputTextEmailValue']}" class="form-control"
+							<form:input path="email" type="email" value="${newUserFormBean.mapMsgs['formNewUserInputTextEmailValue']}" class="form-control"
 								required="required" name="email"
-								id="miwspotifybundle_usuario_email">
+								id="miwspotifybundle_usuario_email"/>
 						</div>
 					</div>
+					<form:input path="createTime" type="text" 
+                                    value="${newUserFormBean.mapMsgs['formNewUserInputTextCreateTime']}" name="isEnabled"
+                                    id="miwspotifybundle_usuario_createTime"/> <spring:message
+                                        code="form.new.user.inputText.createtime" />
 					<div class="form-group">
 						<label class="col-sm-2 control-label required"><spring:message code="form.new.user.inputText.createtime" /></label>
 						<div class="col-sm-10">
@@ -230,7 +236,7 @@
 						class="form-control" name="${_csrf.parameterName}"
 						id="miwspotifybundle_usuario__token">
 				</div>
-			</form>
+			</form:form>
 
 			<table class="record_actions">
 				<tbody>

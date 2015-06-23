@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
 import es.miw.spotify.models.daos.UserDao;
 import es.spotify.models.entities.Favorite;
 import es.spotify.models.entities.FavoriteType;
+import es.spotify.models.entities.Role;
 import es.spotify.models.entities.User;
 @Component
 public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao {
@@ -118,12 +120,13 @@ public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao 
 	}
 
 	@Override
-	public User getUserByUserName(String userName) {
+	public List<User> getUserByUserName(String userName) {
+		List<User> listaResultado = new ArrayList<User>();
 		Query query = entityManager.createQuery(FIND__USER_BY_USERNAME);
         query.setParameter("userName", userName);
-        User resultado = (User) query.getSingleResult();
+        listaResultado =  query.getResultList();
         //entityManager.close();
-        return resultado;
+        return listaResultado;
 	}
 
 	@Override
@@ -136,6 +139,12 @@ public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao 
         listaResultado = query.getResultList();
         //entityManager.close();
         return listaResultado;
+	}
+
+	@Override
+	public void createUser(User user, Role role) {
+		
+		
 	}
 
 

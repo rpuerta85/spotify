@@ -1,6 +1,7 @@
 package es.upm.miw.spotify.form.beans;
 
 import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -13,24 +14,15 @@ import javax.persistence.OneToMany;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
-
-import es.spotify.models.entities.Favorite;
-import es.spotify.models.entities.Role;
-import es.spotify.models.entities.User;
 import es.upm.miw.spotify.controllers.ws.ControllerWsFactory;
-import es.upm.miw.spotify.form.web.ee.FindFavoriteFormParamsEE;
 import es.upm.miw.spotify.form.web.ee.NewUserFormParamsEE;
-import es.upm.miw.spotify.models.forms.FindFavoriteForm;
 import es.upm.miw.spotify.models.forms.UserForm;
-import es.upm.miw.spotify.models.forms.validators.FindFavoriteFormValidator;
 import es.upm.miw.spotify.models.forms.validators.UserFormValidator;
-import es.upm.miw.spotify.models.pojos.UserWeb;
 import es.upm.miw.spotify.utils.constants.ViewUrlConstants;
 import es.upm.miw.spotify.view.beans.GenericView;
 import es.upm.miw.spotify.view.beans.SessionBean;
 import es.upm.miw.spotify.views.web.ee.CommonViewParamsEE;
-import es.upm.miw.spotify.views.web.ee.ShowArtistsViewParamsEE;
+
 
 public class UserFormBean extends GenericView {
 	private static final Logger logger = LogManager.getLogger(UserFormBean.class);
@@ -63,14 +55,16 @@ public class UserFormBean extends GenericView {
 	}
 	public void process() {
 		logger.info("begin UserFormBean process method");
-		if(userFormValidator.validate()){
+		//if(userFormValidator.validate()){
+		if(true==true){//OJO LAS VALIDACIONES!!
 			String userName =userForm.getUserName();
 			String email = userForm.getEmail();
-	        Boolean enabled = userForm.isEnabled();
+	        boolean isEnabled = userForm.isEnabled();
             String password =userForm.getPassword();
-            Date  fecha = new Date(userForm.getCreateTime());
-			ControllerWsFactory.getInstance(sessionBean).getNewUserController().newUser(userName,
-					email, enabled, password, fecha);
+            long   date = userForm.getCreateTime();
+            boolean isAdmin = userForm.isAdmin();
+			ControllerWsFactory.getInstance(sessionBean).getNewUserController().newUser(userName,password,
+					email, isEnabled,  date, isAdmin);
 //			logger.info("JSON Track:"+jsonTrack);
 //			addSuccessMsg(jsonTrack);
 			this.success=true;

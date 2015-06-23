@@ -16,7 +16,7 @@ public class UserPojo implements Serializable {
 	private String password;
 	private List<FavoritePojo> favorites;
 	private List<Role> userRoles;
-	
+	private boolean isAdmin;
 	
 	public Integer getId() {
 		return id;
@@ -82,6 +82,14 @@ public class UserPojo implements Serializable {
 		return userName;
 	}
 
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
 
 	public void setUserName(String userName) {
 		this.userName = userName;

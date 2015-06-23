@@ -23,7 +23,8 @@ public interface RestArtistUris {
 	String CHANGE_ALBUM_FAVORITE_STATE = "change/favorite/album/state?favoriteId=" +PARAM +"&userUUID="+ PARAM2;
 	String CHANGE_ARTIST_FAVORITE_STATE = "change/favorite/artist/state?favoriteId=" +PARAM +"&userUUID="+ PARAM2;
 	String CHANGE_TRACK_FAVORITE_STATE = "change/favorite/track/state?favoriteId=" +PARAM +"&userUUID="+ PARAM2;
-    String NEW_USER_REST_URI = "user/new"; 
+    String NEW_USER_REST_URI = "user/new";
+
 
 
 }

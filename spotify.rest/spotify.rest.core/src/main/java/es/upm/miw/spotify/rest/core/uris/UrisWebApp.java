@@ -19,4 +19,5 @@ public interface UrisWebApp {
 	String CHANGE_FAVORITE_TRACK_STATE ="/change/favorite/track/state";
 	String LOGIN_USER="/user/login";
 	String SHOW_USERS_ALL="/user/show/all";
+	String NEW_USER_URI_REST = "/user/new";
 }

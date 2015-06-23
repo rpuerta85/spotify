@@ -58,7 +58,7 @@ public class LoginControllerRest {
     private long parseLocalDateTimeToTimeStamp(LocalDateTime 
     		localDateTime){
     	GregorianCalendar gregorianCalendar = new GregorianCalendar();
-    	gregorianCalendar.set(localDateTime.getYear(), localDateTime.getMonthValue(), localDateTime.getDayOfMonth());
+    	gregorianCalendar.set(localDateTime.getYear(), localDateTime.getMonthValue()-1, localDateTime.getDayOfMonth());
     	return gregorianCalendar.getTimeInMillis();
     }
     private List<es.upm.miw.spotify.models.pojos.Role> parseListEntityRolesToListgRoles(List<Role> userRoles){

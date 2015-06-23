@@ -32,6 +32,9 @@ public class UserForm {
 		this.msgErrorEmail="";
 		this.msgErrorCreateTime="";
 	}
+	public UserForm() {
+		super();
+	}
 	public String getUserName() {
 		return userName;
 	}
