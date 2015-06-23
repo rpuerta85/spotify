@@ -43,7 +43,8 @@ public class LoginControllerRest {
     	if(userList.size()!=0){
 	    	try {
 				userWeb = objectMapper.readValue(objectMapper.writeValueAsString(userList.get(0)),UserWeb.class);
-				userWeb.setCreateTimeInMilis(parseLocalDateTimeToTimeStamp(userList.get(0).getCreateTime()));
+				//userWeb.setCreateTimeInMilis(parseLocalDateTimeToTimeStamp(userList.get(0).getCreateTime()));
+		         userWeb.setCreateTimeInMilis(userList.get(0).getCreateTime().getTimeInMillis());
 				userWeb.setUserRoles(parseListEntityRolesToListgRoles(userList.get(0).getUserRoles()));
 			} catch (IOException e) {
 				LOG.error("Error in parsing USER DAO to User Web");

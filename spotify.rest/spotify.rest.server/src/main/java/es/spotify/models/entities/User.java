@@ -5,8 +5,10 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import es.miw.spotify.models.entities.utils.GenerateUUIDUnique;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 
@@ -23,7 +25,8 @@ public class User implements Serializable {
 	private String userName;
 
 	@Column(name="create_time")
-	private LocalDateTime createTime;
+	@Temporal(TemporalType.TIMESTAMP)
+	private GregorianCalendar createTime;
 
 	private String email;
 
@@ -44,7 +47,7 @@ public class User implements Serializable {
 	}
 
 	
-	public User(String userName, LocalDateTime createTime, String email,
+	public User(String userName, GregorianCalendar createTime, String email,
 			boolean enabled, String password) {
 		this();
 		this.idUUID =   GenerateUUIDUnique.generateUniqueId();
@@ -75,12 +78,12 @@ public class User implements Serializable {
 	public void setIdUUID(String idUUID) {
 		this.idUUID = idUUID;
 	}
-
-	public LocalDateTime getCreateTime() {
+    
+	public GregorianCalendar getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(LocalDateTime createTime) {
+	public void setCreateTime(GregorianCalendar createTime) {
 		this.createTime = createTime;
 	}
 
