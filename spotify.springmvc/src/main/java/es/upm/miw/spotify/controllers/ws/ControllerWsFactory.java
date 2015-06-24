@@ -2,6 +2,7 @@ package es.upm.miw.spotify.controllers.ws;
 
 import es.upm.miw.spotify.controllers.ChangeStateFavoriteController;
 import es.upm.miw.spotify.controllers.ControllerFactory;
+import es.upm.miw.spotify.controllers.DeleteUserController;
 import es.upm.miw.spotify.controllers.FindAlbumController;
 import es.upm.miw.spotify.controllers.FindArtistController;
 import es.upm.miw.spotify.controllers.FindFavoritesAlbumsController;
@@ -25,6 +26,7 @@ public class ControllerWsFactory extends ControllerFactory {
 	private FindFavoritesTracksController findFavoritesTracksController;
 	private ChangeStateFavoriteController changeStateFavoriteController;
 	private NewUserController newUserController;
+	private DeleteUserController deleteUserController;
 
 	public ControllerWsFactory(SessionBean session) {
 		this.session = session;
@@ -103,6 +105,12 @@ public class ControllerWsFactory extends ControllerFactory {
 			newUserController= new NewUserControllerControllerWS(session);
 		return  newUserController;
 		
+	}
+
+	public DeleteUserController getDeleteUserController() {
+		if(deleteUserController==null)
+			deleteUserController= new DeleteUserControllerControllerWS(session);
+		return  deleteUserController;
 	}
 
 }

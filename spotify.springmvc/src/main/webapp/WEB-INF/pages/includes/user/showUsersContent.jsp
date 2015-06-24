@@ -66,7 +66,7 @@ var jsonObject = ${showUsersViewBean.mapMsgs['jsonUsers']};
                       <td>
                       <table>
                         <tr>
-                          <td>
+                         <!--  <td>
                               <a title='Mostrar' ng-href="${pageContext.request.contextPath}/user/show/{{user.idUUID}}" >
                                 <span class="glyphicon glyphicon-search" aria-hidden="true">&nbsp;</span>
                               </a>
@@ -74,6 +74,13 @@ var jsonObject = ${showUsersViewBean.mapMsgs['jsonUsers']};
                           <td>
                               <a title='Editar'  ng-href="${pageContext.request.contextPath}/user/edit/{{user.idUUID}}">
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true">&nbsp;</span>
+                              </a>
+                          </td>
+                          -->
+                          <td>
+                          
+                              <a title="<spring:message code="showUsersView.table.action.delete" />" ng-href="${pageContext.request.contextPath}/user/delete/{{user.idUUID}}" >
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true" colspan="3">&nbsp;</span>
                               </a>
                           </td>
                         </tr>

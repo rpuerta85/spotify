@@ -20,4 +20,5 @@ public interface UrisWebApp {
 	String LOGIN_USER="/user/login";
 	String SHOW_USERS_ALL="/user/show/all";
 	String NEW_USER_URI_REST = "/user/new";
+	String DELETE_USER_URI_REST = "/user/delete";
 }

@@ -26,4 +26,5 @@ public interface ViewUrlConstants {
 	String CHANGE_FAVORITE_TRACK_STATE_PATH=CHANGE_FAVORITE_TRACK_STATE_GETPATH +IDPARAM;
 	String NEW_USER_GETPATH = "user/new";
 	String NEW_USER_PATH = "user/new";
+	String DELETE_USER_GETPATH = "user/delete" + IDPARAM;
 }

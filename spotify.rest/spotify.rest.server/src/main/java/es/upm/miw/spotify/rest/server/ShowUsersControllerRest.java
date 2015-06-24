@@ -44,24 +44,11 @@ public class ShowUsersControllerRest {
     		LOG.info("num users :"+userList.size());
     		List<UserPojo> userPojoList2 = new ArrayList<UserPojo>();
     		GregorianCalendar gregorianCalendar = new GregorianCalendar();
-    		
-    		
-    		json = objectMapper.writeValueAsString(userList);
+     		json = objectMapper.writeValueAsString(userList);
     		userPojoList=gson.fromJson(json, UserPojo[].class);
     		for(int i = 0;i<userList.size();i++){
-    		//for(int i = 0;i<userList.size() && i<userPojoList2.size();i++){
-//    			gregorianCalendar.set (userList.get(i).getCreateTime(). getYear(), 
-//    					userList.get(i).getCreateTime().getMonthValue(),
-//    					userList.get(i).getCreateTime().getDayOfMonth());
-    			
     			gregorianCalendar.setTimeInMillis(userList.get(i).getCreateTime().getTimeInMillis());
-    			
-    			System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").
-    					format(gregorianCalendar.getTime()));
-
-    			//userPojoList2.get(i).setCreateTime2(gregorianCalendar.getTimeInMillis());
-    			userPojoList[i].setCreateTime2(gregorianCalendar.getTimeInMillis());
-    			//System.out.println(userPojoList2.get(i).getCreateTime2());
+				userPojoList[i].setCreateTime2(gregorianCalendar.getTimeInMillis());
     		}
     		LOG.info("response json:"+json);
     		} catch (Exception e) {
