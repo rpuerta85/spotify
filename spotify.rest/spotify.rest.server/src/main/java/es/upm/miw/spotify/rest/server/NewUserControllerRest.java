@@ -66,13 +66,13 @@ public class NewUserControllerRest {
      	List<User>  existUser = userDaoJpa.getUserByUserName(userPojo.getUserName());
   	 	LocalDateTime dateLocalDateTime = LocalDateTime.now();
     	Role role=null;
-    	LocalDateTime dateForUser = LocalDateTime.now();
-    	Calendar date = new GregorianCalendar();
+//    	LocalDateTime dateForUser = LocalDateTime.now();
+    	GregorianCalendar date = new GregorianCalendar();
     	date.setTimeInMillis(userPojo.getCreateTime2());
     	System.out.println(date);
-    	dateForUser.of(date.YEAR, date.MONTH+1,date.DAY_OF_MONTH,
-    			             date.HOUR_OF_DAY,date.MINUTE);
-    	System.out.println("Fecha creada" + dateForUser);
+//    	dateForUser.of(date.YEAR, date.MONTH+1,date.DAY_OF_MONTH,
+//    			             date.HOUR_OF_DAY,date.MINUTE);
+//    	System.out.println("Fecha creada" + dateForUser);
     	if(existUser.size()>0){
     		// actualizar..
     	}
@@ -83,11 +83,11 @@ public class NewUserControllerRest {
     		User userToAdd;//= g.fromJson(g.toJson(userPojo), User.class);
     		
     		userToAdd = new User(userPojo.getUserName(), 
-    				             dateForUser,
+                                   date ,
     				             userPojo.getEmail(),
     				             userPojo.isEnabled(), 
     				             userPojo.getPassword());
-    		userToAdd.setCreateTime(LocalDateTime.now());
+    		//userToAdd.setCreateTime(LocalDateTime.now());
     		if(userPojo.isAdmin()){
     		 role= roleDaoJpa.read(1);	
     		}
