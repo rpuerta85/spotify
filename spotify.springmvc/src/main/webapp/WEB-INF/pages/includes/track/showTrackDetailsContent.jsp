@@ -23,11 +23,9 @@ data-ng-init="vm.init('${pageContext.request.contextPath}')">
               <small><span class="glyphicon glyphicon-music" aria-hidden="true"></span><spring:message
 					code="showTrackDetails.panel.header.title" /></small>
               <mark>&nbsp;{{ vm.jsonObject.name }}</mark>
-               <a ng-href="${pageContext.request.contextPath}/track/favorite/change/state/{{ vm.jsonObject.id }}" title="{{ vm.jsonObject.name }} />">
-                             <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+              <a ng-href="${pageContext.request.contextPath}/<spring:message code="favorites.track.change.state" />/{{ vm.jsonObject.id }}" title="{{ vm.jsonObject.name }} />">
+                   <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
                 </a>
-               
-           
             </h1>
           </div>
 

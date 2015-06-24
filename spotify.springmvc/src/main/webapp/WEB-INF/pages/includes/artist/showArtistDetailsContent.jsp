@@ -27,16 +27,10 @@ data-ng-init="vm.init('${pageContext.request.contextPath}','${_csrf.token}','${i
 				{{ vm.jsonObject.name }}
 				<!-- ${findFavoriteFormBean.mapMsgs['formFindFavoriteNameMsgError']} -->
 			</mark>
-		
-               <a ng-href="${pageContext.request.contextPath}/artist/favorite/change/state/{{ vm.jsonObject.id }}" title="{{ vm.jsonObject.name }} />">
-                             <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+		       <a ng-href="${pageContext.request.contextPath}/<spring:message code="favorites.artist.change.state" />/{{ vm.jsonObject.id }}" title="{{ vm.jsonObject.name }} />">
+                                           <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
                 </a>
 
-			<!-- <button
-				onclick="crearContenidoCapaCorreoOrdinario('Intérprete','Pink Floyd','/rusuariofavoritos/0k17h0D3J5VfsdmQ1iZtE9/1/new','0k17h0D3J5VfsdmQ1iZtE9' );"
-				class="btn-link" type="button" id="btnGuardarCorreo">
-				<span aria-hidden="true" class="glyphicon glyphicon-star-empty"></span>
-			</button>-->
 		</h1>
 	</div>
 

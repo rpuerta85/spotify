@@ -25,6 +25,7 @@ public class ShowArtistDetailsViewBean extends GenericView {
 	private SessionBean sessionBean;
 	private String spotifyId;
 	private boolean success = false;
+	// crear atributo boolean... para ver si está el favorito o no.
 	private ShowAlbumesOfArtistListViewComponentBean showAlbumesOfArtistListViewComponentBean;
 	public ShowArtistDetailsViewBean() {
 		super();

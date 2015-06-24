@@ -29,8 +29,8 @@ data-ng-init="vm.init('${pageContext.request.contextPath}')">
               <small><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span><spring:message
 					code="showAlbumDetails.panel.header.title" /></small>
               <mark>&nbsp;{{ vm.jsonObject.name }}</mark>
-             <a ng-href="${pageContext.request.contextPath}/album/favorite/change/state/{{ vm.jsonObject.id }}" title="{{ vm.jsonObject.name }} />">
-                             <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+               <a ng-href="${pageContext.request.contextPath}/<spring:message code="favorites.album.change.state" />/{{ vm.jsonObject.id }}" title="{{ vm.jsonObject.name }} />">
+                   <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
                 </a>
               
             
