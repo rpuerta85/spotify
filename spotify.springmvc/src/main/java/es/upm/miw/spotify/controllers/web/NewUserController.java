@@ -86,7 +86,8 @@ public class NewUserController {
 		ModelAndView model = newUserViewBean.update();
 		newUserViewBean.process();
 		if(newUserViewBean.isSuccess()) {
-			model.setViewName(ViewNameConstants.SHOW_USERS_VIEWNAME);
+			model.setViewName("redirect:"+ ViewUrlConstants.ROOT_PATH+ViewUrlConstants.SHOW_USERS_REGISTERED_PATH);
+			//model.setViewName(ViewNameConstants.SHOW_USERS_VIEWNAME);
 		}else{
 		    model.setViewName(ViewNameConstants.NEW_USER_VIEWNAME);
 		}

@@ -43,7 +43,7 @@ public class ChangeFavoriteAlbumStateController {
 				new ChangeFavoriteAlbumViewBean(messageSource, session, spotifyidAlbum);
 	
 		ModelAndView model = changeFavoriteAlbumViewBean.update();
-		model.setViewName("redirect:/"+ ViewUrlConstants.FIND_FAVORITES_ALBUM_PATH);
+		model.setViewName("redirect:"+ ViewUrlConstants.ROOT_PATH+ ViewUrlConstants.FIND_FAVORITES_ALBUM_PATH);
 		logger.info("End showAlbumsDetailsAction GET");
 		logger.info("redirect to "+model.getViewName()+" page ");
 		return model;

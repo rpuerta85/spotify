@@ -50,7 +50,8 @@
             <li><a href="${pageContext.request.contextPath}/<spring:message code="header.menu.url.artist.find.path" />"><span aria-hidden="true" class="glyphicon glyphicon-user"></span>&nbsp; <spring:message code="header.menu.artist.title" /></a></li>
             <li><a href="${pageContext.request.contextPath}/<spring:message code="header.menu.url.album.find.path" />"><span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span>&nbsp; <spring:message code="header.menu.album.title" /></a></li>
             <li><a href="${pageContext.request.contextPath}/<spring:message code="header.menu.url.track.find.path" />"><span aria-hidden="true" class="glyphicon glyphicon-music"></span>&nbsp; <spring:message code="header.menu.track.title" /></a></li>
-             <sec:authorize access="hasRole('ROLE_ADMIN')">
+            
+              <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
                  <li class="dropdown">
 			              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
 			                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>&nbsp;Favoritos <b class="caret"></b>
@@ -66,6 +67,8 @@
 				                </ul>-->
 			              </ul>
 			            </li>
+			     </sec:authorize>        
+			    <sec:authorize access="hasRole('ROLE_ADMIN')">         
 	            <li class="dropdown">
 	                <a aria-expanded="false" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">
 	                    <span aria-hidden="true" class="glyphicon glyphicon-wrench"></span>&nbsp;
