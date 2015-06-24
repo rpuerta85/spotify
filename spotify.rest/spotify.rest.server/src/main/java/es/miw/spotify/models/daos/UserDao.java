@@ -21,6 +21,5 @@ public interface UserDao extends GenericDao<User , Integer> {
 	public abstract List<Favorite> getFavoritesAlbums(Integer userId);
 	public abstract List<Favorite> getFavoritesArtists(Integer userId);
 	public abstract List<Favorite> getFavoritesTracks(Integer userId);
-	public abstract void createUser(User user, Role role);
-	
+
 }

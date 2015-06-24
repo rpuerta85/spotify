@@ -25,15 +25,12 @@ public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao 
 	private static final String ALBUM = "ALBUM";
 	private static final String ADMIN = "ADMIN";
 	private static final String FIND_BY_FAVORITE_TYPE = "SELECT  u.favorites FROM User u  JOIN FavoriteType ft where ft.id = :favoritetypeId and u.id = :userId";
-	//private static final String FIND_BY_FAVORITE_TYPE = "SELECT  distinct f FROM  Favorite f JOIN User u  WHERE f.favoritetype =:favoriteType AND u.id= :userId";
 	private static final String FIND__USER_IS_ADMIN_BY_ID = "SELECT u FROM User u JOIN u.userRoles r where r.role = :role and u.id = :userId";
 	private static final String FIND__USER_BY_USERNAME = "SELECT u FROM User u  where u.userName= :userName";
 	private static final String FIND__IS_FAVORITE_FROM_USER = "SELECT  u.favorites FROM User u JOIN u.favorites f WHERE f.idFavorite =:idFavorite AND u.id= :userId";
-	private static final String FIND__USER_BY_USERNAME_AND_PASSWORD = "SELECT u FROM User u JOIN u.userRoles r  where  u.userName= :userName and u.password= :password";
+	private static final String FIND__USER_BY_USERNAME_AND_PASSWORD = "SELECT u FROM User u JOIN u.userRoles r  where  u.userName= :userName and u.password= :password and u.enabled=true";
 	private static final String FIND_FAVORITE_TYPE = "SELECT ft FROM FavoriteType ft  where ft.description= :description";
-	// SELECT t FROM TemaEntity t JOIN t.votos v where v.ip = :ip and t.id = :idTema
-	//private static final String FIND__IS_FAVORITE_FROM_USER = "SELECT  f FROM  Favorite f JOIN User u  WHERE f.idFavorite =:idFavorite AND u.id= :userId";
-	  
+		  
 	public UserDaoJpa() {
         super(User.class);
     }
@@ -125,7 +122,6 @@ public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao 
 		Query query = entityManager.createQuery(FIND__USER_BY_USERNAME);
         query.setParameter("userName", userName);
         listaResultado =  query.getResultList();
-        //entityManager.close();
         return listaResultado;
 	}
 
@@ -137,15 +133,7 @@ public class UserDaoJpa extends GenericDaoJpa<User, Integer> implements UserDao 
         query.setParameter("userName", userName);
         query.setParameter("password", password);
         listaResultado = query.getResultList();
-        //entityManager.close();
         return listaResultado;
 	}
-
-	@Override
-	public void createUser(User user, Role role) {
-		
-		
-	}
-
 
 }
