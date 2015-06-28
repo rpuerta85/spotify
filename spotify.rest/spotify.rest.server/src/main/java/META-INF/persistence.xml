@@ -10,7 +10,7 @@
         <properties>
             <property name="eclipselink.ddl-generation" value="none" /> <!--drop-and-create-tables   none-->
             <property name="eclipselink.logging.level" value="INFO" /> <!-- OFF,WARNING,INFO,FINE,ALL -->
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/test" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/spotify" />
             <property name="javax.persistence.jdbc.user" value="rootSpotify" />
             <property name="javax.persistence.jdbc.password" value="rootSpotify" />
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />

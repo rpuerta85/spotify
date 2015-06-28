@@ -16,8 +16,11 @@ public class Role implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id")
 	private Integer Id;
+	
+	@Column(length=32)
 	private String idUUID;
 
+	@Column(length=10)
 	private String role;
 	
 	

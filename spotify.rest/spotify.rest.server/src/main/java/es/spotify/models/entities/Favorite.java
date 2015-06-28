@@ -17,8 +17,11 @@ public class Favorite implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
+	
+	@Column(length=32)
 	private String idUUID;
-
+	
+	@Column(length=24)
 	private String idFavorite;
 
 	@ManyToOne

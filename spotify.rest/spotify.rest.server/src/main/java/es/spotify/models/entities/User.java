@@ -20,19 +20,23 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
+	
+	@Column(length=32)
 	private String idUUID;
 	
+	@Column(length=40)
 	private String userName;
 
 	@Column(name="create_time")
 	@Temporal(TemporalType.TIMESTAMP)
 	private GregorianCalendar createTime;
 
+	@Column(length=40)
 	private String email;
 
 	private boolean enabled;
 
-
+	@Column(length=32)
 	private String password;
 
 	@OneToMany(cascade = { CascadeType.ALL }, fetch=FetchType.EAGER)
