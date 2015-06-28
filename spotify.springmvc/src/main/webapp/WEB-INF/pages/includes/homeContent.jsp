@@ -5,10 +5,11 @@
       <h1>¡Bienvenido!</h1>
       <p>${attributoInyectadoDesdeElProperties}  Esta aplicación pretende ser un ejemplo de uso de varias técnicas:      
         </p><ul>
-          <li>Por un lado, accede a datos externos empleando la
-              <a title="Web API Endpoint Reference" target="_blank" href="https://developer.spotify.com/web-api/endpoint-reference/">API REST de Spotify</a></li>                
-          <li>Por otro accede a datos locales a los que se accede empleando la capa de
-          abstracción <a title="Doctrine Database Abstraction Layer" target="_blank" href="http://www.doctrine-project.org/projects/dbal.html">Doctrine DBAL</a></li>
+          <li>Por un lado, accede a datos externos empleando la 
+              <a title="Web API Endpoint Reference" target="_blank" href="https://developer.spotify.com/web-api/endpoint-reference/">API REST de Spotify</a></li> 
+           <li>Por otro lado, usa el  framework de aplicaciones Java/J2EE potente en cuanto a la gestión del ciclo de vida de los componentes y fácilmente ampliable <a title="Spring MVC framework" target="_blank" href="https://spring.io/">Spring MVC</a></li>
+           <li>Además las medidas de seguridad  (CSRF por ejemplo) son aportadas por  <a title="Spring Security framework" target="_blank" href="http://projects.spring.io/spring-security/">Spring Security</a></li>               
+           <li>Por otro lado, para actualizar las vistas <a title="AngularJS framework" target="_blank" href="https://angularjs.org/">AngularJS</a></li>
           <li>Además, también se emplea el framework HTML, CSS y JS <a title="Bootstrap framework" target="_blank" href="http://getbootstrap.com/">Bootstrap</a></li>
         </ul>
       <p></p>

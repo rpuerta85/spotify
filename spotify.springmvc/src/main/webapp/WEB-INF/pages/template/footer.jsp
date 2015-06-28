@@ -2,5 +2,6 @@
     pageEncoding="UTF-8"%>
       <hr>
       <footer>
-        <p>&copy; [UPM] MiW Práctica PHP 2014</p>
+        <p>&copy; [UPM] MiW PFM Autores: Raúl Puerta Sánchez - Manuel G. Acevedo Coelho 2015</p>
+        <p>&copy; Tutor: D. Jesús Bernal Bermúdez</p>
       </footer>
