@@ -66,28 +66,23 @@ public class NewUserControllerRest {
      	List<User>  existUser = userDaoJpa.getUserByUserName(userPojo.getUserName());
   	 	LocalDateTime dateLocalDateTime = LocalDateTime.now();
     	Role role=null;
-//    	LocalDateTime dateForUser = LocalDateTime.now();
+
     	GregorianCalendar date = new GregorianCalendar();
     	date.setTimeInMillis(userPojo.getCreateTime2());
     	System.out.println(date);
-//    	dateForUser.of(date.YEAR, date.MONTH+1,date.DAY_OF_MONTH,
-//    			             date.HOUR_OF_DAY,date.MINUTE);
-//    	System.out.println("Fecha creada" + dateForUser);
+
     	if(existUser.size()>0){
     		// actualizar..
     	}
     	else{
-    		// crear nuevo.
-    		//User user = new User(userName, dateLocalDateTime, email, isEnabled, password);
-    		//Gson g = new Gson();
-    		User userToAdd;//= g.fromJson(g.toJson(userPojo), User.class);
     		
+    		User userToAdd;
     		userToAdd = new User(userPojo.getUserName(), 
                                    date ,
     				             userPojo.getEmail(),
     				             userPojo.isEnabled(), 
     				             userPojo.getPassword());
-    		//userToAdd.setCreateTime(LocalDateTime.now());
+    		
     		if(userPojo.isAdmin()){
     		 role= roleDaoJpa.read(1);	
     		}
@@ -99,7 +94,7 @@ public class NewUserControllerRest {
     		userDaoJpa.create(userToAdd);  		
     		
     	}
-       	LOG.info("end changeArtistFavoriteState");
+       	LOG.info("end newUser");
 
     }
 }
