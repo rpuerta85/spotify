@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>spotify.controller</name>
+	<name>spotify.springmvc</name>
 	<comment></comment>
 	<projects>
 		<project>spotify.rest.server</project>

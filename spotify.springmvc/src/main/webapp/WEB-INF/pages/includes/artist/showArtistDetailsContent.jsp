@@ -48,7 +48,7 @@ data-ng-init="vm.init('${pageContext.request.contextPath}','${_csrf.token}','${i
             </div>
             <div class="col-md-8">
 					<%@ include file="showAlbumesList.jsp" %>
-             <a ng-href="${pageContext.request.contextPath}/${showArtistDetailsViewBean.mapMsgs['showAlbumDetailsUrl']}/{{vm.jsonObject.id}}"
+             <a ng-href="${pageContext.request.contextPath}/${showArtistDetailsViewBean.mapMsgs['showArtistDetailsUrl']}/{{vm.jsonObject.id}}?limit=50"
                    class="btn btn-info" role="button">
                   Más resultados &raquo;
    			 </a> 
